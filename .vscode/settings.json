@@ -1,9 +1,0 @@
-{
-  "editor.lightbulb.enabled": false,
-  "editor.snippetSuggestions": "none",
-  "editor.tabSize": 2,
-  "editor.wordWrap": "on",
-  "files.trimTrailingWhitespace": true,
-  "javascript.updateImportsOnFileMove.enabled": "never",
-  "javascript.validate.enable": false
-}
