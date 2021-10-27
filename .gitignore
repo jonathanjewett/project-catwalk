@@ -1,3 +1,7 @@
+# Locks
+package-lock.json
+yarn.lock
+
 # Logs
 logs
 *.log
@@ -68,9 +72,9 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+
 # dotenv environment variables file
-.env
-.env.test
+*.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
