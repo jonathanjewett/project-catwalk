@@ -96,6 +96,8 @@ bundle.js
 # vuepress build output
 .vuepress/dist
 
+.vscode
+
 # Serverless directories
 .serverless/
 
