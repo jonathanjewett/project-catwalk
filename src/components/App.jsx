@@ -1,8 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Overview from './overview';
+import QuestionsAndAnswers from './questions-and-answers';
+import RatingsAndReviews from './ratings-and-reviews';
+import RelatedItemsAndComparisons from './related-items-and-comparisons';
+
 const App = () => (
-  <div>Hello World</div>
+  <div>
+    <Overview/>
+    <QuestionsAndAnswers/>
+    <RatingsAndReviews/>
+    <RelatedItemsAndComparisons/>
+  </div>
 );
 
 export default App;
