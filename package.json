@@ -6,7 +6,8 @@
   "license": "ISC",
   "scripts": {
     "start": "npx live-server dist",
-    "webpack": "webpack --mode development --watch"
+    "webpack": "webpack --mode development --watch",
+    "test": "jest"
   },
   "author": "Team Asteraceae",
   "contributors": [
@@ -25,9 +26,13 @@
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
     "babel-loader": "^8.1.0",
     "css-loader": "^6.5.0",
     "dotenv-webpack": "^7.0.3",
+    "jest": "^27.3.1",
+    "msw": "^0.35.0",
     "nodemon": "^2.0.4",
     "sass": "^1.43.4",
     "sass-loader": "^12.3.0",
