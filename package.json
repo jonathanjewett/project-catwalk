@@ -4,18 +4,18 @@
   "main": "src/index.js",
   "repository": "https://github.com/team-asteraceae/project-catwalk.git",
   "license": "ISC",
-  "scripts": {
-    "start": "npx live-server dist",
-    "webpack": "webpack --mode development --watch",
-    "test": "jest"
-  },
   "author": "Team Asteraceae",
   "contributors": [
     "Joshua Booth <joshua.n.booth@gmail.com>",
     "Jonathan Jewett <jonathanjewett0@gmail.com>",
-    "Anthony Psyk <ajpsyk@gmail.com>",
-    "Roman Solar <romannsolar@gmail.com>"
+    "Anthony Psyk <ajpsyk@gmail.com>"
   ],
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "jest"
+  },
   "dependencies": {
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",
@@ -23,21 +23,10 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-react": "^7.10.4",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.1.2",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^6.5.0",
-    "dotenv-webpack": "^7.0.3",
+    "@vitejs/plugin-react": "^1.0.0",
     "jest": "^27.3.1",
     "msw": "^0.35.0",
-    "nodemon": "^2.0.4",
     "sass": "^1.43.4",
-    "sass-loader": "^12.3.0",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.60.0",
-    "webpack-cli": "^4.9.1"
+    "vite": "^2.6.4"
   }
 }

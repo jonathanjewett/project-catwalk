@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import './ratings-and-reviews.scss';
 
 // this is a test comment
 
