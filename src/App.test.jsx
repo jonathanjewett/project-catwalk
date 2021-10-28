@@ -1,9 +1,20 @@
-describe('true is truthy and false is falsy', () => {
-  test('true is truthy', () => {
-    expect(true).toBe(true);
-  });
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import App from './App';
 
-  test('false is falsy', () => {
-    expect(false).toBe(false);
-  });
+it('displays all modules', () => {
+  const app = render(<App/>);
+
+  expect(document.querySelector('#overview'))
+    .toBeInTheDocument();
+
+  expect(document.querySelector('#questions-and-answers'))
+    .toBeInTheDocument();
+
+  expect(document.querySelector('#ratings-and-reviews'))
+    .toBeInTheDocument();
+
+  expect(document.querySelector('#related-items-and-comparisons'))
+    .toBeInTheDocument();
 });
