@@ -1,6 +1,6 @@
-![tests](https://github.com/Team-Asteraceae/project-catwalk/actions/workflows/node.js.yml/badge.svg) [![codecov](https://codecov.io/gh/Team-Asteraceae/project-catwalk/branch/main/graph/badge.svg?token=IWOPASQ45P)](https://codecov.io/gh/Team-Asteraceae/project-catwalk)
-
 # Project Catwalk
+
+![tests](https://github.com/Team-Asteraceae/project-catwalk/actions/workflows/node.js.yml/badge.svg) [![codecov](https://codecov.io/gh/Team-Asteraceae/project-catwalk/branch/main/graph/badge.svg?token=IWOPASQ45P)](https://codecov.io/gh/Team-Asteraceae/project-catwalk)
 
 ## Setup
 
