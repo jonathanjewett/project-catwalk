@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import './overview.scss';
 
 const Overview = () => (
   <div id="overview">Overview</div>
