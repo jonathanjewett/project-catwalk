@@ -5,13 +5,18 @@ import ProductInformation from './ProductInformation';
 import StyleSelector from './StyleSelector';
 import './overview.scss';
 
-const Overview = () => (
-  <div id="overview">
-    <ProductInformation/>
-    <StyleSelector/>
-    <AddToCart/>
-    <ImageGallery/>
-  </div>
-);
+import sampleData from './sampleData';
+
+const Overview = () => {
+  let { rating } = sampleData;
+  return (
+    <div id="overview">
+      <ProductInformation rating={rating}/>
+      <StyleSelector/>
+      <AddToCart/>
+      <ImageGallery/>
+    </div>
+  );
+};
 
 export default Overview;

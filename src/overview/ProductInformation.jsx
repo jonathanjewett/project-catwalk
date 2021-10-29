@@ -1,7 +1,16 @@
 import React from 'react';
+import { StarRating } from '../common';
 
-const ProductInformation = () => (
+/**
+ * @param {Object} props
+ * @param {Product} props.product
+ */
+const ProductInformation = ({ rating }) => (
   <div>
+    <p>
+      <StarRating rating={rating}/>
+      <a href="#ratings-and-review">Read all reviews</a>
+    </p>
   </div>
 );
 
