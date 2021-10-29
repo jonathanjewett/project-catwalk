@@ -6,4 +6,18 @@ $minor: dimgray;
         color: $minor;
         vertical-align: top;
     }
+
+    .category {
+        text-transform: uppercase;
+        color: $minor;
+    }
+
+    .price {
+        span:first-child {
+            text-decoration: line-through;
+        }
+        span:last-child {
+            color: red;
+        }
+    }
 }
