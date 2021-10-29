@@ -6,18 +6,18 @@ import RatingsAndReviews from './index.jsx';
 it('displays all modules', () => {
   const app = render(<RatingsAndReviews/>);
 
-  expect(document.querySelector('#sort'))
+  expect(document.querySelector('.review-sort'))
     .toBeInTheDocument();
 
-  expect(document.querySelector('#review-list'))
+  expect(document.querySelector('.review-list'))
     .toBeInTheDocument();
 
-  expect(document.querySelector('#review-breakdown'))
+  expect(document.querySelector('.review-breakdown'))
     .toBeInTheDocument();
 
-  expect(document.querySelector('#product-breakdown'))
+  expect(document.querySelector('.product-breakdown'))
     .toBeInTheDocument();
   expect(document.querySelector
-  ('#review-tile'))
+  ('.review-tile'))
     .toBeInTheDocument();
 });
