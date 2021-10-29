@@ -8,10 +8,10 @@ import './overview.scss';
 import sampleData from './sampleData';
 
 const Overview = () => {
-  let { rating } = sampleData;
+  let { product, rating } = sampleData;
   return (
     <div id="overview">
-      <ProductInformation rating={rating}/>
+      <ProductInformation product={product} rating={rating}/>
       <StyleSelector/>
       <AddToCart/>
       <ImageGallery/>
