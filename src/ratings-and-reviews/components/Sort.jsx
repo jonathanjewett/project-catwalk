@@ -1,8 +1,14 @@
 import React from 'react';
-
+// Number of reviews in label based on data from API
+// Depending on which option is selected, re sort the tiles in ReviewTile based on corresponding option
 const Sort = () => (
-  <div id="sort">
-    This is the sort feature.
+  <div className="review-sort">
+    <label>241 reviews, sorted by </label>
+    <select className="review-dropdown">
+      <option>Relevance</option>
+      <option>Newest</option>
+      <option>Most Helpful</option>
+    </select>
   </div>
 );
 

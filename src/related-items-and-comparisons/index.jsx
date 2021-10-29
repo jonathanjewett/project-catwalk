@@ -2,7 +2,7 @@ import React from 'react';
 import './related-items-and-comparisons.scss';
 
 const RelatedItemsAndComparisons = () => (
-  <div id="related-items-and-comparisons">testing making a branch and merging</div>
+  <div id="related-items-and-comparisons"></div>
 );
 
 export default RelatedItemsAndComparisons;
