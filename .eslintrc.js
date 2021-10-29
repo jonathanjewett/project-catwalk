@@ -18,7 +18,8 @@ module.exports = {
     }
   },
   ignorePatterns: [
-    '*.html'
+    '*.html',
+    '*.ts'
   ],
   rules: {
     /* Indentation */
