@@ -8,10 +8,12 @@ import './overview.scss';
 import sampleData from './sampleData';
 
 const Overview = () => {
+  // these will eventually come from React props when the API is plugged in
   let { product, rating, styles } = sampleData;
-  const [page, setPage] = React.useState(0);
-  React.useEffect(() => setPage(0), [product.id]);
-  const style = styles[page];
+  const [styleIndex, setStyleIndex] = React.useState(0);
+  // reset to the first style when a new product is displayed
+  React.useEffect(() => setStyleIndex(0), [product.id]);
+  const style = styles[styleIndex];
 
   return (
     <div id="overview">
