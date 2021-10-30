@@ -13,6 +13,10 @@ import './star-rating.scss';
  * - `star2`: 2/4 filled in, i.e. half
  * - `star3`; 3/4 filled in
  * - `star4`: 4/4 filled in, i.e. full
+ *
+ * Note: These files are rendered as React component functions.
+ *
+ * @type {(() => JSX.Element)[]}
  */
 const stars = [star0, star1, star2, star3, star4];
 
@@ -37,10 +41,12 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
  * @param {number} rating - a decimal between 0 and 5 that determines star fill
  */
 const StarRating = ({ rating }) => (
-  <span className="stars">
-    {[1, 2, 3, 4, 5].map(i => // iterate over each star
-      <img key={i} src={stars[clamp(rating - i, 0, 1) * 4 | 0]}/>
-    )}
+  <span className="stars" role="img">
+    {[1, 2, 3, 4, 5].map(i => { // iterate over each of ✩✩✩✩✩
+      // depending on the rating, select a filled-in amount from `stars`
+      const Star = stars[clamp(1 + rating - i, 0, 1) * 4 | 0];
+      return <Star key={i}/>;
+    })}
   </span>
 );
 

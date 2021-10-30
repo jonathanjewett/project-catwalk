@@ -8,6 +8,7 @@
     "testEnvironment": "jsdom",
     "transform": {
       "^.+\\.jsx?$": "babel-jest",
-      ".+\\.(scss|png|jpg|gif|svg)$": "jest-transform-stub"
+      ".+\\.svg$": "jest-transformer-svg",
+      ".+\\.(scss|png|jpg|gif)$": "jest-transform-stub"
     }
 }
