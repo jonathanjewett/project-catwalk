@@ -9,14 +9,14 @@ import sampleData from './sampleData';
 
 const Overview = () => {
   let { product, rating, styles } = sampleData;
-  const [page, setPage] = React.useState(0);
-  React.useEffect(() => setPage(0), [product.id]);
-  const style = styles[page];
+  const [styleIndex, setStyleIndex] = React.useState(0);
+  React.useEffect(() => setStyleIndex(0), [product.id]);
+  const style = styles[styleIndex];
 
   return (
     <div id="overview">
       <ProductInformation product={product} rating={rating} style={style}/>
-      <StyleSelector/>
+      <StyleSelector styles={styles} style={style} setStyle={setStyleIndex}/>
       <AddToCart/>
       <ImageGallery/>
     </div>
