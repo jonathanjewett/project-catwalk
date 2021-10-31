@@ -5,10 +5,9 @@ import ProductInformation from './ProductInformation';
 import StyleSelector from './StyleSelector';
 import './overview.scss';
 
-import sampleData from './sampleData';
+import { product, rating, styles } from './sampleData';
 
-const Overview = () => {
-  let { product, rating, styles } = sampleData;
+const Overview = (/* { product, rating, styles } */) => {
   const [styleIndex, setStyleIndex] = React.useState(0);
   React.useEffect(() => setStyleIndex(0), [product.id]);
   const style = styles[styleIndex];

@@ -1,6 +1,6 @@
-const rating = 4.27;
+export const rating = 4.27;
 
-const product = {
+export const product = {
   'id': 40344,
   'campus': 'hr-rfp',
   'name': 'Camo Onesie',
@@ -22,7 +22,7 @@ const product = {
   ]
 };
 
-const styles =
+export const styles =
   [
     {
       'style_id': 240500,
@@ -379,5 +379,3 @@ const styles =
       }
     }
   ];
-
-export default { product, rating, styles };
