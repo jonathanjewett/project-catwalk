@@ -35,4 +35,16 @@
     margin-left: 5px;
     margin-bottom: 2.5px;
   }
+
+  .product-image {
+    position: relative;
+  }
+
+  .star-button {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    font-size: 25px;
+    font-weight: bold;
+  }
 }

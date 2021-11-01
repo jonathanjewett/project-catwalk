@@ -7,7 +7,8 @@ const CardItem = (props) => {
   return (
     <div className="card-item">
       <div className="product-image">
-        <img src="https://wallpapercave.com/wp/wp8540209.jpg" alt="placeholder-image" width="250" height="250"></img>
+        <img className="placeholder-image" src="https://wallpapercave.com/wp/wp8540209.jpg" width="250" height="250"></img>
+        <div className="star-button">☆</div>
       </div>
       <div className="category">
         SHOES
