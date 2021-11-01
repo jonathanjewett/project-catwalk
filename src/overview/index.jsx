@@ -1,5 +1,6 @@
 import React from 'react';
 import AddToCart from './AddToCart';
+import Blurb from './Blurb';
 import ImageGallery from './ImageGallery';
 import ProductInformation from './ProductInformation';
 import StyleSelector from './StyleSelector';
@@ -16,10 +17,15 @@ const Overview = (/* { product, rating, styles } */) => {
 
   return (
     <div id="overview">
-      <ProductInformation product={product} rating={rating} style={style}/>
-      <StyleSelector styles={styles} style={style} setStyle={setStyleIndex}/>
-      <AddToCart style={style}/>
-      <ImageGallery style={style}/>
+      <div>
+        <ImageGallery style={style}/>
+        <div>
+          <ProductInformation product={product} rating={rating} style={style}/>
+          <StyleSelector styles={styles} style={style} setStyle={setStyleIndex}/>
+          <AddToCart style={style}/>
+        </div>
+      </div>
+      <Blurb product={product}/>
     </div>
   );
 };

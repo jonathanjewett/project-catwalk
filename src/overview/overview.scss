@@ -1,10 +1,28 @@
-$minor: dimgray;
+$foreground: var(--foreground);
 
 #overview {
+    margin-bottom: 1em;
+
+    > div:first-child {
+        display: flex;
+        overflow-y: hidden;
+    }
+
+    > div:last-child {
+        margin-left: 5%;
+    }
+
     a {
         margin-left: 0.5em;
-        color: $minor;
         vertical-align: top;
+    }
+
+    figure {
+        height: 0;
+
+        img {
+            width: 100%;
+        }
     }
 
     label {
@@ -15,9 +33,12 @@ $minor: dimgray;
         }
     }
 
+    label, .stylename {
+        text-transform: uppercase;
+    }
+
     .category {
         text-transform: uppercase;
-        color: $minor;
     }
 
     .price {
@@ -29,34 +50,39 @@ $minor: dimgray;
         }
     }
 
-    .stylename {
-        color: $minor;
+    .react-share__ShareButton {
+        vertical-align: middle;
+        margin-left: 0.25em;
     }
 
-    .styles button {
-        width: 75px;
-        height: 75px;
-        margin-right: 15px;
-        margin-bottom: 15px;
-        background-size: cover;
-        border-radius: 100%;
-        border: 1px solid $minor;
-        cursor: pointer;
-        position: relative;
+    .styles {
+        min-width: 375px;
 
-        div {
-            position: absolute;
-            right: 0;
-            top: 0;
-            background-color: #fff;
-            border: 1px solid $minor;
+        button {
+            width: 75px;
+            height: 75px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            background-size: cover;
+            background-position: center;
             border-radius: 100%;
-            font-size: 0.9em;
-            width: 1.5em;
-            height: 1.5em;
-            vertical-align: middle;
-            text-align: center;
-            color: $minor;
+            border: 1px solid $foreground;
+            cursor: pointer;
+            position: relative;
+
+            div {
+                position: absolute;
+                right: 0;
+                top: 0;
+                background-color: #fff;
+                border: 1px solid $foreground;
+                border-radius: 100%;
+                font-size: 0.9em;
+                width: 1.5em;
+                height: 1.5em;
+                vertical-align: middle;
+                text-align: center;
+            }
         }
     }
 }
