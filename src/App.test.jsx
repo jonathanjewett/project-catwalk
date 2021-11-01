@@ -12,7 +12,7 @@ it('displays all modules', () => {
   expect(document.querySelector('#questions-and-answers'))
     .toBeInTheDocument();
 
-  expect(document.querySelector('.ratings-and-reviews'))
+  expect(document.querySelector('#ratings-and-reviews'))
     .toBeInTheDocument();
 
   expect(document.querySelector('#related-items-and-comparisons'))

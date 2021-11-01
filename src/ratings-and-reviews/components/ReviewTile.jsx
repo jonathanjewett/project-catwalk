@@ -1,8 +1,7 @@
 import React from 'react';
-import StarRating from './StarRating.jsx';
+import StarRating from '../../common/star-rating/index.jsx';
 import '../ratings-and-reviews.scss';
 
-//
 
 const ReviewTile = () => (
   <div className="review-tile">
