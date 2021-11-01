@@ -27,11 +27,12 @@ const RatingsAndReviews = () => (
     <span className="reviews-rating">3.5</span>
     <StarRating />
     <span className="reviews-recommend">100% of reviews recommend this product</span>
-    <ReviewBreakdown total={reviewsTotal(reviewMetaData.ratings)}breakdown={reviewMetaData.ratings}/>
+    <ReviewBreakdown breakdown={reviewMetaData.ratings}/>
     <ProductBreakdown />
-    <Sort total={reviewsTotal(reviewMetaData.ratings)}/>
+    <Sort breakdown={reviewMetaData.ratings}/>
     <ReviewList />
   </div>
 );
 
+export {reviewsTotal};
 export default RatingsAndReviews;

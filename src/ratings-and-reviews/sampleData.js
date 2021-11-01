@@ -23,11 +23,11 @@ export const review = {
 export const reviewMetaData = {
   'product_id': '2',
   'ratings': {
-    1: 25,
-    2: 10,
-    3: 50,
-    4: 70,
-    5: 100
+    1: 5,
+    2: 3,
+    3: 5,
+    4: 7,
+    5: 10
   },
   'recommended': {
     'false': 5,
