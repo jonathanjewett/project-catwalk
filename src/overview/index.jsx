@@ -19,7 +19,7 @@ const Overview = (/* { product, rating, styles } */) => {
       <ProductInformation product={product} rating={rating} style={style}/>
       <StyleSelector styles={styles} style={style} setStyle={setStyleIndex}/>
       <AddToCart style={style}/>
-      <ImageGallery/>
+      <ImageGallery style={style}/>
     </div>
   );
 };
