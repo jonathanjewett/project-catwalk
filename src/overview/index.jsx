@@ -18,7 +18,7 @@ const Overview = (/* { product, rating, styles } */) => {
     <div id="overview">
       <ProductInformation product={product} rating={rating} style={style}/>
       <StyleSelector styles={styles} style={style} setStyle={setStyleIndex}/>
-      <AddToCart/>
+      <AddToCart style={style}/>
       <ImageGallery/>
     </div>
   );
