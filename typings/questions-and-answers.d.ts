@@ -1,3 +1,6 @@
+// `GET /qa/questions/:question_id/answers` returns an object whose `.results` property is an array
+// of `Answer`s.
+// i.e. it returns `{results: [question1, question2, ...], ...}`
 interface Answer {
     id: number,
     body: string,
@@ -7,6 +10,8 @@ interface Answer {
     photos: {id: number, url: string}[]
 }
 
+// `GET /qa/questions` returns an object whose `.results` property is an array of `Question`s.
+// i.e. it returns `{results: [question1, question2, ...], ...}`
 interface Question {
     question_id: number,
     question_body: string,
