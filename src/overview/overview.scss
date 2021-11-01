@@ -58,5 +58,38 @@ $minor: dimgray;
             text-align: center;
             color: $minor;
         }
+
+#add-to-cart {
+    button, select {
+        font-size: 1.25em;
+        text-transform: uppercase;
+        padding: 0.5em 1em;
+    }
+
+    button {
+        margin-top: 1em;
+        width: 100%;
+        text-align: left;
+    }
+
+    div {
+        display: flex;
+    }
+
+    select {
+        min-width: 4.75em;
+
+        &:first-child {
+            margin-right: 1em;
+            flex-grow: 1;
+        }
+
+        &:invalid {
+            border-color: red;
+        }
+    }
+
+    span {
+        float: right;
     }
 }
