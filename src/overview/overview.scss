@@ -7,6 +7,14 @@ $minor: dimgray;
         vertical-align: top;
     }
 
+    label {
+        font-weight: bold;
+
+        &::after {
+            content: " > ";
+        }
+    }
+
     .category {
         text-transform: uppercase;
         color: $minor;
@@ -18,6 +26,37 @@ $minor: dimgray;
         }
         span:last-child {
             color: red;
+        }
+    }
+
+    .stylename {
+        color: $minor;
+    }
+
+    .styles button {
+        width: 75px;
+        height: 75px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        background-size: cover;
+        border-radius: 100%;
+        border: 1px solid $minor;
+        cursor: pointer;
+        position: relative;
+
+        div {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background-color: #fff;
+            border: 1px solid $minor;
+            border-radius: 100%;
+            font-size: 0.9em;
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: middle;
+            text-align: center;
+            color: $minor;
         }
     }
 }
