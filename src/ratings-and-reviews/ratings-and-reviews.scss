@@ -1,3 +1,38 @@
-#ratings-and-reviews {
+.reviews-header {
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.reviews-rating {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.reviews-recommend {
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+progress {
+  border-radius: 7px;
+  height: 12px;
+  padding-left: 5px;
 
 }
+progress:hover {
+  border-radius: 40px;
+}
+progress::-webkit-progress-bar {
+  background-color: rgb(161, 159, 159);
+  opacity: .75;
+  filter: alpha(opacity=75);
+}
+progress::-webkit-progress-value {
+  background-color: rgb(108, 211, 108);
+}
+
+.review-breakdown-label {
+  font-size: 12px;
+  text-decoration: none;
+}
+
