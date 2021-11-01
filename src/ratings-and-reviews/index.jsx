@@ -10,6 +10,15 @@ import ProductBreakdown from './components/ProductBreakdown.jsx';
 
 import {review, reviewMetaData} from './sampleData.js';
 
+/** @param {Object} reviews */
+const reviewsTotal = (reviews) => {
+  let total = 0;
+  for (let i in reviews) {
+    total += reviews[i];
+  }
+  return total;
+};
+
 
 const RatingsAndReviews = () => (
   <div id="ratings-and-reviews">
@@ -18,9 +27,9 @@ const RatingsAndReviews = () => (
     <span className="reviews-rating">3.5</span>
     <StarRating />
     <span className="reviews-recommend">100% of reviews recommend this product</span>
-    <ReviewBreakdown breakdown={reviewMetaData.ratings}/>
+    <ReviewBreakdown total={reviewsTotal(reviewMetaData.ratings)}breakdown={reviewMetaData.ratings}/>
     <ProductBreakdown />
-    <Sort breakdown={reviewMetaData.ratings}/>
+    <Sort total={reviewsTotal(reviewMetaData.ratings)}/>
     <ReviewList />
   </div>
 );
