@@ -2,6 +2,7 @@
   .card-item {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 250px;
     height: 380px;
     border: 1px solid black;
@@ -9,5 +10,29 @@
   }
   .sample-product-list {
     display: flex;
+  }
+
+  .price {
+    font-size: 14px;
+    margin-top: 2.5px;
+    margin-left: 5px;
+  }
+
+  .category {
+    font-size: 13px;
+    margin-top: 2.5px;
+    margin-left: 5px;
+  }
+
+  .product-name {
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 2.5px;
+    margin-left: 5px;
+  }
+
+  .star-rating {
+    margin-left: 5px;
+    margin-bottom: 2.5px;
   }
 }
