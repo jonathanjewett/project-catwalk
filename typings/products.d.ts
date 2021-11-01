@@ -1,3 +1,5 @@
+// `GET /products` returns an array of `Product`s without `.feature`s.
+// `GET /products/:product_id` returns a `Product` with `.feature`s.
 interface Product {
     id: number,
     name: string,
@@ -8,6 +10,7 @@ interface Product {
     features?: {feature: string, value: string}[]
 }
 
+// `GET /products/:product_id/styles` returns an array of `Style`s.
 interface Style {
     style_id: number,
     name: string,
