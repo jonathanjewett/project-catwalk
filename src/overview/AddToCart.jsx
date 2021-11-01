@@ -5,10 +5,14 @@ import React from 'react';
  * @param {Style} props.style
  */
 const AddToCart = ({ style }) => {
+  // Number of items the user wishes to purchase.
   const [quantity, setQuantity] = React.useState(0);
+  // Whether to expand the select-a-size menu in order to prompt the user.
   const [expandSizes, setExpandSizes] = React.useState(false);
+  // Reference to the select-a-size menu in order to display it as invalid.
   const sizeRef = React.useRef(null);
 
+  // The value of the select-a-size menu is how many of that size are in stock.
   const sizeOptions = Object.entries(style.skus)
     .filter(([_, sku]) => sku.quantity > 0)
     .map(([id, sku]) =>
@@ -22,6 +26,7 @@ const AddToCart = ({ style }) => {
         size={expandSizes ? sizeOptions.length + 1 : 0}
         ref={sizeRef}
         onChange={(event) => {
+          // Un-invalidate the select-a-size menu.
           setQuantity(Number(event.target.value));
           sizeRef.current.setCustomValidity('');
           setExpandSizes(false);
@@ -47,11 +52,11 @@ const AddToCart = ({ style }) => {
   const addToCart = sizeOptions.length === 0 ? null : (
     <button type="button" onClick={() => {
       if (quantity === 0) {
+        // Invalidate and expand the select-a-size menu.
         setExpandSizes(true);
         sizeRef.current.setCustomValidity('You must select a size');
         sizeRef.current.focus();
       } else {
-        console.log(quantity);
         // TODO add to cart with api
       }
     }}>
