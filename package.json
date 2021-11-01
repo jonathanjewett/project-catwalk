@@ -21,7 +21,8 @@
     "dotenv": "^10.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-share": "^4.4.0"
+    "react-share": "^4.4.0",
+    "vite-plugin-react-svg": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -33,6 +34,7 @@
     "babel-jest": "^27.3.1",
     "jest": "^27.3.1",
     "jest-transform-stub": "^2.0.0",
+    "jest-transformer-svg": "^1.0.1",
     "msw": "^0.35.0",
     "sass": "^1.43.4",
     "vite": "^2.6.4"
