@@ -21,7 +21,11 @@ const Overview = (/* { product, rating, styles } */) => {
         <ImageGallery style={style}/>
         <div>
           <ProductInformation product={product} rating={rating} style={style}/>
-          <StyleSelector styles={styles} style={style} setStyle={setStyleIndex}/>
+          <StyleSelector
+            styles={styles}
+            style={style}
+            setStyleIndex={setStyleIndex}
+          />
           <AddToCart style={style}/>
         </div>
       </div>

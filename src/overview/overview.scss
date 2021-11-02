@@ -18,7 +18,12 @@ $foreground: var(--foreground);
     }
 
     figure {
-        height: 0;
+        margin-bottom: 0;
+        position: relative;
+
+        div {
+            height: 0;
+        }
 
         img {
             width: 100%;
@@ -39,6 +44,31 @@ $foreground: var(--foreground);
 
     .category {
         text-transform: uppercase;
+    }
+
+    .nextStyle, .prevStyle {
+        color: black;
+        text-shadow: 0px 0px 2px white;
+        border: none;
+        background: none;
+        font-size: 2em;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        margin-top: -0.5em;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    .nextStyle {
+        right: 0.5em;
+    }
+
+    .prevStyle {
+        left: 0.5em;
+
     }
 
     .price {
