@@ -20,7 +20,7 @@ const AddToCart = ({ style }) => {
     );
 
   const sizeSelect = sizeOptions.length === 0
-    ? <select><option>OUT OF STOCK</option></select>
+    ? <select><option>Out of Stock</option></select>
     : (
       <select
         size={expandSizes ? sizeOptions.length + 1 : 0}

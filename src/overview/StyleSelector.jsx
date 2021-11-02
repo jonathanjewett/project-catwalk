@@ -4,9 +4,9 @@ import React from 'react';
  * @param {Object} props
  * @param {Style[]} props.styles
  * @param {Style} props.style
- * @param {React.Dispatch<React.SetStateAction<number>>} props.setStyle
+ * @param {React.Dispatch<React.SetStateAction<number>>} props.setStyleIndex
  */
-const StyleSelector = ({ styles, style, setStyle }) => {
+const StyleSelector = ({ styles, style, setStyleIndex }) => {
   // Array of style buttons.
   const styleButtons = styles.map((st, i) => {
     const checkmark = st.style_id === style.style_id ? <div>✓</div> : null;
@@ -15,7 +15,7 @@ const StyleSelector = ({ styles, style, setStyle }) => {
         type="button"
         style={{backgroundImage: `url(${st.photos[0].thumbnail_url})`}}
         key={st.style_id}
-        onClick={() => setStyle(i)}
+        onClick={() => setStyleIndex(i)}
       >
         {checkmark}
       </button>
@@ -30,11 +30,11 @@ const StyleSelector = ({ styles, style, setStyle }) => {
 
   // Rows of four style buttons at a time.
   const styleRows = styleChunks.map((chunk, i) =>
-    <div className="styles" key={i}>{chunk}</div>
+    <div key={i}>{chunk}</div>
   );
 
   return (
-    <div>
+    <div className="styles">
       <p>
         <label>Style</label>
         <span className="stylename">{style.name}</span>

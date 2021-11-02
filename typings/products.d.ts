@@ -15,7 +15,7 @@ interface Style {
     style_id: number,
     name: string,
     original_price: string,
-    sale_price: string,
+    sale_price: string | null,
     default?: boolean
     photos: {thumbnail_url: string, url: string}[],
     skus: {quantity: number, size: string}[]

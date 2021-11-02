@@ -17,7 +17,7 @@ it('renders the name of the current style', () => {
   for (const style of styles) {
     render(<StyleSelector style={style} styles={styles}/>);
     const label = screen.getByText(style.name);
-    expect(label).toBeInTheDocument();
+    expect(screen.queryByText(style.name)).not.toBeNull();
   }
 });
 
@@ -33,7 +33,7 @@ for (let i = 1; i <= 10; i++) {
       stylesList.push(stylesMember);
     }
     render(<StyleSelector style={style} styles={stylesList}/>);
-    const rows = document.querySelectorAll('.styles');
+    const rows = document.querySelectorAll('.styles div');
     for (const [j, row] of rows.entries()) {
       if (j === rows.length - 1) {
         expect(row.childElementCount).toBe(i % 4 || 4);

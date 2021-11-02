@@ -47,38 +47,16 @@ const Price = ({ base, sale }) =>
  * @param {number} props.rating
  * @param {Style} props.style
  */
-const ProductInformation = ({ product, rating, style }) => {
-  const url = `https://www.project-catwalk.com/${product.id}`;
-  return (
-    <div>
-      <p>
-        <StarRating rating={rating}/>
-        <a href="#ratings-and-review">Read all reviews</a>
-      </p>
-      <p className="category">{product.category}</p>
-      <h2>{product.name}</h2>
-      <h4>{product.slogan}</h4>
-      <p>{product.description}</p>
-      <Price base={style.original_price} sale={style.sale_price}/>
-      Share on:
-      <FacebookShareButton url={url}>
-        <FacebookIcon size={32} round />
-      </FacebookShareButton>
-      <TwitterShareButton url={url}>
-        <TwitterIcon size={32} round />
-      </TwitterShareButton>
-      <PinterestShareButton url={url}>
-        <PinterestIcon size={32} round />
-      </PinterestShareButton>
-    </div>
-  );
-};
-/*
+const ProductInformation = ({ product, rating, style }) => (
+  <div>
+    <p>
+      <StarRating rating={rating}/>
+      <a href="#ratings-and-reviews">Read all reviews</a>
+    </p>
+    <p className="category">{product.category}</p>
+    <h1>{product.name}</h1>
+    <Price base={style.original_price} sale={style.sale_price}/>
+  </div>
+);
 
-
-Facebook
-Twitter
-Pinterest
-
-*/
 export default ProductInformation;
