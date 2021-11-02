@@ -17,7 +17,7 @@ it('renders the name of the current style', () => {
   for (const style of styles) {
     render(<StyleSelector style={style} styles={styles}/>);
     const label = screen.getByText(style.name);
-    expect(label).toBeInTheDocument();
+    expect(screen.queryByText(style.name)).not.toBeNull();
   }
 });
 

@@ -1,5 +1,6 @@
 export const rating = 4.27;
 
+/** @type {Product} */
 export const product = {
   'id': 40344,
   'campus': 'hr-rfp',
@@ -22,6 +23,7 @@ export const product = {
   ]
 };
 
+/** @type {Style[]} */
 export const styles =
   [
     {
