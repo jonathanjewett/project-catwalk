@@ -30,11 +30,11 @@ const StyleSelector = ({ styles, style, setStyleIndex }) => {
 
   // Rows of four style buttons at a time.
   const styleRows = styleChunks.map((chunk, i) =>
-    <div className="styles" key={i}>{chunk}</div>
+    <div key={i}>{chunk}</div>
   );
 
   return (
-    <div>
+    <div className="styles">
       <p>
         <label>Style</label>
         <span className="stylename">{style.name}</span>
