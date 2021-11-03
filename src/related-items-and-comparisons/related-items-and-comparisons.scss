@@ -10,6 +10,8 @@
   }
   .related-items-list {
     display: flex;
+    overflow: hidden;
+    width: 100%;
   }
 
   .price {
