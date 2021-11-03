@@ -8,7 +8,7 @@ import ReviewBreakdown from './components/ReviewBreakdown.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
 
 
-import {review, reviewMetaData} from './sampleData.js';
+import {reviewList, reviewMetaData} from './sampleData.js';
 
 /** @param {Object} reviews */
 const reviewsTotal = (reviews) => {
@@ -19,18 +19,37 @@ const reviewsTotal = (reviews) => {
   return total;
 };
 
+/** @param {Object}  */
+const reviewsAverage = (reviews) => {
+  let total = 0;
+  let count = 0;
+  for (let i in reviews) {
+    total += i * reviews[i];
+    count += reviews[i];
+  }
+  return parseFloat(total / count).toFixed(1);
+};
+
+let averageRating = reviewsAverage(reviewMetaData.ratings);
+
 
 const RatingsAndReviews = () => (
   <div id="ratings-and-reviews">
-    <h2 className="reviews-header">Ratings & Reviews</h2>
+    <div className="column-1">
+      <h2 className="reviews-header">Ratings & Reviews</h2>
+      <span className="reviews-rating">{averageRating}</span>
+      <div>
+        <StarRating rating={3.5}/>
+      </div>
+      <span className="reviews-recommend">100% of reviews recommend this product</span>
+      <ReviewBreakdown breakdown={reviewMetaData.ratings}/>
+      <ProductBreakdown />
+    </div>
+    <div className="column-2">
+      <Sort breakdown={reviewMetaData.ratings}/>
+      <ReviewList reviewList={reviewList}/>
+    </div>
 
-    <span className="reviews-rating">3.5</span>
-    <StarRating />
-    <span className="reviews-recommend">100% of reviews recommend this product</span>
-    <ReviewBreakdown breakdown={reviewMetaData.ratings}/>
-    <ProductBreakdown />
-    <Sort breakdown={reviewMetaData.ratings}/>
-    <ReviewList />
   </div>
 );
 
