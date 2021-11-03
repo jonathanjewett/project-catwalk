@@ -1,6 +1,24 @@
+#ratings-and-reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 1fr;
+  grid-column-gap: 20px;
+  padding: 1em;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.column-1 {
+  grid-column: 1/2;
+}
+.column-2 {
+  margin-top: 13px;
+  grid-column: 2/5;
+}
+
 .reviews-header {
   font-size: 16px;
   font-weight: lighter;
+  height: 10px;
+  vertical-align: top;
 }
 
 .reviews-rating {
@@ -35,4 +53,23 @@ progress::-webkit-progress-value {
   font-size: 12px;
   text-decoration: none;
 }
+
+.review-sort {
+  margin-bottom: 10px;
+}
+
+.review-userdata {
+  margin-left: 550px;
+}
+
+.review-helpful {
+  margin-left: 550px;
+}
+
+.checkmark {
+  font-style: italic;
+}
+
+
+
 
