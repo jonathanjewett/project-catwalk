@@ -1,12 +1,14 @@
 import React from 'react';
 import CardItem from './CardItem.jsx';
+import RelatedItemsList from './RelatedItemsList.jsx';
 import './related-items-and-comparisons.scss';
 
-const RelatedItemsAndComparisons = () => (
+import { products, stylesForProducts, relatedProducts } from './sampleData.js';
+
+const RelatedItemsAndComparisons = (props) => (
   <div id="related-items-and-comparisons">
-    <div className="sample-product-list">
-      <CardItem/>
-      <CardItem/>
+    <div>
+      <RelatedItemsList products={products}/>
     </div>
   </div>
 );
