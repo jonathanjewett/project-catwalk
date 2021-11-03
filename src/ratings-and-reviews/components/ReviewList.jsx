@@ -4,7 +4,7 @@ import ReviewTile from './ReviewTile.jsx';
 const ReviewList = ({reviewList}) => (
 
   <div className="review-list">
-    {reviewList.map((review, i) => <ReviewTile review={review} key={i}/>)}
+    {reviewList.map((review) => <ReviewTile review={review} key={review.review_id}/>)}
   </div>
 );
 

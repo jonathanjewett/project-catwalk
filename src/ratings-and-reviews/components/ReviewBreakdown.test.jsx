@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 
 it('Renders bars based on number of ratings', () => {
-  const reviews = {1: 25, 2: 10, 3: 50, 4: 70, '5': 100};
+  const reviews = {1: 25, 2: 10, 3: 50, 4: 70, 5: 100};
   const app = render(<ReviewBreakdown breakdown={reviews}/>);
 
   expect(document.querySelector('#progress-5-star')).toHaveAttribute('value', '100');

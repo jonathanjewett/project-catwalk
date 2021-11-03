@@ -19,7 +19,7 @@ const reviewsTotal = (reviews) => {
   return total;
 };
 
-/** @param {Object}  */
+/** @param {Object} reviews*/
 const reviewsAverage = (reviews) => {
   let total = 0;
   let count = 0;
