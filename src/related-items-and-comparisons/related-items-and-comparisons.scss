@@ -10,7 +10,7 @@
   }
   .related-items-list {
     display: flex;
-    // overflow: hidden;
+    overflow: hidden;
     width: 100%;
   }
 
@@ -50,5 +50,20 @@
     font-weight: bold;
   }
 
+  .related-container {
+    display: flex;
+  }
+  .left-arrow {
+    position: relative;
+    height: 500px;
+    left: 0px;
+    z-index: 100;
+  }
 
+  .right-arrow {
+    position: relative;
+    height: 500px;
+    right: 0px;
+    z-index: 100;
+  }
 }
