@@ -114,6 +114,48 @@ $foreground: var(--foreground);
             }
         }
     }
+
+    .thumbnails {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        align-items: center;
+        cursor: auto;
+
+        button, div {
+            color: black;
+            cursor: pointer;
+            text-shadow: 0px 0px 1px white;
+            height: 0px;
+            line-height: 0;
+            margin: 8px;
+            padding: 0;
+            font-size: unset;
+        }
+
+        img {
+            cursor: pointer;
+            width: 65px;
+            height: 65px;
+            object-fit: cover;
+            border: 1px solid black;
+            box-shadow: 0px 0px 5px $foreground;
+            margin: 5px;
+        }
+
+        .selected {
+            border-color: white;
+        }
+    }
+    .expand img {
+        width: 10px;
+        height: 10px;
+        filter: brightness(0);
+        box-shadow: 0px 0px 2px black;
+    }
+    .expand .selected {
+        filter: brightness(100);
+    }
 }
 
 #add-to-cart {
