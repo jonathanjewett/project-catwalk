@@ -18,11 +18,64 @@ const numThumbnails = 7;
 
 /**
  * @param {Object} props
- * @param {boolean} props.expand
- * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setExpand
+ * @param {{thumbnail_url: string, url: string}[]} props.photos
+ * @param {number} page
+ * @param {React.Dispatch<React.SetStateAction<number>>} props.setPage
+ * @param {number} props.thumbOffset
+ * @param {React.Dispatch<React.SetStateAction<number>>} props.setThumbOffset
+ */
+const Thumbnails = ({ photos, page, setPage, thumbOffset, setThumbOffset }) => {
+  const thumbnails = photos
+    .slice(thumbOffset, thumbOffset + numThumbnails)
+    .map((photo, i) =>
+      <Thumbnail
+        src={photo.thumbnail_url}
+        selected={i + thumbOffset === page}
+        onClick={() => setPage(i + thumbOffset)}
+        key={i + thumbOffset}
+      />
+    );
+
+  const upButton = thumbOffset === 0
+    ? <div/>
+    : <button onClick={() => setThumbOffset(i => i - 1)}>⮝</button>;
+
+  const downButton = thumbOffset + numThumbnails + 1 > photos.length
+    ? <div/>
+    : <button onClick={() => setThumbOffset(i => i + 1)}>⮟</button>;
+
+  return (
+    <div className="thumbnails" onClick={(event) => event.stopPropagation()}>
+      {upButton}
+      {thumbnails}
+      {downButton}
+    </div>
+  );
+};
+
+/**
+ * Moves the background image of an element around so that it lines up with the
+ * relative position of the cursor within that element.
+ * @param {React.MouseEvent<HTMLElement>} event
+ */
+const scanZoomedImage = (event) => {
+  const target = event.currentTarget;
+  const bounds = target.getBoundingClientRect();
+  const percentX = (event.clientX - bounds.x) / bounds.width;
+  const percentY = (event.clientY - bounds.y) / bounds.height;
+  target.style.backgroundPositionX = `${percentX * 100}%`;
+  target.style.backgroundPositionY = `${percentY * 100}%`;
+};
+
+const zoomCursors = ['zoom-in', 'crosshair', 'zoom-out'];
+
+/**
+ * @param {Object} props
+ * @param {boolean} props.zoom
+ * @param {React.Dispatch<React.SetStateAction<number>>} props.setZoom
  * @param {Style} props.style
  */
-const ImageGallery = ({ expand, setExpand, style }) => {
+const ImageGallery = ({ zoom, setZoom, style }) => {
   // thumbnail offset for scrolling through more than `numThumbnails`
   const [thumbOffset, setThumbOffset] = React.useState(0);
   // index in `style.photos`
@@ -55,39 +108,20 @@ const ImageGallery = ({ expand, setExpand, style }) => {
       →
     </button>;
 
-  const thumbnails = style
-    .photos
-    .slice(thumbOffset, thumbOffset + numThumbnails)
-    .map((photo, i) =>
-      <Thumbnail
-        src={photo.thumbnail_url}
-        selected={i + thumbOffset === page}
-        onClick={() => setPage(i + thumbOffset)}
-        key={i + thumbOffset}
-      />
-    );
-
-  const upButton = thumbOffset === 0
-    ? <div/>
-    : <button onClick={() => setThumbOffset(i => i - 1)}>⮝</button>;
-
-  const downButton = thumbOffset + numThumbnails + 1 > style.photos.length
-    ? <div/>
-    : <button onClick={() => setThumbOffset(i => i + 1)}>⮟</button>;
-
   return (
-    <figure onClick={() => setExpand(state => !state)} style={{
-      backgroundImage: `url(${style.photos[page].url})`,
-      cursor: expand ? 'zoom-out' : 'zoom-in',
-    }}>
-      <div
-        className={expand ? 'thumbnails expand' : 'thumbnails'}
-        onClick={(event) => event.stopPropagation()}
-      >
-        {upButton}
-        {thumbnails}
-        {downButton}
-      </div>
+    <figure
+      onClick={() => setZoom(state => (state + 1) % 3)}
+      className={`zoom-${zoom}`}
+      style={{backgroundImage: `url(${style.photos[page].url})`}}
+      onMouseMove={zoom === 2 ? scanZoomedImage : null}
+    >
+      <Thumbnails
+        page={page}
+        setPage={setPage}
+        photos={style.photos}
+        thumbOffset={thumbOffset}
+        setThumbOffset={setThumbOffset}
+      />
       {leftButton}
       {rightButton}
     </figure>
