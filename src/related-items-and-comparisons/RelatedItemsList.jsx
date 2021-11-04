@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import CardItem from './CardItem.jsx';
 
 const RelatedItemsList = (props) => {
@@ -19,19 +19,49 @@ const RelatedItemsList = (props) => {
     setCurrList(products.slice(currIndex + 1)); //bandaid fix, still not sure why its not updating the array without the +1 here
   };
 
+  const prev = () => {
+    setCurrIndex(currIndex - 1);
+    setCurrList(products.slice(currIndex - 1));
+  };
 
-  return (
-    <div>
-      <h3>RELATED PRODUCTS</h3>
-      <div className="related-container">
-        <button type="button" className="left-arrow"> &lt; </button>
-        <div className="related-items-list">
-          {currList.map((product) => <CardItem key={product.id} product={product} />)}
+  if (currIndex === products.length - 1) {
+    return (
+      <div>
+        <h3>RELATED PRODUCTS</h3>
+        <div className="related-container">
+          <button type="button" className="left-arrow" onClick={prev}> &lt; </button>
+          <div className="related-items-list">
+            {currList.map((product) => <CardItem key={product.id} product={product} />)}
+          </div>
         </div>
-        <button type="button" className="right-arrow" onClick={next}> &gt; </button>
       </div>
-    </div>
-  );
+    );
+  } else if (currIndex === 0) {
+    return (
+      <div>
+        <h3>RELATED PRODUCTS</h3>
+        <div className="related-container">
+          <div className="related-items-list">
+            {currList.map((product) => <CardItem key={product.id} product={product} />)}
+          </div>
+          <button type="button" className="right-arrow" onClick={next}> &gt; </button>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <h3>RELATED PRODUCTS</h3>
+        <div className="related-container">
+          <button type="button" className="left-arrow" onClick={prev}> &lt; </button>
+          <div className="related-items-list">
+            {currList.map((product) => <CardItem key={product.id} product={product} />)}
+          </div>
+          <button type="button" className="right-arrow" onClick={next}> &gt; </button>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default RelatedItemsList;
