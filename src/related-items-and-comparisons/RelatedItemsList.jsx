@@ -15,9 +15,10 @@ const RelatedItemsList = (props) => {
   });
 
   const next = () => {
-    setCurrIndex(prevState => prevState + 1);
-    setCurrList(prevState => products.slice(currIndex));
+    setCurrIndex(currIndex + 1);
+    setCurrList(products.slice(currIndex + 1)); //bandaid fix, still not sure why its not updating the array without the +1 here
   };
+
 
   return (
     <div>
