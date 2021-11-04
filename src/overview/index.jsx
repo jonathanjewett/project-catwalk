@@ -11,20 +11,23 @@ import { product, rating, styles } from './sampleData';
 
 const Overview = (/* { product, rating, styles } */) => {
   const [styleIndex, setStyleIndex] = React.useState(0);
-  // whether or not the image gallery expands over the product info
-  const [expand, setExpand] = React.useState(false);
+  // zoomed in amount:
+  // 0: standard view
+  // 1: expanded view
+  // 2: zoomed-in view
+  const [zoom, setZoom] = React.useState(0);
   // reset state when a new product is displayed
   React.useEffect(() => {
     setStyleIndex(0);
-    setExpand(false);
+    setZoom(0);
   }, [product.id]);
   const style = styles[styleIndex];
 
   return (
     <div id="overview">
       <div>
-        <ImageGallery style={style} expand={expand} setExpand={setExpand}/>
-        <div className="info" style={{display: expand ? 'none' : null}}>
+        <ImageGallery style={style} zoom={zoom} setZoom={setZoom}/>
+        <div className="info" style={{display: zoom === 0 ? null : 'none'}}>
           <ProductInformation product={product} rating={rating} style={style}/>
           <StyleSelector
             styles={styles}

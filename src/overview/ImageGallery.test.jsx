@@ -112,8 +112,9 @@ describe('click to zoom', () => {
   it('shrinks the gallery', () => {
     render(<Overview product={product} rating={rating} styles={styles}/>);
     const gallery = screen.getByRole('figure');
-    fireEvent.click(gallery);
-    fireEvent.click(gallery);
+    fireEvent.click(gallery); // expanded
+    fireEvent.click(gallery); // zoomed
+    fireEvent.click(gallery); // normal
     expect(document.querySelector('.info')).toBeVisible();
   });
 

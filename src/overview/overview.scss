@@ -25,6 +25,7 @@ $foreground: var(--foreground);
         background-size: cover;
         background-position: center;
         display: flex;
+        user-select: none;
 
         button {
             color: black;
@@ -147,14 +148,33 @@ $foreground: var(--foreground);
             border-color: white;
         }
     }
-    .expand img {
-        width: 10px;
-        height: 10px;
-        filter: brightness(0);
-        box-shadow: 0px 0px 2px black;
+
+    .zoom-0 {
+        cursor: zoom-in;
     }
-    .expand .selected {
-        filter: brightness(100);
+
+    .zoom-1 {
+        cursor: crosshair;
+
+        .thumbnails img {
+            width: 10px;
+            height: 10px;
+            filter: brightness(0);
+            box-shadow: 0px 0px 2px black;
+
+            &.selected {
+                filter: brightness(100);
+            }
+        }
+    }
+
+    .zoom-2 {
+        cursor: zoom-out;
+        background-size: 250%;
+
+        .thumbnails, button {
+            display: none;
+        }
     }
 }
 
