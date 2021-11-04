@@ -3,7 +3,7 @@ import CardItem from './CardItem.jsx';
 
 const RelatedItemsList = (props) => {
   const allProducts = props.products;
-  var products = props.products;
+  const products = props.products;
   const [currList, setCurrList] = useState(products);
   const [currIndex, setCurrIndex] = useState(0);
   const [length, setLength] = useState(products.length);
@@ -16,7 +16,7 @@ const RelatedItemsList = (props) => {
 
   const next = () => {
     setCurrIndex(prevState => prevState + 1);
-    setCurrList(prevState => prevState.slice(currIndex));
+    setCurrList(prevState => products.slice(currIndex));
   };
 
   return (
