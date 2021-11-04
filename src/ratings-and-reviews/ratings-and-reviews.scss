@@ -31,6 +31,11 @@
   font-weight: lighter;
 }
 
+.review-list {
+  overflow-y: scroll;
+  height: 750px;
+}
+
 progress {
   border-radius: 7px;
   height: 12px;
@@ -64,6 +69,7 @@ progress::-webkit-progress-value {
 
 .review-helpful {
   margin-left: 550px;
+  text-align: right;
 }
 
 .checkmark {
