@@ -6,13 +6,8 @@ const RelatedItemsList = (props) => {
   const products = props.products;
   const [currList, setCurrList] = useState(products);
   const [currIndex, setCurrIndex] = useState(0);
-  const [length, setLength] = useState(products.length);
 
-  // set length to current products
   // "useEffect is componentDidMount, componentDidUpdate, and componentWillUnmount combined"
-  useEffect(() => {
-
-  });
 
   const next = () => {
     setCurrIndex(currIndex + 1);
