@@ -10,6 +10,8 @@
   }
   .related-items-list {
     display: flex;
+    overflow: hidden;
+    width: 100%;
   }
 
   .price {
@@ -46,5 +48,23 @@
     right: 8px;
     font-size: 25px;
     font-weight: bold;
+  }
+
+  .related-container {
+    display: flex;
+    align-items: center;
+  }
+  .left-arrow {
+    position: relative;
+    height: 50px;
+    left: 0px;
+    z-index: 100;
+  }
+
+  .right-arrow {
+    position: relative;
+    height: 50px;
+    right: 0px;
+    z-index: 100;
   }
 }
