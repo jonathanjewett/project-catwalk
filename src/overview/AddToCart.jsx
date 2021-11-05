@@ -36,7 +36,7 @@ const AddToCart = ({ style }) => {
         size={expandSizes ? sizeOptions.length + 1 : 0}
         ref={sizeRef}
         value={size || ''}
-        onChange={(event) => {
+        onChange={event => {
           const id = event.target.value;
           if (id) {
             setSize(id);
@@ -65,7 +65,7 @@ const AddToCart = ({ style }) => {
     quantitySelect =
       <select
         value={quantity}
-        onChange={(event) => setQuantity(Number(event.target.value))}
+        onChange={event => setQuantity(Number(event.target.value))}
       >
         {quantities}
       </select>;
@@ -83,7 +83,6 @@ const AddToCart = ({ style }) => {
       } else {
         for (let i = 0; i < quantity; i++) {
           api.addToCart(size);
-          console.log('adding', size, 'to cart');
         }
       }
     }}>
