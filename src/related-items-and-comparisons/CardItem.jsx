@@ -14,8 +14,12 @@ const CardItem = (props) => {
     }
   };
 
+  const closeModal = () => {
+    toggleModal(false);
+  };
+
   const showModal = modal === false ? null :
-    <ComparisonModal />;
+    <ComparisonModal close={closeModal}/>;
 
   return (
     <div className="card-item">
