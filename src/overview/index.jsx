@@ -9,10 +9,12 @@ import './overview.scss';
 /**
  * @param {Object} props
  * @param {ProductInfo} props.info
+ * @param {number} props.reviewCount
  */
-const Overview = ({ info: { product, metadata: {rating}, styles }}) => {
+const Overview = ({ info, reviewCount }) => {
+  const { product, metadata: {rating}, styles } = info;
   const [styleIndex, setStyleIndex] = React.useState(0);
-  // zoomed in amount:
+  // magnification amount:
   // 0: standard view
   // 1: expanded view
   // 2: zoomed-in view
@@ -24,7 +26,12 @@ const Overview = ({ info: { product, metadata: {rating}, styles }}) => {
       <div>
         <ImageGallery style={style} zoom={zoom} setZoom={setZoom}/>
         <div className="info" style={{display: zoom === 0 ? null : 'none'}}>
-          <ProductInformation product={product} rating={rating} style={style}/>
+          <ProductInformation
+            product={product}
+            rating={rating}
+            style={style}
+            reviewCount={reviewCount}
+          />
           <StyleSelector
             styles={styles}
             style={style}
