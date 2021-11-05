@@ -15,7 +15,7 @@ const ReviewTile = ({review}) => (
     {review.recommend ?
       <span className="checkmark">I recommend this product</span>
       : <span></span>}
-    <span className="review-helpful">Helpful? </span>
+    <span className="review-helpful">Helpful? {review.helpfulness} </span>
     <button className="helpful-button">Yes</button>
     <span className ="button-divider"> | </span>
     <button className="helpful-button">No</button>
