@@ -45,7 +45,7 @@ const Thumbnails = ({ photos, page, setPage, thumbOffset, setThumbOffset }) => {
     : <button onClick={() => setThumbOffset(i => i + 1)}>⮟</button>;
 
   return (
-    <div className="thumbnails" onClick={(event) => event.stopPropagation()}>
+    <div className="thumbnails" onClick={event => event.stopPropagation()}>
       {upButton}
       {thumbnails}
       {downButton}
