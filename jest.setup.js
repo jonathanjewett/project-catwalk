@@ -17,3 +17,5 @@ jest.mock('axios', () => ({
     return mock;
   }
 }));
+
+process.meta = { env: {} };
