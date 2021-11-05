@@ -4,8 +4,8 @@ import axios from 'axios';
 /** An Axios instance that points to the Atelier API. */
 const api = axios.create({
   baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/' +
-    import.meta.env.VITE_CAMPUS,
-  headers: {'Authorization': import.meta.env.VITE_API_TOKEN}
+    process.meta.env.VITE_CAMPUS,
+  headers: {'Authorization': process.meta.env.VITE_API_TOKEN}
 });
 
 // POST
