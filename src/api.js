@@ -15,7 +15,7 @@ const api = axios.create({
  * @param {number} skuId - ID for the product being added to the cart
  */
 const addToCart = async (skuId) => {
-  await api.post('/cart', { skuId });
+  await api.post('/cart', { sku_id: skuId });
 };
 
 /**
@@ -132,7 +132,7 @@ const getMetadata = async (productId) => {
   const metadata = res.data;
 
   // Turn all those stringified numbers back into real numbers
-  metadata['product_id'] = productId;
+  metadata.product_id = productId;
   for (const chara of Object.values(metadata.characteristics)) {
     chara.value = Number(chara.value);
   }

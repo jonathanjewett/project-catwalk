@@ -25,8 +25,8 @@ it('sends users to the Ratings & Reviews section on click', () => {
 it('displays price and sale in the correct format', () => {
   // deep copy
   const style = JSON.parse(JSON.stringify(styles[0]));
-  style['original_price'] = '123.00';
-  style['sale_price'] = '124.01';
+  style.original_price = '123.00';
+  style.sale_price = '124.01';
 
   render(<ProductInformation product={product} rating={rating} style={style}/>);
 
@@ -36,13 +36,13 @@ it('displays price and sale in the correct format', () => {
 
 it('hides the sale price if there is no sale', () => {
   const style = JSON.parse(JSON.stringify(styles[0]));
-  style['sale_price'] = '1';
+  style.sale_price = '1';
   const withSale = render(
     <ProductInformation product={product} rating={rating} style={style}/>
   );
   expect(withSale.container.querySelector('.price').childElementCount).toBe(2);
 
-  style['sale_price'] = null;
+  style.sale_price = null;
   const withoutSale = render(
     <ProductInformation product={product} rating={rating} style={style}/>
   );
