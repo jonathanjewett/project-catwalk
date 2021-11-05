@@ -8,6 +8,118 @@ const api = axios.create({
   headers: {'Authorization': import.meta.env.VITE_API_TOKEN}
 });
 
+// POST
+
+/**
+ * Adds a product to the cart.
+ * @param {number} skuId - ID for the product being added to the cart
+ */
+const addToCart = async (skuId) => {
+  await api.post('/cart', { skuId });
+};
+
+/**
+ * Adds a review for a product.
+ *
+ * Routes used:
+ * - [`POST /reviews`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/reviews.md#add-a-review)
+ * @param {Object} review - review to post
+ * @param {number} review.product_id - ID of the product to post the review for
+ * @param {number} review.rating - integer (1-5) indicating the review rating
+ * @param {string} review.summary - summary text of the review
+ * @param {string} review.body - continued or full text of the review
+ * @param {boolean} review.recommend - value indicating if the reviewer recommends the product
+ * @param {string} review.name - username for question asker
+ * @param {string} review.email - email address for question asker
+ * @param {string[]} review.photos - array of text urls that link to images to be shown
+ * @param {{[characteristic_id: string]: number}} review.characteristics - object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
+ */
+const createReview = async (review) => {
+  await api.post('/reviews', review);
+};
+
+/**
+ * Adds an answer for a question.
+ *
+ * Routes used:
+ * - [`POST /qa/questions/:question_id/answers`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#add-an-answer)
+ * @param {number} questionId - ID of the question to post the answer for
+ * @param {Object} answer - answer to post
+ * @param {string} answer.body - text of question being asked
+ * @param {string} answer.name - username for question asker
+ * @param {string} answer.email - email address for question asker
+ * @param {string[]} answer.photos - an array of urls corresponding to images to display
+ */
+const createAnswer = async (questionId, answer) => {
+  await api.post(`/qa/questions/${questionId}/answers`, answer);
+};
+
+/**
+ * Log an interaction to the database.
+ * @param {string} element - selector for the element which was clicked
+ * @param {string} widget - name of the module/widget in which the click occurred
+ * @param {Date=} time - time the interaction occurred, or the current moment
+ */
+const logInteraction = async (element, widget, time = new Date()) => {
+  api.post('/interactions', { element, widget, time: time.toISOString() });
+};
+
+// PUT
+
+const endpoint = (type) => {
+  switch (type) {
+  case 'answer':
+    return '/qa/answers';
+  case 'question':
+    return '/qa/questions';
+  case 'review':
+    return '/reviews';
+  }
+};
+
+/**
+ * Updates an answer, question, or review to show it was found helpful.
+ * @param {'answer'|'question'|'review'} type
+ * @param {number} id - answer_id, question_id, or review_id
+ * Routes used:
+ * - [`PUT /qa/answers/:answer_id/helpful`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#mark-answer-as-helpful)
+ * - [`PUT /qa/questions/:question_id/helpful`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#mark-question-as-helpful)
+ * - [`PUT /reviews/:review_id/helpful`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/reviews.md#mark-review-as-helpful)
+ */
+const markHelpful = async (type, id) => {
+  await api.put(`${endpoint(type)}/${id}/helpful`);
+};
+
+
+/**
+ * Updates an answer, question, or review to show it was reported.
+ *
+ * Note: this action does not delete the item, but the item will not be returned in GET requests.
+ *
+ * Routes used:
+ * - [`PUT /qa/answers/:answer_id/report/`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#report-answer)
+ * - [`PUT /qa/questions/:review_id/report/`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#report-question)
+ * - [`PUT /reviews/:review_id/report/`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/reviews.md#report-review)
+ * @param {'answer'|'question'|'review'} type
+ * @param {number} id - answer_id, question_id, or review_id
+ */
+const report = async (type, id) => {
+  await api.put(`${endpoint(type)}/${id}/report`);
+};
+
+// GET
+
+/**
+ * Retrieves list of products added to the cart by a user.
+ * Routes used:
+ * - [`GET /cart`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/cart.md#get-cart)
+ * @returns {Promise<CartItem[]>}
+ */
+const getCart = async () => {
+  const res = await api.get('/cart');
+  return res.data;
+};
+
 /**
  * Retrieves review metadata for a product.
  *
@@ -119,8 +231,17 @@ const getRelated = async (productId) => {
 };
 
 export default {
+  // POST
+  addToCart,
+  createReview,
+  createAnswer,
+  logInteraction,
+  // PUT
+  markHelpful,
+  report,
+  // GET
+  getCart,
   getProduct,
   getRelated,
-  getMetadata,
   getReviews,
 };

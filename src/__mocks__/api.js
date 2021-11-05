@@ -1,18 +1,17 @@
-/// <reference path="../typings/index.d.ts"/>
-import axios from 'axios';
-
-const getMetadata = () => Promise.resolve(null);
-
-const getReviews = () => Promise.resolve([]);
-
-const getProduct = () =>
-  Promise.resolve({ product: null, metadata: null, styles: [] });
-
-const getRelated = () => Promise.resolve([]);
+const mock = (item) => () => Promise.resolve(item);
 
 export default {
-  getProduct,
-  getRelated,
-  getMetadata,
-  getReviews,
+  // POST
+  addToCart: mock(),
+  createReview: mock(),
+  createAnswer: mock(),
+  logInteraction: mock(),
+  // PUT
+  markHelpful: mock(),
+  report: mock(),
+  // GET
+  getCart: mock([]),
+  getProduct: mock(),
+  getRelated: mock([]),
+  getReviews: mock([]),
 };
