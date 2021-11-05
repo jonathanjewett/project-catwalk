@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../App';
 import ProductInformation from './ProductInformation';
-import { product, rating, styles } from './sampleData';
-
+import { product, metadata, styles } from './sampleData';
+const rating = metadata.rating;
 
 it('displays product name, category', () => {
   const style = styles[0];
@@ -18,7 +18,8 @@ it('sends users to the Ratings & Reviews section on click', () => {
   render(<ProductInformation product={product} rating={rating} style={style}/>);
   const anchor = screen.getByRole('link').getAttribute('href');
   expect(anchor.startsWith('#')).toBe(true);
-  const app = render(<App/>);
+  const info = { product, metadata, styles };
+  const app = render(<App info={info} related={[]} reviews={[]}/>);
   expect(app.container.querySelector(anchor)).not.toBeNull();
 });
 
@@ -35,16 +36,16 @@ it('displays price and sale in the correct format', () => {
 });
 
 it('hides the sale price if there is no sale', () => {
-  const style = styles[0];
+  const style = JSON.parse(JSON.stringify(styles[0]));
+  style['sale_price'] = '1';
   const withSale = render(
     <ProductInformation product={product} rating={rating} style={style}/>
   );
   expect(withSale.container.querySelector('.price').childElementCount).toBe(2);
 
-  const styleCopy = JSON.parse(JSON.stringify(style));
-  styleCopy['sale_price'] = null;
+  style['sale_price'] = null;
   const withoutSale = render(
-    <ProductInformation product={product} rating={rating} style={styleCopy}/>
+    <ProductInformation product={product} rating={rating} style={style}/>
   );
   expect(withoutSale.container.querySelector('.price').childElementCount)
     .toBeLessThan(2);

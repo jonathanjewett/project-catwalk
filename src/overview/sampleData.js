@@ -1,36 +1,64 @@
-export const rating = 4.27;
-
-/** @type {Product} */
-export const product = {
-  'id': 40344,
-  'campus': 'hr-rfp',
-  'name': 'Camo Onesie',
-  'slogan': 'Blend in to your crowd',
-  'description': 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-  'category': 'Jackets',
-  'default_price': '140.00',
-  'created_at': '2021-08-13T14:38:44.509Z',
-  'updated_at': '2021-08-13T14:38:44.509Z',
-  'features': [
-    {
-      'feature': 'Fabric',
-      'value': 'Canvas'
+export const {product, metadata, styles} = {
+  'product': {
+    'id': 40344,
+    'campus': 'hr-rfp',
+    'name': 'Camo Onesie',
+    'slogan': 'Blend in to your crowd',
+    'description': 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+    'category': 'Jackets',
+    'default_price': '140.00',
+    'created_at': '2021-08-13T14:38:44.509Z',
+    'updated_at': '2021-08-13T14:38:44.509Z',
+    'features': [
+      {
+        'feature': 'Fabric',
+        'value': 'Canvas'
+      },
+      {
+        'feature': 'Buttons',
+        'value': 'Brass'
+      }
+    ]
+  },
+  'metadata': {
+    'product_id': 40344,
+    'ratings': {
+      '1': 7,
+      '2': 12,
+      '3': 20,
+      '4': 28,
+      '5': 106
     },
-    {
-      'feature': 'Buttons',
-      'value': 'Brass'
-    }
-  ]
-};
-
-/** @type {Style[]} */
-export const styles =
-  [
+    'recommended': {
+      'false': 41,
+      'true': 132
+    },
+    'characteristics': {
+      'Fit': {
+        'id': 135219,
+        'value': 2.5476190476190474
+      },
+      'Length': {
+        'id': 135220,
+        'value': 2.5952380952380953
+      },
+      'Comfort': {
+        'id': 135221,
+        'value': 2.8536585365853657
+      },
+      'Quality': {
+        'id': 135222,
+        'value': 3.111111111111111
+      }
+    },
+    'rating': 4.236994219653179
+  },
+  'styles': [
     {
       'style_id': 240500,
       'name': 'Forest Green & Black',
       'original_price': '140.00',
-      'sale_price': '120.00',
+      'sale_price': null,
       'default?': true,
       'photos': [
         {
@@ -380,4 +408,5 @@ export const styles =
         }
       }
     }
-  ];
+  ]
+};

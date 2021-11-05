@@ -9,7 +9,6 @@ import {
 
 } from 'react-share';
 import { StarRating } from '../common';
-
 /**
  * Formats a string as a price, prepending a dollar sign and removing the cents
  * value if the price is a whole number of dollars.
@@ -43,7 +42,7 @@ const Price = ({ base, sale }) =>
 
 /**
  * @param {Object} props
- * @param {Product} props.product
+ * @param {ProductInfo} props.product
  * @param {number} props.rating
  * @param {Style} props.style
  */

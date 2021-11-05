@@ -9,6 +9,11 @@ const AddToCart = ({ style }) => {
   const [quantity, setQuantity] = React.useState(0);
   // Whether to expand the select-a-size menu in order to prompt the user.
   const [expandSizes, setExpandSizes] = React.useState(false);
+  // Reset state when style switches
+  React.useEffect(() => {
+    setQuantity(0);
+    setExpandSizes(false);
+  }, [style.style_id]);
   // Reference to the select-a-size menu in order to display it as invalid.
   const sizeRef = React.useRef(null);
 
@@ -16,7 +21,7 @@ const AddToCart = ({ style }) => {
   const sizeOptions = Object.entries(style.skus)
     .filter(([_, sku]) => sku.quantity > 0)
     .map(([id, sku]) =>
-      <option key={id} value={sku.quantity}>{sku.size}</option>
+      <option key={id} value={id}>{sku.size}</option>
     );
 
   const sizeSelect = sizeOptions.length === 0
@@ -27,13 +32,18 @@ const AddToCart = ({ style }) => {
         ref={sizeRef}
         onChange={(event) => {
           // Un-invalidate the select-a-size menu.
-          setQuantity(Number(event.target.value));
+          const id = event.target.value;
+          if (id) {
+            setQuantity(style.skus[event.target.value].quantity);
+          } else {
+            setQuantity(0);
+          }
           sizeRef.current.setCustomValidity('');
           setExpandSizes(false);
         }}
         required
       >
-        <option value="0">Select Size</option>
+        <option value="">Select Size</option>
         {sizeOptions}
       </select>
     );
@@ -57,7 +67,9 @@ const AddToCart = ({ style }) => {
         sizeRef.current.setCustomValidity('You must select a size');
         sizeRef.current.focus();
       } else {
-        // TODO add to cart with api
+        for (let i = 0; i < quantity; i++) {
+          // TODO add to cart with api
+        }
       }
     }}>
       Add to Cart

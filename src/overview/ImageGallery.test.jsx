@@ -3,7 +3,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ImageGallery from './ImageGallery';
 import Overview from './';
-import { product, rating, styles } from './sampleData';
+import { product, metadata, styles } from './sampleData';
+
+const info = { product, metadata, styles };
 
 // deep copy
 /** @type {Style} */
@@ -103,14 +105,14 @@ describe('thumbnails', () => {
 
 describe('click to zoom', () => {
   it('expands the gallery', () => {
-    render(<Overview product={product} rating={rating} styles={styles}/>);
+    render(<Overview info={info}/>);
     const gallery = screen.getByRole('figure');
     fireEvent.click(gallery);
     expect(document.querySelector('.info')).not.toBeVisible();
   });
 
   it('shrinks the gallery', () => {
-    render(<Overview product={product} rating={rating} styles={styles}/>);
+    render(<Overview info={info}/>);
     const gallery = screen.getByRole('figure');
     fireEvent.click(gallery); // expanded
     fireEvent.click(gallery); // zoomed
@@ -119,7 +121,7 @@ describe('click to zoom', () => {
   });
 
   it('does not expand the gallery if a sub-component is clicked', () => {
-    render(<Overview product={product} rating={rating} styles={styles}/>);
+    render(<Overview info={info}/>);
     const gallery = screen.getByRole('figure');
     const subComponents = [];
     for (const button of gallery.querySelectorAll('button')) {
