@@ -10,7 +10,6 @@ const RelatedItemsAndComparisons = (/* { products } */) => (
   <div id="related-items-and-comparisons">
     <div>
       <RelatedItemsList products={products}/>
-      <ComparisonModal/>
     </div>
   </div>
 );
