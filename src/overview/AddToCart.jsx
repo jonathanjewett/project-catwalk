@@ -1,23 +1,28 @@
 import React from 'react';
+import api from '../api';
 
 /**
  * @param {Object} props
  * @param {Style} props.style
  */
 const AddToCart = ({ style }) => {
-  // Number of items the user wishes to purchase.
+  // size of item the user wishes to purchase, as SKU
+  const [size, setSize] = React.useState(null);
+  const maxQuantity = size === null ? 0 : style.skus[size].quantity;
+  // number of items the user wishes to purchase.
   const [quantity, setQuantity] = React.useState(0);
-  // Whether to expand the select-a-size menu in order to prompt the user.
+  // whether to expand the select-a-size menu in order to prompt the user.
   const [expandSizes, setExpandSizes] = React.useState(false);
-  // Reset state when style switches
+  // reset state when style switches
   React.useEffect(() => {
+    setSize(null);
     setQuantity(0);
     setExpandSizes(false);
   }, [style.style_id]);
-  // Reference to the select-a-size menu in order to display it as invalid.
+  // reference to the select-a-size menu in order to display it as invalid
   const sizeRef = React.useRef(null);
 
-  // The value of the select-a-size menu is how many of that size are in stock.
+  // the value of the select-a-size menu is how many of that size are in stock
   const sizeOptions = Object.entries(style.skus)
     .filter(([_, sku]) => sku.quantity > 0)
     .map(([id, sku]) =>
@@ -31,15 +36,15 @@ const AddToCart = ({ style }) => {
         size={expandSizes ? sizeOptions.length + 1 : 0}
         ref={sizeRef}
         onChange={(event) => {
-          // Un-invalidate the select-a-size menu.
           const id = event.target.value;
           if (id) {
-            setQuantity(style.skus[event.target.value].quantity);
+            setSize(id);
+            setQuantity(1);
+            // un-invalidate the select-a-size menu
+            setExpandSizes(false);
           } else {
             setQuantity(0);
           }
-          sizeRef.current.setCustomValidity('');
-          setExpandSizes(false);
         }}
         required
       >
@@ -49,12 +54,15 @@ const AddToCart = ({ style }) => {
     );
 
   let quantitySelect;
-  if (quantity > 0) {
+  if (maxQuantity > 0) {
     const quantities = [];
-    for (let i = 1; i <= quantity && i <= 15; i++) {
+    for (let i = 1; i <= maxQuantity && i <= 15; i++) {
       quantities.push(<option key={i}>{i}</option>);
     }
-    quantitySelect = <select>{quantities}</select>;
+    quantitySelect =
+      <select onChange={(event) => setQuantity(Number(event.target.value))}>
+        {quantities}
+      </select>;
   } else {
     quantitySelect = <select disabled><option>-</option></select>;
   }
@@ -68,7 +76,8 @@ const AddToCart = ({ style }) => {
         sizeRef.current.focus();
       } else {
         for (let i = 0; i < quantity; i++) {
-          // TODO add to cart with api
+          api.addToCart(size);
+          console.log('adding', size, 'to cart');
         }
       }
     }}>
