@@ -8,7 +8,7 @@ import api from '../api';
 const AddToCart = ({ style }) => {
   // size of item the user wishes to purchase, as SKU
   const [size, setSize] = React.useState(null);
-  const maxQuantity = size === null ? 0 : style.skus[size].quantity;
+  const maxQuantity = size in style.skus ? style.skus[size].quantity : 0;
   // number of items the user wishes to purchase.
   const [quantity, setQuantity] = React.useState(0);
   // whether to expand the select-a-size menu in order to prompt the user.
@@ -43,6 +43,7 @@ const AddToCart = ({ style }) => {
             setQuantity(1);
             // un-invalidate the select-a-size menu
             setExpandSizes(false);
+            sizeRef.current.setCustomValidity('');
           } else {
             setSize(null);
             setQuantity(0);
