@@ -43,6 +43,7 @@ const AddToCart = ({ style }) => {
             // un-invalidate the select-a-size menu
             setExpandSizes(false);
           } else {
+            setSize(null);
             setQuantity(0);
           }
         }}
