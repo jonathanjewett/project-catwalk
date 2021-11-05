@@ -35,6 +35,7 @@ const AddToCart = ({ style }) => {
       <select
         size={expandSizes ? sizeOptions.length + 1 : 0}
         ref={sizeRef}
+        value={size || ''}
         onChange={(event) => {
           const id = event.target.value;
           if (id) {
@@ -61,7 +62,10 @@ const AddToCart = ({ style }) => {
       quantities.push(<option key={i}>{i}</option>);
     }
     quantitySelect =
-      <select onChange={(event) => setQuantity(Number(event.target.value))}>
+      <select
+        value={quantity}
+        onChange={(event) => setQuantity(Number(event.target.value))}
+      >
         {quantities}
       </select>;
   } else {
