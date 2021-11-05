@@ -6,7 +6,6 @@ import {
   PinterestShareButton,
   TwitterIcon,
   TwitterShareButton,
-
 } from 'react-share';
 import { StarRating } from '../common';
 /**

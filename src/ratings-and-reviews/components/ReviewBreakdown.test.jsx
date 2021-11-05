@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 
 it('Renders bars based on number of ratings', () => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import StarRating from './';
 
 const filled = (star) => Number(star.getAttribute('data-file-name').slice(-1));
