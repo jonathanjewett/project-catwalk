@@ -14,7 +14,7 @@ import RelatedItemsAndComparisons from './related-items-and-comparisons';
 const App = ({ info, related, reviews }) => {
   return (
     <div>
-      <Overview info={info}/>
+      <Overview info={info} reviewCount={reviews.length}/>
       <QuestionsAndAnswers/>
       <RatingsAndReviews reviews={reviews} metadata={info.metadata}/>
       <RelatedItemsAndComparisons products={related}/>
