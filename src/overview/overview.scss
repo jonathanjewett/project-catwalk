@@ -26,6 +26,7 @@ $foreground: var(--foreground);
         background-position: center;
         display: flex;
         user-select: none;
+        background-color: lightgray;
 
         button {
             color: black;

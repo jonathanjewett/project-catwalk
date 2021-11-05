@@ -4,9 +4,9 @@ import RelatedItemsList from './RelatedItemsList.jsx';
 import ComparisonModal from './ComparisonModal.jsx';
 import './related-items-and-comparisons.scss';
 
-import { products, stylesForProducts, relatedProducts } from './sampleData.js';
+import { products } from './sampleData.js';
 
-const RelatedItemsAndComparisons = (props) => (
+const RelatedItemsAndComparisons = (/* { products } */) => (
   <div id="related-items-and-comparisons">
     <div>
       <RelatedItemsList products={products}/>

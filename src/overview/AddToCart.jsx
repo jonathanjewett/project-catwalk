@@ -1,22 +1,32 @@
 import React from 'react';
+import api from '../api';
 
 /**
  * @param {Object} props
  * @param {Style} props.style
  */
 const AddToCart = ({ style }) => {
-  // Number of items the user wishes to purchase.
+  // size of item the user wishes to purchase, as SKU
+  const [size, setSize] = React.useState(null);
+  const maxQuantity = size in style.skus ? style.skus[size].quantity : 0;
+  // number of items the user wishes to purchase.
   const [quantity, setQuantity] = React.useState(0);
-  // Whether to expand the select-a-size menu in order to prompt the user.
+  // whether to expand the select-a-size menu in order to prompt the user.
   const [expandSizes, setExpandSizes] = React.useState(false);
-  // Reference to the select-a-size menu in order to display it as invalid.
+  // reset state when style switches
+  React.useEffect(() => {
+    setSize(null);
+    setQuantity(0);
+    setExpandSizes(false);
+  }, [style.style_id]);
+  // reference to the select-a-size menu in order to display it as invalid
   const sizeRef = React.useRef(null);
 
-  // The value of the select-a-size menu is how many of that size are in stock.
+  // the value of the select-a-size menu is how many of that size are in stock
   const sizeOptions = Object.entries(style.skus)
     .filter(([_, sku]) => sku.quantity > 0)
     .map(([id, sku]) =>
-      <option key={id} value={sku.quantity}>{sku.size}</option>
+      <option key={id} value={id}>{sku.size}</option>
     );
 
   const sizeSelect = sizeOptions.length === 0
@@ -25,26 +35,40 @@ const AddToCart = ({ style }) => {
       <select
         size={expandSizes ? sizeOptions.length + 1 : 0}
         ref={sizeRef}
+        value={size || ''}
         onChange={(event) => {
-          // Un-invalidate the select-a-size menu.
-          setQuantity(Number(event.target.value));
-          sizeRef.current.setCustomValidity('');
-          setExpandSizes(false);
+          const id = event.target.value;
+          if (id) {
+            setSize(id);
+            setQuantity(1);
+            // un-invalidate the select-a-size menu
+            setExpandSizes(false);
+            sizeRef.current.setCustomValidity('');
+          } else {
+            setSize(null);
+            setQuantity(0);
+          }
         }}
         required
       >
-        <option value="0">Select Size</option>
+        <option value="">Select Size</option>
         {sizeOptions}
       </select>
     );
 
   let quantitySelect;
-  if (quantity > 0) {
+  if (maxQuantity > 0) {
     const quantities = [];
-    for (let i = 1; i <= quantity && i <= 15; i++) {
+    for (let i = 1; i <= maxQuantity && i <= 15; i++) {
       quantities.push(<option key={i}>{i}</option>);
     }
-    quantitySelect = <select>{quantities}</select>;
+    quantitySelect =
+      <select
+        value={quantity}
+        onChange={(event) => setQuantity(Number(event.target.value))}
+      >
+        {quantities}
+      </select>;
   } else {
     quantitySelect = <select disabled><option>-</option></select>;
   }
@@ -57,7 +81,10 @@ const AddToCart = ({ style }) => {
         sizeRef.current.setCustomValidity('You must select a size');
         sizeRef.current.focus();
       } else {
-        // TODO add to cart with api
+        for (let i = 0; i < quantity; i++) {
+          api.addToCart(size);
+          console.log('adding', size, 'to cart');
+        }
       }
     }}>
       Add to Cart

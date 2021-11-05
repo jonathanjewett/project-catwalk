@@ -5,13 +5,21 @@ import QuestionsAndAnswers from './questions-and-answers';
 import RatingsAndReviews from './ratings-and-reviews';
 import RelatedItemsAndComparisons from './related-items-and-comparisons';
 
-const App = () => (
-  <div>
-    <Overview/>
-    <QuestionsAndAnswers/>
-    <RatingsAndReviews/>
-    <RelatedItemsAndComparisons/>
-  </div>
-);
+/**
+ * @param {Object} props
+ * @param {ProductInfo} props.info
+ * @param {ProductInfo[]} props.related
+ * @param {Review[]} props.reviews
+ */
+const App = ({ info, related, reviews }) => {
+  return (
+    <div>
+      <Overview info={info}/>
+      <QuestionsAndAnswers/>
+      <RatingsAndReviews reviews={reviews} metadata={info.metadata}/>
+      <RelatedItemsAndComparisons products={related}/>
+    </div>
+  );
+};
 
 export default App;

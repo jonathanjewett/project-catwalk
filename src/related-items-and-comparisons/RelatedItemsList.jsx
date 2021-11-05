@@ -31,7 +31,9 @@ const RelatedItemsList = (props) => {
       <div className="related-container">
         {leftButton}
         <div className="related-items-list">
-          {currList.map((product) => <CardItem key={product.id} product={product} />)}
+          {currList.map(({ product, metadata, styles }) =>
+            <CardItem key={product.id} product={product} />
+          )}
         </div>
         {rightButton}
       </div>

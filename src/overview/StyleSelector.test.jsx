@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import StyleSelector from './StyleSelector';
 import { styles } from './sampleData';
 
@@ -29,7 +28,7 @@ for (let i = 1; i <= 10; i++) {
     for (let j = 0; j < i; j++) {
       const stylesMember = {};
       Object.assign(stylesMember, style);
-      stylesMember['style_id'] = j;
+      stylesMember.style_id = j;
       stylesList.push(stylesMember);
     }
     render(<StyleSelector style={style} styles={stylesList}/>);
