@@ -1,12 +1,10 @@
-$foreground: #525252;
-
 :root {
-  --foreground: dimgray;
+  --foreground: #525252;
 }
 
 a, body, input, select, button {
   font-family: Arial, Helvetica, sans-serif;
-  color: $foreground;
+  color: var(--foreground);
 }
 
 body {
@@ -29,7 +27,7 @@ body {
     text-transform: uppercase;
     font-weight: bold;
     padding: 0.5em 1em;
-    border: 1px solid $foreground;
+    border: 1px solid var(--foreground);
     background: none;
 
     &:disabled {
@@ -48,6 +46,12 @@ button.interact {
     &:hover {
       background: #eee;
     }
+}
+
+input.interact {
+  box-sizing: border-box;
+  width: 100%;
+  text-transform: unset;
 }
 
 select.interact:first-child {
