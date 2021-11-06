@@ -13,6 +13,12 @@ import './list-view.scss';
  */
 const ListView = (props) => {
   const [count, setCount] = React.useState(props.start);
+  const itemsRef = React.createRef();
+  React.useEffect(() => {
+    if (count !== props.start && itemsRef.current) {
+      itemsRef.current.scrollTop = itemsRef.current.scrollHeight
+    }
+  }, [count]);
   const incr = 'increment' in props ? props.increment : 2;
   const moreButton = count >= props.children.length ? null : (
     <button className="interact more" onClick={() => setCount(i => i + incr)}>
@@ -21,7 +27,7 @@ const ListView = (props) => {
   );
   return (
     <div className="listview">
-      <div className="listview-items">
+      <div className="listview-items" ref={itemsRef}>
         {props.children.slice(0, count)}
       </div>
       {moreButton}
