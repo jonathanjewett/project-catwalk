@@ -4,8 +4,8 @@ import axios from 'axios';
 /** An Axios instance that points to the Atelier API. */
 const api = axios.create({
   baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/' +
-    process.meta.env.VITE_CAMPUS,
-  headers: {'Authorization': process.meta.env.VITE_API_TOKEN}
+    import.meta.env.VITE_CAMPUS,
+  headers: {'Authorization': import.meta.env.VITE_API_TOKEN}
 });
 
 // POST
@@ -168,19 +168,48 @@ const getProductDetail = async (productId) => {
   return res.data;
 };
 
+const getPage = async(endpoint, productId, sort, count, page) => {
+  const params = new URLSearchParams({
+    product_id: productId,
+    count: count || Number.MAX_SAFE_INTEGER
+  });
+  if (sort !== undefined) {
+    params.append('sort', sort);
+  }
+  if (page !== undefined) {
+    params.append('page', page);
+  }
+  const res = await api.get(`${endpoint}?${params}`);
+  return res.data.results;
+};
+
 /**
  * Retrieves reviews for a product.
  *
  * Routes used:
  * - [`GET /reviews`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/reviews.md#list-reviews)
  * @param {number} productId
- * @param {number=} count - number of results to return, or all if unspecified
+ * @param {'newest' | 'helpful' | 'relevant'=} sort - sort order
+ * @param {number=} count - number of results to return (default: all)
+ * @param {number=} page - page of results to return (default: 1)
  * @returns {Promise<Review[]}>}
  */
-const getReviews = async (productId, count = Number.MAX_SAFE_INTEGER) => {
-  const res = await api.get(`reviews?product_id=${productId}&count=${count}`);
-  return res.data.results;
-};
+const getReviews = async (productId, sort, count, page) =>
+  getPage('/reviews', productId, sort, count, page);
+
+/**
+ * Retrieves a list of questions for a particular product. This list does not include any reported questions.
+ *
+ * Routes used:
+ * - [`GET /qa/questions`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#list-questions)
+ * @param {number} productId
+ * @param {number=} count - number of results to return (default: all)
+ * @param {number=} page - page of results to return (default: 1)
+ * @returns {Promise<Question[]}>}
+ */
+const getQuestions = async (productId, count, page) =>
+  getPage('/qa/questions', productId, undefined, count, page);
+
 
 /**
  * Retrieves styles for a product.
@@ -244,4 +273,5 @@ export default {
   getProduct,
   getRelated,
   getReviews,
+  getQuestions,
 };
