@@ -19,6 +19,7 @@ if (idString === '') {
 
 // These will be filled in asynchronously
 let info = null;
+let questions = [];
 let related = [];
 let reviews = [];
 
@@ -27,7 +28,12 @@ const renderApp = () => {
   if (info !== null) { // Don't render if we don't have a product yet!
     ReactDOM.render(
       <React.StrictMode>
-        <App info={info} related={related} reviews={reviews}/>
+        <App
+          info={info}
+          related={related}
+          reviews={reviews}
+          questions={questions}
+        />
       </React.StrictMode>,
       document.getElementById('root')
     );
@@ -37,6 +43,12 @@ const renderApp = () => {
 // Asynchronously retrieve product info and then re-render
 api.getProduct(productId).then(infoResult => {
   info = infoResult;
+  renderApp();
+}).catch(console.error);
+// Asynchronously retrieve questions and then re-render
+api.getQuestions(productId).then(questionsResult => {
+  questions = questionsResult
+    .sort((x, y) => y.question_helpfulness - x.question_helpfulness);
   renderApp();
 }).catch(console.error);
 // Asynchronously retrieve reviews and then re-render

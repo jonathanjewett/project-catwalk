@@ -42,7 +42,7 @@ it('sends users to the Ratings & Reviews section on click', () => {
   const anchor = screen.getByRole('link').getAttribute('href');
   expect(anchor.startsWith('#')).toBe(true);
   const info = { product, metadata, styles };
-  const app = render(<App info={info} related={[]} reviews={[]}/>);
+  const app = render(<App info={info} questions={[]} related={[]} reviews={[]}/>);
   expect(app.container.querySelector(anchor)).not.toBeNull();
 });
 
