@@ -1,7 +1,7 @@
 .listview {
     > button {
         margin-right: 1em;
-        margin-top: 1.5em;
+        margin-top: 0.5em;
 
         span {
             margin-left: 1em;
@@ -12,4 +12,6 @@
 
 .listview-items {
   overflow-y: auto;
+  border-bottom: 1px solid var(--foreground);
+  padding-bottom: 0.5em;
 }

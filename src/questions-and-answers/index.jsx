@@ -10,7 +10,12 @@ import './questions-and-answers.scss';
  */
 const QuestionsAndAnswers = ({ questions }) => (
   <div id="questions-and-answers">
-    <ListView start={4} more="More Answered Questions" add="Add Question">
+    <ListView
+      start={4}
+      more="More Answered Questions"
+      add="Add Question"
+      placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+    >
       {questions.map(question =>
         <QuestionTile key={question.question_id} question={question}/>
       )}
