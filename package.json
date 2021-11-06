@@ -1,7 +1,7 @@
 {
   "name": "project-catwalk",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "server.js",
   "repository": "https://github.com/team-asteraceae/project-catwalk.git",
   "license": "ISC",
   "author": "Team Asteraceae",
@@ -12,13 +12,17 @@
   ],
   "scripts": {
     "build": "vite build",
-    "serve": "vite preview",
+    "serve": "vite build && nodemon --watch server.js server.js",
     "start": "vite",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "compression": "^1.7.4",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "moment": "^2.29.1",
+    "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-share": "^4.4.0",
