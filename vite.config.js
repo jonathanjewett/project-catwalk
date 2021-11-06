@@ -5,5 +5,4 @@ import reactSvgPlugin from 'vite-plugin-react-svg';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), reactSvgPlugin({ defaultExport: 'component' })],
-  define: { 'process.meta.env': 'import.meta.env' },
 });

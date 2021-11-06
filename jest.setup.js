@@ -12,10 +12,9 @@ jest.mock('axios', () => ({
           args.unshift(method);
           log.push(args);
         }
+        return Promise.resolve({results: []});
       };
     }
     return mock;
   }
 }));
-
-process.meta = { env: {} };

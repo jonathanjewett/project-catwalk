@@ -30,9 +30,10 @@ const AddToCart = ({ style }) => {
     );
 
   const sizeSelect = sizeOptions.length === 0
-    ? <select><option>Out of Stock</option></select>
+    ? <select className="interact"><option>Out of Stock</option></select>
     : (
       <select
+        className="interact"
         size={expandSizes ? sizeOptions.length + 1 : 0}
         ref={sizeRef}
         value={size || ''}
@@ -64,17 +65,21 @@ const AddToCart = ({ style }) => {
     }
     quantitySelect =
       <select
+        className="interact"
         value={quantity}
         onChange={event => setQuantity(Number(event.target.value))}
       >
         {quantities}
       </select>;
   } else {
-    quantitySelect = <select disabled><option>-</option></select>;
+    quantitySelect =
+      <select className="interact" disabled>
+        <option>-</option>
+      </select>;
   }
 
   const addToCart = sizeOptions.length === 0 ? null : (
-    <button type="button" onClick={() => {
+    <button type="button" className="interact" onClick={() => {
       if (quantity === 0) {
         // Invalidate and expand the select-a-size menu.
         setExpandSizes(true);

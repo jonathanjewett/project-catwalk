@@ -13,7 +13,6 @@ let productId;
 // For testing purposes only, default to product #40344
 if (idString === '') {
   productId = 40344;
-  window.history.replaceState({}, null, `/${productId}`);
 } else {
   productId = Number(idString);
 }
@@ -36,17 +35,17 @@ const renderApp = () => {
 };
 
 // Asynchronously retrieve product info and then re-render
-api.getProduct(productId).then(apiInfo => {
-  info = apiInfo;
+api.getProduct(productId).then(infoResult => {
+  info = infoResult;
   renderApp();
-});
+}).catch(console.error);
 // Asynchronously retrieve reviews and then re-render
-api.getReviews(productId).then(apiReviews => {
-  reviews = apiReviews;
+api.getReviews(productId).then(reviewsResult => {
+  reviews = reviewsResult;
   renderApp();
-});
+}).catch(console.error);
 // Asynchronously retrieve related items and then re-render
-api.getRelated(productId).then(apiRelated => {
-  related = apiRelated;
+api.getRelated(productId).then(relatedResult => {
+  related = relatedResult;
   renderApp();
-});
+}).catch(console.error);

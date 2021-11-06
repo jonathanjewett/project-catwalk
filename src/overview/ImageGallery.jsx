@@ -59,7 +59,7 @@ const Thumbnails = ({ photos, page, setPage, thumbOffset, setThumbOffset }) => {
  * @param {React.MouseEvent<HTMLElement>} event
  */
 const scanZoomedImage = (event) => {
-  const target = event.currentTarget;
+  const target = event.target;
   const bounds = target.getBoundingClientRect();
   const percentX = (event.clientX - bounds.x) / bounds.width;
   const percentY = (event.clientY - bounds.y) / bounds.height;
@@ -110,7 +110,14 @@ const ImageGallery = ({ zoom, setZoom, style }) => {
 
   return (
     <figure
-      onClick={() => setZoom(state => (state + 1) % 3)}
+      onClick={event => setZoom(zoom => {
+        if (zoom === 1) {
+          scanZoomedImage(event);
+        } else {
+          event.target.style.backgroundPosition = 'center';
+        }
+        return (zoom + 1) % 3;
+      })}
       className={`zoom-${zoom}`}
       style={{backgroundImage: `url(${style.photos[page].url})`}}
       onMouseMove={zoom === 2 ? scanZoomedImage : null}

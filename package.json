@@ -32,6 +32,7 @@
     "@testing-library/react": "^12.1.2",
     "@vitejs/plugin-react": "^1.0.0",
     "babel-jest": "^27.3.1",
+    "babel-plugin-transform-vite-meta-env": "^1.0.3",
     "jest": "^27.3.1",
     "jest-transform-stub": "^2.0.0",
     "jest-transformer-svg": "^1.0.1",
