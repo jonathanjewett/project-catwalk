@@ -1,3 +1,4 @@
+import ListView from './list-view';
 import StarRating from './star-rating';
 
-export { StarRating };
+export { ListView, StarRating };

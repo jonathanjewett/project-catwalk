@@ -8,16 +8,17 @@ import RelatedItemsAndComparisons from './related-items-and-comparisons';
 /**
  * @param {Object} props
  * @param {ProductInfo} props.info
+ * @param {Question[]} props.questions
  * @param {ProductInfo[]} props.related
  * @param {Review[]} props.reviews
  */
-const App = ({ info, related, reviews }) => {
+const App = ({ info, questions, related, reviews }) => {
   return (
     <div>
       <Overview info={info} reviewCount={reviews.length}/>
-      <QuestionsAndAnswers/>
-      <RatingsAndReviews reviews={reviews} metadata={info.metadata}/>
       <RelatedItemsAndComparisons products={related}/>
+      <QuestionsAndAnswers questions={questions}/>
+      <RatingsAndReviews reviews={reviews} metadata={info.metadata}/>
     </div>
   );
 };

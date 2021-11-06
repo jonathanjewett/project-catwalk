@@ -7,7 +7,7 @@ const info = { product, metadata, styles };
 
 
 it('displays all modules', () => {
-  const app = render(<App info={info} related={[]} reviews={[]}/>);
+  const app = render(<App info={info} questions={[]} related={[]} reviews={[]}/>);
 
   expect(document.querySelector('#overview'))
     .toBeInTheDocument();

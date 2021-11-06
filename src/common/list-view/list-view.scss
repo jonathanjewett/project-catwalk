@@ -1,0 +1,15 @@
+.listview {
+    > button {
+        margin-right: 1em;
+        margin-top: 1.5em;
+
+        span {
+            margin-left: 1em;
+            float: right;
+        }
+    }
+}
+
+.listview-items {
+  overflow-y: auto;
+}
