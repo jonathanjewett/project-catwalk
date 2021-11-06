@@ -1,8 +1,21 @@
 import React from 'react';
+import api from '../api';
+import { ListView } from '../common';
+import QuestionTile from './QuestionTile';
 import './questions-and-answers.scss';
 
-const QuestionsAndAnswers = () => (
-  <div id="questions-and-answers">Questions and Answers</div>
+/**
+ * @param {Object} props
+ * @param {Question[]} props.questions
+ */
+const QuestionsAndAnswers = ({ questions }) => (
+  <div id="questions-and-answers">
+    <ListView start={4} more="More Answered Questions" add="Add Question">
+      {questions.map(question =>
+        <QuestionTile key={question.question_id} question={question}/>
+      )}
+    </ListView>
+  </div>
 );
 
 export default QuestionsAndAnswers;

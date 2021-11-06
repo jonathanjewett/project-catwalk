@@ -1,7 +1,7 @@
 {
   "name": "project-catwalk",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "server.js",
   "repository": "https://github.com/team-asteraceae/project-catwalk.git",
   "license": "ISC",
   "author": "Team Asteraceae",
@@ -12,14 +12,17 @@
   ],
   "scripts": {
     "build": "vite build",
-    "serve": "vite preview",
+    "serve": "vite build && nodemon --watch server.js server.js",
     "start": "vite",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "compression": "^1.7.4",
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "moment": "^2.29.1",
+    "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-share": "^4.4.0",
@@ -33,10 +36,12 @@
     "@testing-library/react": "^12.1.2",
     "@vitejs/plugin-react": "^1.0.0",
     "babel-jest": "^27.3.1",
+    "babel-plugin-transform-vite-meta-env": "^1.0.3",
     "jest": "^27.3.1",
     "jest-transform-stub": "^2.0.0",
     "jest-transformer-svg": "^1.0.1",
     "msw": "^0.35.0",
+    "regenerator-runtime": "^0.13.9",
     "sass": "^1.43.4",
     "vite": "^2.6.4"
   }

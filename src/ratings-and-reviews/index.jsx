@@ -7,8 +7,7 @@ import Sort from './components/Sort.jsx';
 import ReviewBreakdown from './components/ReviewBreakdown.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
 
-
-import {reviewList, reviewMetaData} from './sampleData.js';
+import {reviews, metadata} from './sampleData.js';
 
 /** @param {Object} reviews */
 const reviewsTotal = (reviews) => {

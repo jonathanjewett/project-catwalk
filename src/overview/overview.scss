@@ -1,210 +1,197 @@
 $foreground: var(--foreground);
 
 #overview {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 
-    > div:first-child {
-        display: flex;
+  > div:first-child {
+    display: flex;
+    padding-right: 1em;
+  }
+
+  a {
+    margin-left: 0.5em;
+    vertical-align: top;
+  }
+
+  figure {
+    margin: 0;
+    margin-right: 1em;
+    position: relative;
+    flex-grow: 1;
+    height: 610px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    user-select: none;
+    background-color: #ebebeb;
+
+    button {
+      color: black;
+      text-shadow: 0px 0px 2px white;
+      border: none;
+      background: none;
+      font-size: 2em;
+      cursor: pointer;
+      margin: auto;
+
+      &:hover {
+        color: white;
+      }
     }
+  }
 
-    > div:last-child {
-        margin-left: 5%;
+  label {
+    font-weight: bold;
+
+    &::after {
+      content: " > ";
     }
+  }
 
-    a {
-        margin-left: 0.5em;
-        vertical-align: top;
+  label, .stylename {
+    text-transform: uppercase;
+  }
+
+  .category {
+    text-transform: uppercase;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nextStyle {
+    margin-right: 0.25em;
+  }
+  .prevStyle {
+    margin-left: 0.25em;
+  }
+
+  .price {
+    span:first-child {
+      text-decoration: line-through;
     }
-
-    figure {
-        margin: 0;
-        margin-right: 1em;
-        position: relative;
-        flex-grow: 1;
-        height: 610px;
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        user-select: none;
-
-        button {
-            color: black;
-            text-shadow: 0px 0px 2px white;
-            border: none;
-            background: none;
-            font-size: 2em;
-            cursor: pointer;
-            margin: auto;
-
-            &:hover {
-                color: white;
-            }
-        }
+    span:last-child {
+      color: red;
     }
+  }
 
-    label {
-        font-weight: bold;
+  .react-share__ShareButton {
+    vertical-align: middle;
+    margin-left: 0.25em;
+  }
 
-        &::after {
-            content: " > ";
-        }
-    }
+  .styles {
+    min-width: 375px;
+    flex-grow: 1;
 
-    label, .stylename {
-        text-transform: uppercase;
-    }
+    button {
+      width: 75px;
+      height: 75px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 100%;
+      border: 1px solid $foreground;
+      cursor: pointer;
+      position: relative;
+      vertical-align: middle;
 
-    .category {
-        text-transform: uppercase;
-    }
-
-    .info {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .nextStyle {
-        margin-right: 0.25em;
-    }
-    .prevStyle {
-        margin-left: 0.25em;
-    }
-
-    .price {
-        span:first-child {
-            text-decoration: line-through;
-        }
-        span:last-child {
-            color: red;
-        }
-    }
-
-    .react-share__ShareButton {
+      div {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: #fff;
+        border: 1px solid $foreground;
+        border-radius: 100%;
+        font-size: 0.9em;
+        width: 1.5em;
+        height: 1.5em;
         vertical-align: middle;
-        margin-left: 0.25em;
+        text-align: center;
+      }
+    }
+  }
+
+  .thumbnails {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    align-items: center;
+    cursor: auto;
+
+    button, div {
+      color: black;
+      cursor: pointer;
+      text-shadow: 0px 0px 1px white;
+      height: 0px;
+      line-height: 0;
+      margin: 8px;
+      padding: 0;
+      font-size: unset;
     }
 
-    .styles {
-        min-width: 375px;
-        flex-grow: 1;
-
-        button {
-            width: 75px;
-            height: 75px;
-            margin-right: 15px;
-            margin-bottom: 15px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 100%;
-            border: 1px solid $foreground;
-            cursor: pointer;
-            position: relative;
-
-            div {
-                position: absolute;
-                right: 0;
-                top: 0;
-                background-color: #fff;
-                border: 1px solid $foreground;
-                border-radius: 100%;
-                font-size: 0.9em;
-                width: 1.5em;
-                height: 1.5em;
-                vertical-align: middle;
-                text-align: center;
-            }
-        }
+    img {
+      cursor: pointer;
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border: 1px solid black;
+      box-shadow: 0px 0px 5px $foreground;
+      margin: 5px;
     }
 
-    .thumbnails {
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-        align-items: center;
-        cursor: auto;
-
-        button, div {
-            color: black;
-            cursor: pointer;
-            text-shadow: 0px 0px 1px white;
-            height: 0px;
-            line-height: 0;
-            margin: 8px;
-            padding: 0;
-            font-size: unset;
-        }
-
-        img {
-            cursor: pointer;
-            width: 65px;
-            height: 65px;
-            object-fit: cover;
-            border: 1px solid black;
-            box-shadow: 0px 0px 5px $foreground;
-            margin: 5px;
-        }
-
-        .selected {
-            border-color: white;
-        }
+    .selected {
+      border-color: white;
     }
+  }
 
-    .zoom-0 {
-        cursor: zoom-in;
+  .zoom-0 {
+    cursor: zoom-in;
+  }
+
+  .zoom-1 {
+    cursor: crosshair;
+
+    .thumbnails img {
+      width: 10px;
+      height: 10px;
+      filter: brightness(0);
+      box-shadow: 0px 0px 2px black;
+
+      &.selected {
+        filter: brightness(100);
+      }
     }
+  }
 
-    .zoom-1 {
-        cursor: crosshair;
+  .zoom-2 {
+    cursor: zoom-out;
+    background-size: 250%;
 
-        .thumbnails img {
-            width: 10px;
-            height: 10px;
-            filter: brightness(0);
-            box-shadow: 0px 0px 2px black;
-
-            &.selected {
-                filter: brightness(100);
-            }
-        }
+    .thumbnails, button {
+      display: none;
     }
-
-    .zoom-2 {
-        cursor: zoom-out;
-        background-size: 250%;
-
-        .thumbnails, button {
-            display: none;
-        }
-    }
+  }
 }
 
 #add-to-cart {
-    button, select {
-        font-size: 1.25em;
-        text-transform: uppercase;
-        padding: 0.5em 1em;
-    }
+  button {
+    margin-top: 1em;
+    width: 100%;
+  }
 
-    button {
-        margin-top: 1em;
-        width: 100%;
-        text-align: left;
-    }
+  div {
+    display: flex;
+  }
 
-    div {
-        display: flex;
-    }
+  select {
+    min-width: 4.75em;
+  }
 
-    select {
-        min-width: 4.75em;
-
-        &:first-child {
-            margin-right: 1em;
-            flex-grow: 1;
-        }
-    }
-
-    span {
-        float: right;
-    }
+  span {
+    float: right;
+  }
 }

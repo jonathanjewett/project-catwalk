@@ -1,6 +1,5 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import AddToCart from './AddToCart';
 import { styles } from './sampleData';
 
@@ -79,4 +78,20 @@ it('opens the size menu if the user clicks add to cart without a size', () => {
   expect(sizeMenu).toBeInvalid();
   fireEvent.change(sizeMenu, { target: { selectedIndex: 1 } });
   expect(sizeMenu).toBeValid();
+});
+
+it('adds items to the cart', () => {
+  process.mockRequestLog = [];
+  const style = styles[0];
+  const sizeIndex = 0;
+  const quantity = 3;
+  const size = Object.keys(style.skus)[sizeIndex];
+  render(<AddToCart style={styles[0]}/>);
+  const [sizeMenu, quantityMenu] = getSizeAndQuantity();
+  fireEvent.change(sizeMenu, { target: { selectedIndex: sizeIndex + 1 } });
+  fireEvent.change(quantityMenu, { target: { selectedIndex: quantity - 1 } });
+  const addToCart = screen.getByRole('button');
+  fireEvent.click(addToCart);
+  const expectedReq = ['POST', '/cart', { sku_id: size }];
+  expect(process.mockRequestLog).toEqual(Array(quantity).fill(expectedReq));
 });

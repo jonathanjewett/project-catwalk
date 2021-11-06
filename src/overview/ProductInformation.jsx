@@ -6,10 +6,8 @@ import {
   PinterestShareButton,
   TwitterIcon,
   TwitterShareButton,
-
 } from 'react-share';
 import { StarRating } from '../common';
-
 /**
  * Formats a string as a price, prepending a dollar sign and removing the cents
  * value if the price is a whole number of dollars.
@@ -43,16 +41,28 @@ const Price = ({ base, sale }) =>
 
 /**
  * @param {Object} props
- * @param {Product} props.product
+ * @param {number} props.rating
+ * @param {number} props.reviewCount
+ */
+const Rating = ({ rating, reviewCount }) => reviewCount ? (
+  <p>
+    <StarRating rating={rating}/>
+    <a href="#ratings-and-reviews">
+      Read all {reviewCount} reviews
+    </a>
+  </p>
+) : null;
+
+/**
+ * @param {Object} props
+ * @param {ProductInfo} props.product
  * @param {number} props.rating
  * @param {Style} props.style
+ * @param {number} props.reviewCount
  */
-const ProductInformation = ({ product, rating, style }) => (
+const ProductInformation = ({ product, rating, style, reviewCount }) => (
   <div>
-    <p>
-      <StarRating rating={rating}/>
-      <a href="#ratings-and-reviews">Read all reviews</a>
-    </p>
+    <Rating rating={rating} reviewCount={reviewCount}/>
     <p className="category">{product.category}</p>
     <h1>{product.name}</h1>
     <Price base={style.original_price} sale={style.sale_price}/>

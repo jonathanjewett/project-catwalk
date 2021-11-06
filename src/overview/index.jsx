@@ -6,21 +6,19 @@ import ProductInformation from './ProductInformation';
 import StyleSelector from './StyleSelector';
 import './overview.scss';
 
-// these will eventually come from React props when the API is plugged in
-import { product, rating, styles } from './sampleData';
-
-const Overview = (/* { product, rating, styles } */) => {
+/**
+ * @param {Object} props
+ * @param {ProductInfo} props.info
+ * @param {number} props.reviewCount
+ */
+const Overview = ({ info, reviewCount }) => {
+  const { product, metadata: {rating}, styles } = info;
   const [styleIndex, setStyleIndex] = React.useState(0);
-  // zoomed in amount:
+  // magnification amount:
   // 0: standard view
   // 1: expanded view
   // 2: zoomed-in view
   const [zoom, setZoom] = React.useState(0);
-  // reset state when a new product is displayed
-  React.useEffect(() => {
-    setStyleIndex(0);
-    setZoom(0);
-  }, [product.id]);
   const style = styles[styleIndex];
 
   return (
@@ -28,7 +26,12 @@ const Overview = (/* { product, rating, styles } */) => {
       <div>
         <ImageGallery style={style} zoom={zoom} setZoom={setZoom}/>
         <div className="info" style={{display: zoom === 0 ? null : 'none'}}>
-          <ProductInformation product={product} rating={rating} style={style}/>
+          <ProductInformation
+            product={product}
+            rating={rating}
+            style={style}
+            reviewCount={reviewCount}
+          />
           <StyleSelector
             styles={styles}
             style={style}

@@ -11,7 +11,7 @@ module.exports = {
     mocha: true
   },
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: {
       'jsx': true
@@ -26,7 +26,7 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],
     /* Variable cames */
-    'camelcase': 2,
+    'camelcase': 0,
     /* Language constructs */
     'curly': 2,
     'eqeqeq': [2, 'smart'],
