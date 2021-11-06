@@ -21,7 +21,9 @@ const ListView = (props) => {
   );
   return (
     <div className="listview">
-      {props.children.slice(0, count)}
+      <div className="listview-items">
+        {props.children.slice(0, count)}
+      </div>
       {moreButton}
       <button className="interact add" onClick={props.onAdd}>
         {props.add}

@@ -4,9 +4,14 @@
     font-style: normal;
   }
 
+  p {
+    margin: 0.65em 0;
+  }
+
   h3, .answers {
     font-size: 1.17em;
     margin-left: 1.75em;
+    margin-bottom: 0;
   }
   h3::before, .answers::before {
     margin-left: -1.75em;
@@ -41,6 +46,11 @@
 
   .answers .details {
     float: none;
+  }
+
+  .listview-items {
+    max-height: 50vh;
+    overflow-y: auto;
   }
 }
 
