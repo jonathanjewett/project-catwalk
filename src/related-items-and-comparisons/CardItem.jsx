@@ -6,13 +6,7 @@ import { StarRating } from '../common';
 const CardItem = (props) => {
   const [modal, toggleModal] = useState(false);
 
-  const compare = () => {
-    if (modal === false) {
-      toggleModal(true);
-    } else {
-      toggleModal(false);
-    }
-  };
+  const compare = () => toggleModal(modal => !modal);
 
   const closeModal = () => {
     toggleModal(false);

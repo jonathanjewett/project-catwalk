@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ComparisonModal = (props) => {
+  // refactor later after full implementation so it doesn't need this function
   const renderTableData = () => {
     var features = props.product1.features;
     return features.map((feature) => {
