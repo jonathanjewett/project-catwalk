@@ -9,7 +9,48 @@ a, body, input, select, button {
   color: $foreground;
 }
 
+body {
+    margin: 0;
+}
+
 #root {
     max-width: 1280px;
     margin: auto;
+    padding: 0 50px;
+}
+
+#overview > div:first-child {
+  margin-left: -50px;
+  margin-right: -50px;
+}
+
+.interact {
+    font-size: 1.25em;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    border: 1px solid $foreground;
+    background: none;
+
+    &:disabled {
+      border-color: lightgray;
+    }
+
+    span {
+        float: right;
+    }
+}
+
+button.interact {
+    text-align: left;
+    cursor: pointer;
+
+    &:hover {
+      background: #eee;
+    }
+}
+
+select.interact:first-child {
+    margin-right: 1em;
+    flex-grow: 1;
 }
