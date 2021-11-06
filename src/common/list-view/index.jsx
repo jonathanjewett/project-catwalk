@@ -16,7 +16,7 @@ const ListView = (props) => {
   const itemsRef = React.createRef();
   React.useEffect(() => {
     if (count !== props.start && itemsRef.current) {
-      itemsRef.current.scrollTop = itemsRef.current.scrollHeight
+      itemsRef.current.scrollTop = itemsRef.current.scrollHeight;
     }
   }, [count]);
   const incr = 'increment' in props ? props.increment : 2;
