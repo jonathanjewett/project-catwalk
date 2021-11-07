@@ -3,8 +3,6 @@
   grid-template-columns: 1fr 1fr 2fr 1fr;
   grid-column-gap: 20px;
   padding: 1em;
-  margin-left: 5%;
-  margin-right: 5%;
 }
 .column-1 {
   grid-column: 1/2;
@@ -33,7 +31,8 @@
 
 .review-list {
   overflow-y: scroll;
-  height: 750px;
+  height: 500px;
+  margin-bottom: 5%;
 }
 
 progress {
@@ -74,6 +73,10 @@ progress::-webkit-progress-value {
 
 .checkmark {
   font-style: italic;
+}
+
+.star-breakdown:hover {
+  text-decoration: underline;
 }
 
 
