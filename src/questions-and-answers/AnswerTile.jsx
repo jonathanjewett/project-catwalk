@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Helpful, Report } from '../common';
 
 const formatName = (name) => name === 'Seller' ? <em>{name}</em> : name;
 
@@ -15,11 +16,9 @@ const AnswerTile = ({ answer }) => (
         by {formatName(answer.answerer_name.trim())},
         {moment(answer.date).format(' MMMM, Do YYYY')}
       </span>
+      <Helpful type="answer" id={answer.id} score={answer.helpfulness}/>
       <span>
-        Helpful? <a>Yes</a> ({answer.helpfulness})
-      </span>
-      <span>
-        <a>Report</a>
+        <Report type="answer" id={answer.id}/>
       </span>
 
     </footer>
