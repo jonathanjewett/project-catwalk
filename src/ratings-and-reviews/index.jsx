@@ -18,40 +18,11 @@ const reviewsTotal = (reviews) => {
   return total;
 };
 
-/** @param {Object} reviews*/
-const reviewsAverage = (reviews) => {
-  let total = 0;
-  let count = 0;
-  for (let i in reviews) {
-    total += i * reviews[i];
-    count += reviews[i];
-  }
-  let average = (total / count).toFixed(1);
-  return Number.parseFloat(average);
-};
-
-let averageRating = reviewsAverage(metadata.ratings);
-
 /** @param {string} newSortType*/
 
 const sortReviews = (newSortType) => {
   if (newSortType === 'Relevance') {
 
-    filteredReviews.sort(function (review1, review2) {
-      if (review1.date > review2.date) {
-        return -1;
-      } else if (review1.date < review2.date) {
-        return 1;
-      }
-    });
-
-    filteredReviews.sort(function (review1, review2) {
-      if (review1.helpfulness > review2.helpfulness) {
-        return -1;
-      } else if (review1.helpfulness < review2.helpfulness) {
-        return 1;
-      }
-    });
     return filteredReviews;
 
   } else if (newSortType === 'Newest') {
@@ -90,8 +61,11 @@ const filterReviews = (starFilters) => {
   filteredReviews = filteredList;
 };
 
-const recommendPercentage = (reviews) => {
+const recommendPercentage = (recommended) => {
 
+  let total = recommended.true + recommended.false;
+
+  return ((recommended.true / total) * 100).toFixed(0);
 };
 
 
@@ -106,11 +80,11 @@ const RatingsAndReviews = () => {
     <div id="ratings-and-reviews">
       <div className="column-1">
         <h2 className="reviews-header">Ratings & Reviews</h2>
-        <span className="reviews-rating">{averageRating}</span>
+        <span className="reviews-rating">{metadata.rating.toFixed(1)}</span>
         <div>
-          <StarRating rating={averageRating}/>
+          <StarRating rating={metadata.rating}/>
         </div>
-        <span className="reviews-recommend">{recommendPercentage(reviews)} of reviews recommend this product</span>
+        <span className="reviews-recommend">{recommendPercentage(metadata.recommended)}% of reviews recommend this product</span>
         <ReviewBreakdown breakdown={metadata.ratings} filterReviews={filterReviews} starFilters={starFilters} setStarFilters={setStarFilters}/>
         <ProductBreakdown />
       </div>
@@ -122,5 +96,5 @@ const RatingsAndReviews = () => {
   );
 };
 
-export {reviewsTotal};
+export {reviews, reviewsTotal};
 export default RatingsAndReviews;

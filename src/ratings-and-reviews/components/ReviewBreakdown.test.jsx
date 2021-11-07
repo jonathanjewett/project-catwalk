@@ -7,7 +7,7 @@ import {reviewsTotal} from '../index.jsx';
 it('Renders bars based on number of ratings', () => {
   const reviews = {1: 25, 2: 10, 3: 50, 4: 70, 5: 100};
   let starFilters = [];
-  let setStarFiltesr = () => {};
+  let setStarFilters = () => {};
   const app = render(<ReviewBreakdown breakdown={reviews} starFilters={starFilters} setStarFilters={setStarFilters}/>);
 
   expect(document.querySelector('#progress-5-star')).toHaveAttribute('value', '100');

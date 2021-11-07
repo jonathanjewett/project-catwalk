@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {reviewsTotal} from '../index.jsx';
+import {reviews, reviewsTotal} from '../index.jsx';
 
 const checkStarFilters = (num, starFilters, setStarFilters) => {
   if (starFilters.indexOf(num) === -1) {
