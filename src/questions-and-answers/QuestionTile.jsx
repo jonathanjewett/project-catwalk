@@ -1,14 +1,24 @@
 import React from 'react';
 import AnswerTile from './AnswerTile';
+import AnswerModal from './AnswerModal';
 import { Helpful } from '../common';
 import api from '../api';
 
 /**
  * @param {Object} props
  * @param {Question} props.question
+ * @param {Product} props.product
  */
-const QuestionTile = ({ question }) => {
-  let [expand, setExpand] = React.useState(false);
+const QuestionTile = ({ question, product }) => {
+  const [expand, setExpand] = React.useState(false);
+  const [showModal, setShowModal] = React.useState(false);
+  const modal = showModal ? (
+    <AnswerModal
+      hide={() => setShowModal(false)}
+      question={question}
+      product={product}
+    />
+  ) : null;
   const answers = Object.entries(question.answers);
   answers.sort((x, y) => {
     const seller1 = x[1].answerer_name === 'Seller';
@@ -41,7 +51,7 @@ const QuestionTile = ({ question }) => {
           score={question.question_helpfulness}
         />
         <span>
-          <a>Add Answer</a>
+          <a onClick={() => setShowModal(true)}>Add Answer</a>
         </span>
       </span>
       <h3>{question.question_body}</h3>
