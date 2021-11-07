@@ -7,6 +7,7 @@ const CardItem = (props) => {
   const [modal, toggleModal] = useState(false);
   var image_url = '';
   var defaultPrice = 0;
+  var salePrice = null;
 
   const compare = () => toggleModal(modal => !modal);
 
@@ -15,16 +16,24 @@ const CardItem = (props) => {
   };
 
   const showModal = modal === false ? null :
-    <ComparisonModal close={closeModal} product1={props.product}/>; // Need to pass in product2 info as a prop later
+    <ComparisonModal close={closeModal} product1={props.product} />; // Need to pass in product2 info as a prop later
 
   for (var i = 0; i < props.styles.length; i++) {
     if (props.styles[i]['default?'] === true) {
       image_url = props.styles[i].photos[0].url;
       defaultPrice = props.styles[i].original_price;
+      salePrice = props.styles[i].sale_price;
     }
   }
 
-
+  // if sale price is not null
+  // display sale price
+  // show defaultprice as crossed out
+  const price = salePrice === null ? <div className="price">{'$' + defaultPrice}</div> :
+    <div className="price-container">
+      <div className="sale-price">{'$' + salePrice}</div>
+      <div className="default-price">{'$' + defaultPrice}</div>
+    </div>;
 
   return (
     <div className="card-item">
@@ -39,9 +48,7 @@ const CardItem = (props) => {
       <div className="product-name">
         {props.product.name}
       </div>
-      <div className="price">
-        {'$' + defaultPrice}
-      </div>
+      {price}
       <div className="star-rating">
         <StarRating rating={props.rating} />
       </div>

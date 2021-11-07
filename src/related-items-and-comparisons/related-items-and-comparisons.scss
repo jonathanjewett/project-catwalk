@@ -20,6 +20,24 @@
     margin-left: 5px;
   }
 
+  .price-container {
+    display: flex;
+  }
+
+  .sale-price {
+    color: red;
+    font-size: 14px;
+    margin-top: 2.5px;
+    margin-left: 5px;
+  }
+
+  .default-price {
+    font-size: 14px;
+    margin-top: 2.5px;
+    margin-left: 5px;
+    text-decoration: line-through;
+  }
+
   .category {
     font-size: 13px;
     margin-top: 2.5px;
