@@ -3,7 +3,7 @@ import ReviewTile from './ReviewTile.jsx';
 
 
 
-const ReviewList = ({reviews}) => {
+const ReviewList = ({reviews, filteredReviews}) => {
 
   let [count, setCount] = useState(2);
 

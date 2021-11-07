@@ -41,6 +41,22 @@ const createReview = async (review) => {
 };
 
 /**
+ * Adds a question for a product.
+ *
+ * Routes used:
+ * - [`POST /qa/questions`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#add-a-question)
+ * @param {number} productId - ID of the product to post the question for
+ * @param {Object} question - question to post
+ * @param {string} question.body - text of question being asked
+ * @param {string} question.name - username for question asker
+ * @param {string} question.email - email address for question asker
+ */
+const createQuestion = async (productId, question) => {
+  question.product_id = productId;
+  await api.post('/qa/questions', question);
+};
+
+/**
  * Adds an answer for a question.
  *
  * Routes used:
@@ -266,8 +282,9 @@ const getRelated = async (productId) => {
 export default {
   // POST
   addToCart,
-  createReview,
+  createQuestion,
   createAnswer,
+  createReview,
   logInteraction,
   // PUT
   markHelpful,

@@ -17,7 +17,7 @@ const App = ({ info, questions, related, reviews }) => {
     <div>
       <Overview info={info} reviewCount={reviews.length}/>
       <RelatedItemsAndComparisons products={related}/>
-      <QuestionsAndAnswers questions={questions}/>
+      <QuestionsAndAnswers questions={questions} product={info.product}/>
       <RatingsAndReviews reviews={reviews} metadata={info.metadata}/>
     </div>
   );

@@ -4,8 +4,9 @@ import ReviewList from './ReviewList.jsx';
 import {reviews} from '../sampleData.js';
 
 it('Only renders more reviews button if there are more reviews to render', () => {
-  reviews.length = 6;
-  const app = render(<ReviewList reviews={reviews}/>);
+
+
+  const app = render(<ReviewList reviews={reviews.slice(0, 7)}/>);
 
   let button = document.querySelector('#more-reviews');
 
