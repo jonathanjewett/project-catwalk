@@ -114,11 +114,7 @@ const RatingsAndReviews = () => {
       </div>
       <div className="column-2">
         <Sort breakdown={metadata.ratings} sortReviews={sortReviews} sortType={sortType} setSortType={setSortType}/>
-        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)} count={reviewCount}/>
-        { reviewCount <= reviews.length &&
-        <button id="more-reviews" onClick={() => setReviewCount(reviewCount + 2) }>More Reviews</button>
-        }
-        <button className="add-a-review">Add A Review +</button>
+        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)} count={reviewCount} setCount={setReviewCount}/>
       </div>
     </div>
   );
