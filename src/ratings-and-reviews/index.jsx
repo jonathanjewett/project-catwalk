@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './ratings-and-reviews.scss';
 import StarRating from '../common/star-rating/index.jsx';
 import ReviewList from './components/ReviewList.jsx';
@@ -30,17 +30,14 @@ const reviewsAverage = (reviews) => {
   return Number.parseFloat(average);
 };
 
-let averageRating = reviewsAverage(reviewMetaData.ratings);
+let averageRating = reviewsAverage(metadata.ratings);
 
 /** @param {string} newSortType*/
 
 const sortReviews = (newSortType) => {
-
-  let sortedList = reviewList;
-
   if (newSortType === 'Relevance') {
 
-    sortedList.sort(function (review1, review2) {
+    filteredReviews.sort(function (review1, review2) {
       if (review1.date > review2.date) {
         return -1;
       } else if (review1.date < review2.date) {
@@ -48,18 +45,17 @@ const sortReviews = (newSortType) => {
       }
     });
 
-    sortedList.sort(function (review1, review2) {
+    filteredReviews.sort(function (review1, review2) {
       if (review1.helpfulness > review2.helpfulness) {
         return -1;
       } else if (review1.helpfulness < review2.helpfulness) {
         return 1;
       }
     });
-
-    return sortedList;
+    return filteredReviews;
 
   } else if (newSortType === 'Newest') {
-    return sortedList.sort(function (review1, review2) {
+    return filteredReviews.sort(function (review1, review2) {
       if (review1.date > review2.date) {
         return -1;
       } else if (review1.date < review2.date) {
@@ -68,7 +64,7 @@ const sortReviews = (newSortType) => {
     });
 
   } else if (newSortType === 'Most Helpful') {
-    return sortedList.sort(function (review1, review2) {
+    return filteredReviews.sort(function (review1, review2) {
       if (review1.helpfulness > review2.helpfulness) {
         return -1;
       } else if (review1.helpfulness < review2.helpfulness) {
@@ -78,13 +74,31 @@ const sortReviews = (newSortType) => {
   }
 };
 
+let filteredReviews = reviews;
+
+const filterReviews = (starFilters) => {
+  let reviewList = reviews;
+  let filteredList = [];
+  if (!starFilters.length) {
+    filteredReviews = reviews;
+    return;
+  }
+
+  for (let i = 0; i < starFilters.length; i++) {
+    filteredList = filteredList.concat(reviewList.filter(review => review.rating === starFilters[i]));
+  }
+  filteredReviews = filteredList;
+};
+
 
 const RatingsAndReviews = () => {
 
   let [sortType, setSortType] = useState('Relevance');
 
+  let [starFilters, setStarFilters] = useState([]);
 
-  const sortedReviews = sortReviews(sortType);
+  let [reviewCount, setReviewCount] = useState(2);
+
 
   return (
     <div id="ratings-and-reviews">
@@ -95,12 +109,16 @@ const RatingsAndReviews = () => {
           <StarRating rating={averageRating}/>
         </div>
         <span className="reviews-recommend">100% of reviews recommend this product</span>
-        <ReviewBreakdown breakdown={reviewMetaData.ratings}/>
+        <ReviewBreakdown breakdown={metadata.ratings} filterReviews={filterReviews} starFilters={starFilters} setStarFilters={setStarFilters}/>
         <ProductBreakdown />
       </div>
       <div className="column-2">
-        <Sort breakdown={reviewMetaData.ratings} sortReviews={sortReviews} sortType={sortType} setSortType={setSortType}/>
-        <ReviewList reviewList={sortReviews(sortType)}/>
+        <Sort breakdown={metadata.ratings} sortReviews={sortReviews} sortType={sortType} setSortType={setSortType}/>
+        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)} count={reviewCount}/>
+        { reviewCount <= reviews.length &&
+        <button id="more-reviews" onClick={() => setReviewCount(reviewCount + 2) }>More Reviews</button>
+        }
+        <button className="add-a-review">Add A Review +</button>
       </div>
     </div>
   );
