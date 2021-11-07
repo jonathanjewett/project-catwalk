@@ -81,12 +81,13 @@ const endpoint = (type) => {
 
 /**
  * Updates an answer, question, or review to show it was found helpful.
- * @param {'answer'|'question'|'review'} type
- * @param {number} id - answer_id, question_id, or review_id
+ *
  * Routes used:
  * - [`PUT /qa/answers/:answer_id/helpful`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#mark-answer-as-helpful)
  * - [`PUT /qa/questions/:question_id/helpful`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/qa.md#mark-question-as-helpful)
  * - [`PUT /reviews/:review_id/helpful`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/reviews.md#mark-review-as-helpful)
+ * @param {'answer'|'question'|'review'} type
+ * @param {number} id - answer_id, question_id, or review_id
  */
 const markHelpful = async (type, id) => {
   await api.put(`${endpoint(type)}/${id}/helpful`);
@@ -113,6 +114,7 @@ const report = async (type, id) => {
 
 /**
  * Retrieves list of products added to the cart by a user.
+ *
  * Routes used:
  * - [`GET /cart`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/cart.md#get-cart)
  * @returns {Promise<CartItem[]>}

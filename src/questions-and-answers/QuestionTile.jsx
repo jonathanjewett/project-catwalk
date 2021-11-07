@@ -1,5 +1,7 @@
 import React from 'react';
 import AnswerTile from './AnswerTile';
+import { Helpful } from '../common';
+import api from '../api';
 
 /**
  * @param {Object} props
@@ -33,9 +35,11 @@ const QuestionTile = ({ question }) => {
   return (
     <div>
       <span className="details">
-        <span>
-          Helpful? <a>Yes</a> ({question.question_helpfulness})
-        </span>
+        <Helpful
+          type="question"
+          id={question.question_id}
+          score={question.question_helpfulness}
+        />
         <span>
           <a>Add Answer</a>
         </span>
