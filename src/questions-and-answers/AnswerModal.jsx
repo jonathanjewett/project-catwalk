@@ -30,9 +30,13 @@ const AnswerModal = ({ hide, product, question }) => (
         }
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) =>
+      onSubmit={(values, { resetForm, setSubmitting }) =>
         api.createAnswer(question.question_id, values)
-          .then(() => setSubmitting(false))
+          .then(() => {
+            setSubmitting(false);
+            resetForm();
+            hide();
+          })
           .catch(console.error)
       }
     >

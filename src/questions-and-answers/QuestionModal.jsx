@@ -29,9 +29,13 @@ const QuestionModal = ({ hide, product }) => (
         }
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) =>
+      onSubmit={(values, { resetForm, setSubmitting }) =>
         api.createQuestion(product.id, values)
-          .then(() => setSubmitting(false))
+          .then(() => {
+            setSubmitting(false);
+            resetForm();
+            hide();
+          })
           .catch(console.error)
       }
     >
