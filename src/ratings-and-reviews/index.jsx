@@ -90,14 +90,16 @@ const filterReviews = (starFilters) => {
   filteredReviews = filteredList;
 };
 
+const recommendPercentage = (reviews) => {
+
+};
+
 
 const RatingsAndReviews = () => {
 
   let [sortType, setSortType] = useState('Relevance');
 
   let [starFilters, setStarFilters] = useState([]);
-
-  let [reviewCount, setReviewCount] = useState(2);
 
 
   return (
@@ -108,13 +110,13 @@ const RatingsAndReviews = () => {
         <div>
           <StarRating rating={averageRating}/>
         </div>
-        <span className="reviews-recommend">100% of reviews recommend this product</span>
+        <span className="reviews-recommend">{recommendPercentage(reviews)} of reviews recommend this product</span>
         <ReviewBreakdown breakdown={metadata.ratings} filterReviews={filterReviews} starFilters={starFilters} setStarFilters={setStarFilters}/>
         <ProductBreakdown />
       </div>
       <div className="column-2">
         <Sort breakdown={metadata.ratings} sortReviews={sortReviews} sortType={sortType} setSortType={setSortType}/>
-        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)} count={reviewCount} setCount={setReviewCount}/>
+        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)}/>
       </div>
     </div>
   );
