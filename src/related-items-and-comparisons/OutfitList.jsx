@@ -5,8 +5,7 @@ const OutfitList = (props) => {
   // hook for array of outfits, starts with nothing by default
   // items must be unique, so clicking does nothing if product is already in the list
   // should always have an "add to list" card
-  var outfitArray = [];
-  const [outfit, updateOutfit] = useState(outfitArray);
+  const [outfit, updateOutfit] = useState([]);
   const [currList, setCurrList] = useState(outfit);
   const [currIndex, setCurrIndex] = useState(0);
 
@@ -21,13 +20,19 @@ const OutfitList = (props) => {
   };
 
   const addToOutfit = () => { // need to replace with outfit from the current page
-    if (!outfit.includes(props.products[0].product)) {
-      updateOutfit([...outfit, props.products[0].product]);
+    if (!outfit.includes(props.products[0])) {
+      // updateOutfit([...outfit, props.products[0].product]);
+      updateOutfit([...outfit, props.products[0]]);
     }
   };
 
   const removeFromOutfit = (product) => {
-    var index = outfit.indexOf(product);
+    var index = -1;
+    for (var i = 0; i < outfit.length; i++) {
+      if (outfit[i].product.id === product.id) {
+        index = i;
+      }
+    }
     if (index > -1) {
       updateOutfit(prevState=> outfit.splice(index, 1));
     }
@@ -50,7 +55,7 @@ const OutfitList = (props) => {
           <div className="add-text">Add to Outfit</div>
         </div>
         <div className="outfit-list">
-          {outfit.map((product) =>
+          {outfit.map(({ product, metadata, styles }) =>
             <OutfitCard key={product.id} product={product} remove={removeFromOutfit}/>
           )}
         </div>
