@@ -56,7 +56,7 @@ const OutfitList = (props) => {
         </div>
         <div className="outfit-list">
           {outfit.map(({ product, metadata, styles }) =>
-            <OutfitCard key={product.id} product={product} remove={removeFromOutfit}/>
+            <OutfitCard key={product.id} product={product} rating= {metadata.rating} styles={styles}remove={removeFromOutfit}/>
           )}
         </div>
         {rightButton}
