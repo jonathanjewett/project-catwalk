@@ -31,7 +31,7 @@ const AnswerModal = ({ hide, product, question }) => (
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) =>
-        api.createQuestion(product.id, values)
+        api.createAnswer(question.question_id, values)
           .then(() => setSubmitting(false))
           .catch(console.error)
       }

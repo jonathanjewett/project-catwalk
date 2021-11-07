@@ -7,7 +7,7 @@ import './modal.scss';
  * @param {React.MouseEventHandler} props.hide
  */
 const Modal = ({ children, hide }) => (
-  <div className="modalBack" onClick={hide} onScroll={event => event.preventDefault()}>
+  <div className="modalBack" onClick={hide}>
     <div className="modal" onClick={event => event.stopPropagation()}>
       {children}
     </div>
