@@ -29,7 +29,9 @@ const RelatedItemsList = (props) => {
     <div>
       <h3>RELATED PRODUCTS</h3>
       <div className="list-container">
-        {leftButton}
+        <div className="scroll-button-container">
+          {leftButton}
+        </div>
         <div className="related-items-list">
           {currList.map(({ product, metadata, styles }) =>
             <CardItem key={product.id} product={product} rating={metadata.rating} styles={styles}/>

@@ -49,7 +49,9 @@ const OutfitList = (props) => {
     <div>
       <h3>YOUR OUTFIT</h3>
       <div className="list-container">
-        {leftButton}
+        <div className="scroll-button-container">
+          {leftButton}
+        </div>
         <div className="add-card" onClick={addToOutfit}>
           <div className="add-button">+</div>
           <div className="add-text">Add to Outfit</div>
