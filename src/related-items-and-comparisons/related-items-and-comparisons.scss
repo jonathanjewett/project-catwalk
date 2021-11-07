@@ -42,7 +42,8 @@
     position: relative;
   }
 
-  .star-button {
+  .card-action-button {
+    cursor: pointer;
     position: absolute;
     top: 4px;
     right: 8px;
@@ -50,7 +51,7 @@
     font-weight: bold;
   }
 
-  .related-container {
+  .list-container {
     display: flex;
     align-items: center;
   }
@@ -76,9 +77,30 @@
     width: auto;
     top:50%;
     left:50%;
+    z-index: 100;
   }
 
   td {
     text-align: center;
+  }
+
+  .add-card {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 250px;
+    height: 380px;
+    border: 1px solid black;
+    margin: 15px;
+  }
+
+  .add-button {
+    font-size: 100px;
+  }
+
+  .add-text {
+    font-size: 30px;
   }
 }

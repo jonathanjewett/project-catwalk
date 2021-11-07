@@ -19,8 +19,8 @@ const CardItem = (props) => {
     <div className="card-item">
       {showModal}
       <div className="product-image">
-        <img src="https://wallpapercave.com/wp/wp8540209.jpg" width="250" height="250"></img>
-        <div className="star-button" onClick={compare}>☆</div>
+        <img src={props.image} width="250" height="275"></img>
+        <div className="card-action-button" onClick={compare}>☆</div>
       </div>
       <div className="category">
         {props.product.category.toUpperCase()}
@@ -32,7 +32,7 @@ const CardItem = (props) => {
         {'$' + props.product.default_price}
       </div>
       <div className="star-rating">
-        <StarRating rating={4} />
+        <StarRating rating={props.rating} />
       </div>
     </div>
   );

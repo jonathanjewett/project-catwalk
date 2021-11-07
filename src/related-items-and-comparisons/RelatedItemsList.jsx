@@ -28,11 +28,11 @@ const RelatedItemsList = (props) => {
   return (
     <div>
       <h3>RELATED PRODUCTS</h3>
-      <div className="related-container">
+      <div className="list-container">
         {leftButton}
         <div className="related-items-list">
           {currList.map(({ product, metadata, styles }) =>
-            <CardItem key={product.id} product={product} />
+            <CardItem key={product.id} product={product} rating={metadata.rating} image={styles[0].photos[0].url}/>
           )}
         </div>
         {rightButton}
