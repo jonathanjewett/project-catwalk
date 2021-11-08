@@ -14,11 +14,11 @@ const ReviewBreakdown = ({breakdown, starFilters, setStarFilters, filterReviews}
 
   return (
     <div className="review-breakdown">
-      {starFilters.indexOf(5) !== -1 && <span>Filtering by 5 stars </span>}
-      {starFilters.indexOf(4) !== -1 && <span>Filtering by 4 stars </span>}
-      {starFilters.indexOf(3) !== -1 && <span>Filtering by 3 stars </span>}
-      {starFilters.indexOf(2) !== -1 && <span>Filtering by 2 stars </span>}
-      {starFilters.indexOf(1) !== -1 && <span>Filtering by 1 stars </span>}
+      {starFilters.indexOf(5) !== -1 && <span>Filtering by 5 stars</span>}
+      {starFilters.indexOf(4) !== -1 && <span>, Filtering by 4 stars</span>}
+      {starFilters.indexOf(3) !== -1 && <span>, Filtering by 3 stars</span>}
+      {starFilters.indexOf(2) !== -1 && <span>, Filtering by 2 stars</span>}
+      {starFilters.indexOf(1) !== -1 && <span>, Filtering by 1 star</span>}
       <div className="star-breakdown" onClick={() => { checkStarFilters(5, starFilters, setStarFilters); }}>
         <label className="review-breakdown-label">
         5 star

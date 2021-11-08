@@ -75,8 +75,16 @@ progress::-webkit-progress-value {
   font-style: italic;
 }
 
+.star-breakdown {
+  padding-top: .5em;
+}
 .star-breakdown:hover {
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.characteristics {
+  color: black;
 }
 
 

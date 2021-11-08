@@ -6,6 +6,7 @@ import ReviewTile from './components/ReviewTile.jsx';
 import Sort from './components/Sort.jsx';
 import ReviewBreakdown from './components/ReviewBreakdown.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
+import AddReview from './components/AddReview.jsx';
 
 import {reviews, metadata} from './sampleData.js';
 
@@ -22,6 +23,22 @@ const reviewsTotal = (reviews) => {
 
 const sortReviews = (newSortType) => {
   if (newSortType === 'Relevance') {
+
+    filteredReviews.sort(function (review1, review2) {
+      if (review1.date > review2.date) {
+        return -1;
+      } else if (review1.date < review2.date) {
+        return 1;
+      }
+    });
+
+    filteredReviews.sort(function (review1, review2) {
+      if (review1.helpfulness > review2.helpfulness) {
+        return -1;
+      } else if (review1.helpfulness < review2.helpfulness) {
+        return 1;
+      }
+    });
 
     return filteredReviews;
 
@@ -75,6 +92,8 @@ const RatingsAndReviews = () => {
 
   let [starFilters, setStarFilters] = useState([]);
 
+  let [addView, setAddView] = useState(false);
+
 
   return (
     <div id="ratings-and-reviews">
@@ -90,7 +109,8 @@ const RatingsAndReviews = () => {
       </div>
       <div className="column-2">
         <Sort breakdown={metadata.ratings} sortReviews={sortReviews} sortType={sortType} setSortType={setSortType}/>
-        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)}/>
+        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)} addView={addView} setAddView={setAddView}/>
+        {addView && <AddReview characterisitics={metadata.characteristics} hide={() => setAddView(false)}></AddReview>}
       </div>
     </div>
   );
