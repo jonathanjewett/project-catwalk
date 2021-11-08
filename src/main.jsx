@@ -53,7 +53,7 @@ api.getQuestions(productId).then(questionsResult => {
   renderApp();
 }).catch(console.error);
 // Asynchronously retrieve reviews and then re-render
-api.getReviews(productId).then(reviewsResult => {
+api.getReviews(productId, 'relevant').then(reviewsResult => {
   reviews = reviewsResult;
   renderApp();
 }).catch(console.error);

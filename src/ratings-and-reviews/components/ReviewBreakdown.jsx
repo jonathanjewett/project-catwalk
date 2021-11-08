@@ -17,9 +17,7 @@ const checkStarFilters = (num, starFilters, setStarFilters) => {
   }
 };
 
-const ReviewBreakdown = ({breakdown, starFilters, setStarFilters, filterReviews}) => {
-
-
+const ReviewBreakdown = ({breakdown, starFilters, setStarFilters, reviews}) => {
   return (
     <div className="review-breakdown">
       {starFilters.indexOf(5) !== -1 && <span>Filtering by 5 stars </span>}
