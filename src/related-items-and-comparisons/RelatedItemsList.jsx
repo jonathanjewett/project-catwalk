@@ -34,7 +34,7 @@ const RelatedItemsList = (props) => {
         </div>
         <div className="related-items-list">
           {currList.map(({ product, metadata, styles }) =>
-            <CardItem key={product.id} product={product} rating={metadata.rating} styles={styles}/>
+            <CardItem key={product.id} product={product} rating={metadata.rating} styles={styles} currentProduct={props.currentProduct}/>
           )}
         </div>
         {rightButton}

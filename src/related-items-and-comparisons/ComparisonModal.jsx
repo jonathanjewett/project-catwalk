@@ -4,6 +4,30 @@ const ComparisonModal = (props) => {
   // refactor later after full implementation so it doesn't need this function
   const renderTableData = () => {
     var features = props.product1.features;
+    /*
+    var features = [];
+
+    // Make an array of all features between the two products
+    props.product1.features.map((feature) => features.push(feature.feature));
+    for (var i = 0; i < props.product2.features.length; i++) {
+      if (!features.includes(props.product2.features[i].feature)) {
+        features.push(props.product2.features[i].feature);
+      }
+    }
+
+    // Create object array with the features and values for each product
+    for (var i = 0; i < features; i++) {
+
+    }
+
+    console.log(features);
+    /*
+    for (var i = 0; i < props.product2.product.features.length; i++) {
+      if (!features.includes(props.product2.product.features[i].feature)) {
+        features.push()
+      }
+    }
+    */
     return features.map((feature) => {
       return (
         <tr key={feature.feature}>
@@ -23,7 +47,7 @@ const ComparisonModal = (props) => {
           <tr>
             <th>{props.product1.name}</th>
             <th></th>
-            <th>product 2</th>
+            <th>{props.product2.name}</th>
           </tr>
         </thead>
         <tbody>

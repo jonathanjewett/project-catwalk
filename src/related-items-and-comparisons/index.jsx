@@ -7,11 +7,11 @@ import './related-items-and-comparisons.scss';
 
 import { products } from './sampleData.js';
 
-const RelatedItemsAndComparisons = (/* { products } */) => (
+const RelatedItemsAndComparisons = (props) => (
   <div id="related-items-and-comparisons">
     <div>
-      <RelatedItemsList products={products}/>
-      <OutfitList products={products}/>
+      <RelatedItemsList products={products} currentProduct={props.info}/>
+      <OutfitList products={products} currentProduct={props.info}/>
     </div>
   </div>
 );
