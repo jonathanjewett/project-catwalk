@@ -12,7 +12,7 @@ const OutfitCard = (props) => {
 
   for (var i = 0; i < props.styles.length; i++) {
     if (props.styles[i]['default?'] === true) {
-      image_url = props.styles[i].photos[0].url;
+      image_url = props.styles[i].photos[0].url; // unused for now, need to clarify what default images should be
       defaultPrice = props.styles[i].original_price;
       salePrice = props.styles[i].sale_price;
     }
@@ -27,7 +27,7 @@ const OutfitCard = (props) => {
   return (
     <div className="card-item">
       <div className="product-image">
-        <img src={image_url} width="250" height="250"></img>
+        <img src={props.styles[0].photos[0].url} width="250" height="250"></img>
         <div className="card-action-button" onClick={removeFromOutfit}>X</div>
       </div>
       <div className="category">
