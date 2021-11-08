@@ -3,82 +3,73 @@
   grid-template-columns: 1fr 1fr 2fr 1fr;
   grid-column-gap: 20px;
   padding: 1em;
-}
-.column-1 {
-  grid-column: 1/2;
-}
-.column-2 {
-  margin-top: 13px;
-  grid-column: 2/5;
-}
 
-.reviews-header {
-  font-size: 16px;
-  font-weight: lighter;
-  height: 10px;
-  vertical-align: top;
+  .column-1 {
+    grid-column: 1/2;
+  }
+  .column-2 {
+    margin-top: 13px;
+    grid-column: 2/5;
+  }
+
+  .review-tile {
+    margin: 1em 0;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--foreground);
+  }
+
+  .reviews-header {
+    font-size: 16px;
+    font-weight: lighter;
+    height: 10px;
+    vertical-align: top;
+  }
+
+  .reviews-rating {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .reviews-recommend {
+    font-size: 12px;
+    font-weight: lighter;
+  }
+
+  .listview-items {
+    max-height: 500px;
+  }
+
+  progress {
+    height: 10px;
+    appearance: none;
+    margin-left: 5px;
+    border: none;
+    filter: saturate(0);
+    background-color: rgb(233, 233, 233);
+  }
+  progress::-webkit-progress-bar {
+    background-color: rgb(233, 233, 233);
+  }
+  progress:hover {
+    background-color: rgb(207, 207, 207);
+  }
+  progress::-webkit-progress-bar:hover {
+    background-color: rgb(207, 207, 207);
+  }
+
+  .review-breakdown-label {
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  .review-sort {
+    margin-bottom: 10px;
+  }
+  .checkmark {
+    font-style: italic;
+  }
+
+  .star-breakdown:hover {
+    text-decoration: underline;
+  }
 }
-
-.reviews-rating {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.reviews-recommend {
-  font-size: 12px;
-  font-weight: lighter;
-}
-
-.review-list {
-  overflow-y: scroll;
-  height: 500px;
-  margin-bottom: 5%;
-}
-
-progress {
-  border-radius: 7px;
-  height: 12px;
-  padding-left: 5px;
-
-}
-progress:hover {
-  border-radius: 40px;
-}
-progress::-webkit-progress-bar {
-  background-color: rgb(161, 159, 159);
-  opacity: .75;
-  filter: alpha(opacity=75);
-}
-progress::-webkit-progress-value {
-  background-color: rgb(108, 211, 108);
-}
-
-.review-breakdown-label {
-  font-size: 12px;
-  text-decoration: none;
-}
-
-.review-sort {
-  margin-bottom: 10px;
-}
-
-.review-userdata {
-  margin-left: 550px;
-}
-
-.review-helpful {
-  margin-left: 550px;
-  text-align: right;
-}
-
-.checkmark {
-  font-style: italic;
-}
-
-.star-breakdown:hover {
-  text-decoration: underline;
-}
-
-
-
-
