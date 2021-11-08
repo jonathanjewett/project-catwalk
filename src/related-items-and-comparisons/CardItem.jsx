@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ComparisonModal from './ComparisonModal.jsx';
 import './related-items-and-comparisons.scss';
-import { StarRating } from '../common';
+import { Price, StarRating } from '../common';
 
 const CardItem = (props) => {
   const [modal, toggleModal] = useState(false);
   var image_url = '';
-  var defaultPrice = 0;
+  var defaultPrice = '??';
   var salePrice = null;
 
   const compare = () => toggleModal(modal => !modal);
@@ -26,15 +26,6 @@ const CardItem = (props) => {
     }
   }
 
-  // if sale price is not null
-  // display sale price
-  // show defaultprice as crossed out
-  const price = salePrice === null ? <div className="price">{'$' + defaultPrice}</div> :
-    <div className="price-container">
-      <div className="sale-price">{'$' + salePrice}</div>
-      <div className="default-price">{'$' + defaultPrice}</div>
-    </div>;
-
   return (
     <div className="card-item">
       {showModal}
@@ -48,7 +39,7 @@ const CardItem = (props) => {
       <div className="product-name">
         {props.product.name}
       </div>
-      {price}
+      <Price base={defaultPrice} sale={salePrice}/>
       <div className="star-rating">
         <StarRating rating={props.rating} />
       </div>

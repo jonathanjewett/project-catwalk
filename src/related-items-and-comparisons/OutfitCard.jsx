@@ -1,9 +1,9 @@
 import React from 'react';
-import { StarRating } from '../common';
+import { Price, StarRating } from '../common';
 
 const OutfitCard = (props) => {
   var image_url = '';
-  var defaultPrice = 0;
+  var defaultPrice = '??';
   var salePrice = null;
 
   const removeFromOutfit = () => {
@@ -18,12 +18,6 @@ const OutfitCard = (props) => {
     }
   }
 
-  const price = salePrice === null ? <div className="price">{'$' + defaultPrice}</div> :
-    <div className="price-container">
-      <div className="sale-price">{'$' + salePrice}</div>
-      <div className="default-price">{'$' + defaultPrice}</div>
-    </div>;
-
   return (
     <div className="card-item">
       <div className="product-image">
@@ -36,7 +30,7 @@ const OutfitCard = (props) => {
       <div className="product-name">
         {props.product.name}
       </div>
-      {price}
+      <Price base={defaultPrice} sale={salePrice}/>
       <div className="star-rating">
         <StarRating rating={props.rating} />
       </div>
