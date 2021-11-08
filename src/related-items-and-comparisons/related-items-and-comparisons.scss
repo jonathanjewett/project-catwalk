@@ -20,6 +20,24 @@
     margin-left: 5px;
   }
 
+  .price-container {
+    display: flex;
+  }
+
+  .sale-price {
+    color: red;
+    font-size: 14px;
+    margin-top: 2.5px;
+    margin-left: 5px;
+  }
+
+  .default-price {
+    font-size: 14px;
+    margin-top: 2.5px;
+    margin-left: 5px;
+    text-decoration: line-through;
+  }
+
   .category {
     font-size: 13px;
     margin-top: 2.5px;
@@ -42,7 +60,8 @@
     position: relative;
   }
 
-  .star-button {
+  .card-action-button {
+    cursor: pointer;
     position: absolute;
     top: 4px;
     right: 8px;
@@ -50,9 +69,14 @@
     font-weight: bold;
   }
 
-  .related-container {
+  .list-container {
     display: flex;
     align-items: center;
+  }
+
+  .scroll-button-container {
+    height: 50px;
+    width: 25px;
   }
   .left-arrow {
     position: relative;
@@ -76,9 +100,30 @@
     width: auto;
     top:50%;
     left:50%;
+    z-index: 100;
   }
 
   td {
     text-align: center;
+  }
+
+  .add-card {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 250px;
+    height: 380px;
+    border: 1px solid black;
+    margin: 15px;
+  }
+
+  .add-button {
+    font-size: 100px;
+  }
+
+  .add-text {
+    font-size: 30px;
   }
 }

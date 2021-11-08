@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import ComparisonModal from './ComparisonModal.jsx';
-import './related-items-and-comparisons.scss';
+import React from 'react';
 import { StarRating } from '../common';
 
-const CardItem = (props) => {
-  const [modal, toggleModal] = useState(false);
+const OutfitCard = (props) => {
   var image_url = '';
   var defaultPrice = 0;
   var salePrice = null;
 
-  const compare = () => toggleModal(modal => !modal);
-
-  const closeModal = () => {
-    toggleModal(false);
+  const removeFromOutfit = () => {
+    props.remove(props.product);
   };
-
-  const showModal = modal === false ? null :
-    <ComparisonModal close={closeModal} product1={props.product} />; // Need to pass in product2 info as a prop later
 
   for (var i = 0; i < props.styles.length; i++) {
     if (props.styles[i]['default?'] === true) {
@@ -26,9 +18,6 @@ const CardItem = (props) => {
     }
   }
 
-  // if sale price is not null
-  // display sale price
-  // show defaultprice as crossed out
   const price = salePrice === null ? <div className="price">{'$' + defaultPrice}</div> :
     <div className="price-container">
       <div className="sale-price">{'$' + salePrice}</div>
@@ -37,10 +26,9 @@ const CardItem = (props) => {
 
   return (
     <div className="card-item">
-      {showModal}
       <div className="product-image">
-        <img src={props.styles[0].photos[0].url} width="250" height="275"></img>
-        <div className="card-action-button" onClick={compare}>☆</div>
+        <img src={props.styles[0].photos[0].url} width="250" height="250"></img>
+        <div className="card-action-button" onClick={removeFromOutfit}>X</div>
       </div>
       <div className="category">
         {props.product.category.toUpperCase()}
@@ -54,6 +42,7 @@ const CardItem = (props) => {
       </div>
     </div>
   );
+
 };
 
-export default CardItem;
+export default OutfitCard;

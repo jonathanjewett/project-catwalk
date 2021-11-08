@@ -5,7 +5,6 @@ const ComparisonModal = (props) => {
   const renderTableData = () => {
     var features = props.product1.features;
     return features.map((feature) => {
-      console.log(feature.value);
       return (
         <tr key={feature.feature}>
           <td>{feature.value}</td>

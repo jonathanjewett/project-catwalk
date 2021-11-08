@@ -181,7 +181,7 @@ export const products = [
         'style_id': 240510,
         'name': 'Black',
         'original_price': '40.00',
-        'sale_price': null,
+        'sale_price': '20.00',
         'default?': true,
         'photos': [
           {
