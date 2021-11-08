@@ -1,6 +1,7 @@
 import Helpful from './Helpful';
 import ListView from './list-view';
 import Modal from './modal';
+import Price from './price';
 import Report from './Report';
 import StarRating from './star-rating';
 
@@ -11,4 +12,4 @@ import StarRating from './star-rating';
 const validateEmail = (email) =>
   /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
 
-export { Helpful, ListView, Modal, Report, StarRating, validateEmail };
+export { Helpful, ListView, Modal, Report, Price, StarRating, validateEmail };
