@@ -11,43 +11,32 @@ import ProductBreakdown from './components/ProductBreakdown.jsx';
 const sortReviews = (newSortType, reviews) => {
   if (newSortType === 'Relevance') {
     return reviews;
-  } else if (newSortType === 'Newest') {
-    return reviews.slice().sort(function (review1, review2) {
-      if (review1.date > review2.date) {
-        return -1;
-      } else if (review1.date < review2.date) {
-        return 1;
-      }
-    });
+  }
 
-  } else if (newSortType === 'Most Helpful') {
-    return reviews.slice().sort(function (review1, review2) {
-      if (review1.helpfulness > review2.helpfulness) {
-        return -1;
-      } else if (review1.helpfulness < review2.helpfulness) {
-        return 1;
-      }
+  if (newSortType === 'Newest') {
+    return reviews.slice().sort(function (review1, review2) { // new copy
+      return review2.date - review1.date;
+    });
+  }
+
+  if (newSortType === 'Most Helpful') {
+    return reviews.slice().sort(function (review1, review2) { // new copy
+      return review2.helpfulness - review1.helpfulness;
     });
   }
 };
 
 const filterReviews = (starFilters, reviews) => {
-  if (!starFilters.length) {
-    return reviews;
-  }
-
-  let filteredList = [];
-  for (let i = 0; i < starFilters.length; i++) {
-    filteredList = filteredList.concat(reviews.filter(review => review.rating === starFilters[i]));
-  }
-  return filteredList;
+  return starFilters.some(filter => filter) // are we filtering by anything
+    ? reviews.filter(review => starFilters[review.rating]) // filtered
+    : reviews; // no need to filter
 };
 
 const recommendPercentage = (recommended) => {
 
   let total = recommended.true + recommended.false;
 
-  return ((recommended.true / total) * 100).toFixed(0);
+  return 100 * recommended.true / total | 0;
 };
 
 
@@ -55,7 +44,9 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
 
   let [sortType, setSortType] = useState('Relevance');
 
-  let [starFilters, setStarFilters] = useState([]);
+  // An array of five booleans, one for each star rating,
+  // plus an extra at the start for zero stars.
+  let [starFilters, setStarFilters] = useState(Array(1).concat(Array(5).fill(false)));
 
   reviews = sortReviews(sortType, reviews);
   reviews = filterReviews(starFilters, reviews);
@@ -74,7 +65,7 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
         <ProductBreakdown />
       </div>
       <div className="column-2">
-        <Sort reviews={reviews} breakdown={metadata.ratings} sortReviews={sortReviews} sortType={sortType} setSortType={setSortType}/>
+        <Sort reviews={reviews} sortType={sortType} setSortType={setSortType}/>
         <ListView
           more="More Reviews"
           add="Add A Review"
@@ -85,7 +76,6 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
             <ReviewTile review={review} key={review.review_id}/>
           )}
         </ListView>
-
       </div>
     </div>
   );

@@ -4,18 +4,19 @@ import React, {useState, useEffect} from 'react';
 // Depending on which option is selected, re sort the tiles in ReviewTile based on corresponding option
 
 
-const Sort = ({reviews, sortType, setSortType}) => {
-
-  return (
-    <div className="review-sort">
-      <label> {reviews.length} reviews, sorted by </label>
-      <select onChange={(e) => setSortType( sortType = e.target.value) }className="review-dropdown">
-        <option>Relevance</option>
-        <option>Newest</option>
-        <option>Most Helpful</option>
-      </select>
-    </div>
-  );
-};
+const Sort = ({reviews, sortType, setSortType}) => (
+  <div className="review-sort">
+    <label> {reviews.length} reviews, sorted by </label>
+    <select
+      className="review-dropdown"
+      value={sortType}
+      onChange={(e) => setSortType(e.target.value)}
+    >
+      <option>Relevance</option>
+      <option>Newest</option>
+      <option>Most Helpful</option>
+    </select>
+  </div>
+);
 
 export default Sort;

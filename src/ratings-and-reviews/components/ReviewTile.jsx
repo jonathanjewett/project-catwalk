@@ -13,9 +13,10 @@ const ReviewTile = ({review}) => (
     <h3 className="review-header">{review.summary}</h3>
     <p className="review-body">{review.body}</p>
     <footer className="details">
-      {review.recommend ?
-        <span className="checkmark">I recommend this product</span>
-        : null}
+      {review.recommend
+        ? <span className="checkmark">I recommend this product</span>
+        : null
+      }
       <Helpful type="review" score={review.helpfulness} id={review.review_id}/>
       <Report type="review" id={review.review_id}/>
     </footer>
