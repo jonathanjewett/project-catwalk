@@ -1,8 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ReviewBreakdown from './ReviewBreakdown.jsx';
+import ReviewBreakdown, {reviewsTotal} from './ReviewBreakdown.jsx';
 import {starFilters, setStarFilters} from '../index.jsx';
-import {reviewsTotal} from '../index.jsx';
 
 it('Renders bars based on number of ratings', () => {
   const reviews = {1: 25, 2: 10, 3: 50, 4: 70, 5: 100};

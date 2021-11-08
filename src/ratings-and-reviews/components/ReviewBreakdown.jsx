@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {reviews, reviewsTotal} from '../index.jsx';
+
+/** @param {Object} reviews */
+const reviewsTotal = (reviews) => {
+  let total = 0;
+  for (let i in reviews) {
+    total += reviews[i];
+  }
+  return total;
+};
 
 const checkStarFilters = (num, starFilters, setStarFilters) => {
   if (starFilters.indexOf(num) === -1) {
@@ -54,3 +62,4 @@ const ReviewBreakdown = ({breakdown, starFilters, setStarFilters, filterReviews}
 };
 
 export default ReviewBreakdown;
+export {reviewsTotal};

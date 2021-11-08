@@ -9,15 +9,6 @@ import ProductBreakdown from './components/ProductBreakdown.jsx';
 
 import {reviews, metadata} from './sampleData.js';
 
-/** @param {Object} reviews */
-const reviewsTotal = (reviews) => {
-  let total = 0;
-  for (let i in reviews) {
-    total += reviews[i];
-  }
-  return total;
-};
-
 /** @param {string} newSortType*/
 
 const sortReviews = (newSortType) => {
@@ -96,5 +87,4 @@ const RatingsAndReviews = () => {
   );
 };
 
-export {reviews, reviewsTotal};
 export default RatingsAndReviews;
