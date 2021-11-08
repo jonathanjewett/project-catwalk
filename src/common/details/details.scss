@@ -1,0 +1,29 @@
+.details {
+  font-size: 0.8em;
+  float: right;
+  a, span {
+    color: gray;
+  }
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  span {
+    border-right: 1px solid;
+    margin-right: 0.75em;
+    padding-right: 0.75em;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  em {
+    font-weight: bold;
+    font-style: normal;
+  }
+}
+
+footer.details {
+  float: none;
+}

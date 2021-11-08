@@ -10,7 +10,7 @@ import './list-view.scss';
  */
 const recursiveFind = (needle, hay) =>
   typeof hay === 'string' && hay.indexOf(needle) !== -1 ||
-  typeof hay === 'object' &&
+  typeof hay === 'object' && hay !== null &&
     Object.values(hay).some(value => recursiveFind(needle, value));
 
 /**

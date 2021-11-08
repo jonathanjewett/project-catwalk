@@ -1,8 +1,8 @@
-import Helpful from './Helpful';
+import Helpful from './details/Helpful';
 import ListView from './list-view';
 import Modal from './modal';
 import Price from './price';
-import Report from './Report';
+import Report from './details/Report';
 import StarRating from './star-rating';
 
 /**

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import './common/details/details.scss';
 import App from './App';
 import api from './api';
 
@@ -52,7 +53,7 @@ api.getQuestions(productId).then(questionsResult => {
   renderApp();
 }).catch(console.error);
 // Asynchronously retrieve reviews and then re-render
-api.getReviews(productId).then(reviewsResult => {
+api.getReviews(productId, 'relevant').then(reviewsResult => {
   reviews = reviewsResult;
   renderApp();
 }).catch(console.error);

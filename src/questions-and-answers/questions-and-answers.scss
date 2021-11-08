@@ -34,41 +34,8 @@
     padding-left: 0;
   }
 
-  .details {
-    font-size: 0.8em;
-    float: right;
-  }
-
-  .answers .details {
-    float: none;
-  }
-
   .listview-items {
     max-height: 50vh;
-    overflow-y: auto;
-  }
-}
-
-.details {
-  a, span {
-    color: gray;
-  }
-  a {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  span {
-    border-right: 1px solid;
-    margin-right: 0.75em;
-    padding-right: 0.75em;
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  em {
-    font-weight: bold;
-    font-style: normal;
+    border-bottom: 1px solid var(--foreground);
   }
 }
