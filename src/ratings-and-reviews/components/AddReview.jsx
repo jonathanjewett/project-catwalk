@@ -2,14 +2,15 @@ import React from 'react';
 import { Modal, validateEmail} from '../../common';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import '../ratings-and-reviews.scss';
+import api from '../../api';
 
-const AddReview = ({hide}) => {
+const AddReview = ({hide, /*product*/}) => {
   return (
     <Modal hide={hide}>
       <h1>Write Your Review</h1>
-      <h2>About the 'Product Name Here'</h2>
+      <h2>About the Product</h2>
       <Formik
-        initialValues={{rating: '', recommend: '', characteristics: '', body: '', nickname: '', email: ''}}
+        initialValues={{rating: '', recommend: '', size: '', width: '', comfort: '', quality: '', length: '', fit: '', summary: '', body: '', nickname: '', email: ''}}
         validate={values => {
           const errors = {};
           if (!values.rating) {
@@ -26,45 +27,51 @@ const AddReview = ({hide}) => {
           }
           if (!values.nickname) {
             errors.body = 'Required';
+          } else if (!validateEmail(values.email)) {
+            errors.email = 'Invalid email address';
           }
           if (!values.email) {
             errors.email = 'Required';
           }
           return errors;
         }}
-        onSubmit={(values, {setSubmitting}) => {}}
+        onSubmit={(values, {resetForm, setSubmitting}) => {
+          api.createReview(values)
+            .then(() => {
+              setSubmitting(false);
+              resetForm();
+              hide();
+            })
+            .catch(console.error);
+        }}
       >
         {({values, isSubmitting}) => (
           <Form>
             <label>Your Rating:</label>
-            <div>
-              <label>
-                <Field type="radio" name="rating" value="One" />
-              </label>
-              <label>
-                <Field type="radio" name="rating" value="Two" />
-              </label>
-              <label>
-                <Field type="radio" name="rating" value="Three" />
-              </label>
-              <label>
-                <Field type="radio" name="rating" value="Four" />
-              </label>
-              <label>
-                <Field type="radio" name="rating" value="Five" />
-              </label>
+            <div className="star-rating-buttons">
+              <div className="rating-indicator"> {values.rating}</div>
+              <Field type="radio" name="rating" id="star-5"value="Great" />
+              <label htmlFor="star-5"></label>
+              <Field type="radio" name="rating" id="star-4" value="Good" />
+              <label htmlFor="star-4"></label>
+              <Field type="radio" name="rating" id="star-3" value="Average" />
+              <label htmlFor="star-3"></label>
+              <Field type="radio" name="rating" id="star-2" value="Fair" />
+              <label htmlFor="star-2"></label>
+              <Field type="radio" name="rating" id="star-1"value="Poor" />
+              <label htmlFor="star-1"></label>
             </div>
 
             <label>Do you recommend this product?</label>
-            <div>
-              <label>Yes:</label>
-              <Field type="radio" name="recommend" value="Yes"/>
+            <div className="recommend-buttons">
+              <label htmlFor="recommend-yes">Yes:</label>
+              <Field type="radio" name="recommend" id="recommend-yes" value="Yes"/>
 
-              <label>No:</label>
-              <Field type="radio" name="recommend" value="No"/>
+              <label htmlFor="recommend-no">No:</label>
+              <Field type="radio" name="recommend" id="recommend-no" value="No"/>
             </div>
             <label>Tell us more about this product</label>
-            <div className="">
+            <div className="characterisitcs-buttons">
               <label>Size: </label>
               <Field type="radio" name="size" value="A size too small"/>
               <label>A size too small</label>

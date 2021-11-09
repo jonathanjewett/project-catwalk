@@ -41,7 +41,7 @@ const recommendPercentage = (recommended) => {
 };
 
 
-const RatingsAndReviews = ({ reviews, metadata }) => {
+const RatingsAndReviews = ({ product, reviews, metadata }) => {
 
   let [sortType, setSortType] = useState('Relevance');
 
@@ -72,6 +72,7 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
         <ListView
           more="More Reviews"
           add="Add A Review"
+          onAdd={() => setAddView(addView = true)}
           start={2}
           placeholder="SEARCH REVIEWS"
         >
@@ -79,6 +80,7 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
             <ReviewTile review={review} key={review.review_id}/>
           )}
         </ListView>
+        {addView && <AddReview hide={() => setAddView(addView = false)} product={product}/>}
       </div>
     </div>
   );
