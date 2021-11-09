@@ -8,11 +8,12 @@ import './modal.scss';
  * @param {boolean} full
  */
 const Modal = ({ children, hide, full }) => (
-  <div className="modalBack" onClick={hide}>
-    <div
-      className={'modal' + (full ? ' full' : '') }
-      onClick={event => event.stopPropagation()}
-    >
+  <div className="modal-back" onClick={event => {
+    if (event.target.className === 'modal-back') {
+      hide(event);
+    }
+  }}>
+    <div className={'modal' + (full ? ' full' : '') }>
       {children}
     </div>
   </div>

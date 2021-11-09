@@ -13,6 +13,9 @@ const recursiveFind = (needle, hay) =>
   typeof hay === 'object' && hay !== null &&
     Object.values(hay).some(value => recursiveFind(needle, value));
 
+/** Generates an ID from text. */
+const genID = (text) => text.replace(/\s+/g, '-').toLowerCase();
+
 /**
  * Displays elements in a list that expands when the user clicks on a button.
  * @param {Object} props
@@ -39,7 +42,11 @@ const ListView = (props) => {
   }, [count]);
   const incr = 'increment' in props ? props.increment : 2;
   const moreButton = count >= props.children.length ? null : (
-    <button className="interact more" onClick={() => setCount(i => i + incr)}>
+    <button
+      id={genID(props.more)}
+      className="interact more"
+      onClick={() => setCount(i => i + incr)}
+    >
       {props.more}
     </button>
   );
@@ -53,7 +60,11 @@ const ListView = (props) => {
         {children}
       </div>
       {moreButton}
-      <button className="interact add" onClick={props.onAdd}>
+      <button
+        id={genID(props.add)}
+        className="interact add"
+        onClick={props.onAdd}
+      >
         {props.add}
         <span>+</span>
       </button>

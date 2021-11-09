@@ -4,7 +4,7 @@ import ListView from './';
 
 it('Only renders more items button if there are more items to render', () => {
   render(
-    <ListView start={2} more="More">
+    <ListView start={2} more="More" add="Add">
       <br/><br/><br/><br/><br/><br/><br/><br/>
     </ListView>
   );
@@ -22,7 +22,7 @@ it('Only renders more items button if there are more items to render', () => {
 });
 
 it('filters by keyword', () => {
-  render(<ListView start={3}>
+  render(<ListView start={3} add="add" more="more">
     <p body="11abc">1</p>
     <p body="11cde">2</p>
     <p body={{recur1: {recur2: 'e11abc'}}}>3</p>

@@ -17,7 +17,7 @@ const Report = ({ score, type, id }) => {
     api.report(type, id).catch(console.error);
   };
 
-  return <a onClick={onClick}>Report</a>;
+  return <a className="report" onClick={onClick}>Report</a>;
 };
 
 export default Report;
