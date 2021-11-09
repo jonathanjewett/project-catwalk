@@ -1,14 +1,17 @@
 /// <reference path="../typings/index.d.ts"/>
-import axios from 'axios';
 
 /** An Axios instance that points to the Atelier API. */
-const api = import.meta.env.PROD && !import.meta.env.SSR
-  ? axios.create({ baseURL: `${location.protocol}//${location.hostname}:3000/api/` })
-  : axios.create({
-    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/' +
-      import.meta.env.VITE_CAMPUS,
-    headers: {'Authorization': import.meta.env.VITE_API_TOKEN}
-  });
+/** @type {import('axios').AxiosInstance} */
+let api;
+
+/**
+ * Sets up the API's Axios instance.
+ * This should be run once at the start of the program.
+ * @param {import('axios').AxiosInstance} instance
+ */
+const initialize = (instance) => {
+  api = instance;
+};
 
 // POST
 
@@ -295,6 +298,7 @@ const getRelated = async (productId, count) => {
 };
 
 export default {
+  initialize,
   // POST
   addToCart,
   createQuestion,

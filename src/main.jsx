@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './index.scss';
 import './common/details/details.scss';
 import App from './App';
 import api from './api';
 
 if (import.meta.env.PROD) {
+  if (!import.meta.env.SSR) {
+    api.initialize(axios.create({
+      baseURL: `${location.protocol}//${location.hostname}:${location.port}/api/`
+    }));
+  }
   ReactDOM.hydrate(
     <React.StrictMode>
       <App
@@ -18,6 +24,11 @@ if (import.meta.env.PROD) {
     document.getElementById('root')
   );
 } else {
+  api.initialize(axios.create({
+    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/' +
+      import.meta.env.VITE_CAMPUS,
+    headers: {'Authorization': import.meta.env.VITE_API_TOKEN}
+  }));
   // Get product ID from URL
   let idString = window.location.pathname;
   if (idString.startsWith('/')) {
@@ -31,15 +42,21 @@ if (import.meta.env.PROD) {
     productId = Number(idString);
   }
 
-  // Asynchronously retrieve product info and then re-render
-  api.getProduct(productId).then(info => {
+
+  Promise.all([
+    api.getProduct(productId),
+    api.getQuestions(productId),
+    api.getRelated(productId),
+    api.getReviews(productId, 'relevant'),
+  ]).then(([info, questions, related, reviews]) => {
+    questions.sort((x, y) => y.question_helpfulness - x.question_helpfulness);
     ReactDOM.render(
       <React.StrictMode>
         <App
           info={info}
-          related={[]}
-          reviews={[]}
-          questions={[]}
+          related={related}
+          reviews={reviews}
+          questions={questions}
         />
       </React.StrictMode>,
       document.getElementById('root')
