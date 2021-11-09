@@ -6,7 +6,8 @@ const OutfitCard = (props) => {
   var defaultPrice = '??';
   var salePrice = null;
 
-  const removeFromOutfit = () => {
+  const removeFromOutfit = (e) => {
+    e.preventDefault();
     props.remove(props.product);
   };
 
@@ -19,22 +20,24 @@ const OutfitCard = (props) => {
   }
 
   return (
-    <div className="card-item">
-      <div className="product-image">
-        <img className="card-images" src={props.styles[0].photos[0].url} width="250" height="275"></img>
-        <div className="card-action-button" onClick={removeFromOutfit}>X</div>
+    <a href={'/' + props.product.id}>
+      <div className="card-item">
+        <div className="product-image">
+          <img className="card-images" src={props.styles[0].photos[0].url} width="250" height="275"></img>
+          <div className="card-action-button" onClick={removeFromOutfit}>X</div>
+        </div>
+        <div className="category">
+          {props.product.category.toUpperCase()}
+        </div>
+        <div className="product-name">
+          {props.product.name}
+        </div>
+        <Price base={props.product.default_price} sale={salePrice} />
+        <div className="star-rating">
+          <StarRating rating={props.rating} />
+        </div>
       </div>
-      <div className="category">
-        {props.product.category.toUpperCase()}
-      </div>
-      <div className="product-name">
-        {props.product.name}
-      </div>
-      <Price base={props.product.default_price} sale={salePrice}/>
-      <div className="star-rating">
-        <StarRating rating={props.rating} />
-      </div>
-    </div>
+    </a>
   );
 
 };
