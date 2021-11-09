@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 /** An Axios instance that points to the Atelier API. */
-const api = import.meta.env.PROD
-  ? axios.create({ baseURL: '/api/' })
+const api = import.meta.env.PROD && !import.meta.env.SSR
+  ? axios.create({ baseURL: `${location.protocol}//${location.hostname}:3000/api/` })
   : axios.create({
     baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/' +
       import.meta.env.VITE_CAMPUS,
@@ -285,11 +285,13 @@ const getProduct = async (productId) => {
  * - [`GET /reviews`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/reviews.md#list-reviews) (per item)
  * - [`GET /products/:product_id/styles`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/products.md#product-styles) (per item)
  * @param {number} productId
+ * @param {number?} count
  * @returns {Promise<ProductInfo[]>}
  */
-const getRelated = async (productId) => {
+const getRelated = async (productId, count) => {
   const res = await api.get(`/products/${productId}/related`);
-  return Promise.all(res.data.map(getProduct));
+  const productIds = count ? res.data.slice(0, count) : res.data;
+  return Promise.all(productIds.map(getProduct));
 };
 
 export default {

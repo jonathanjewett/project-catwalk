@@ -26,13 +26,39 @@ const Tracker = ({ render: Render, ...props }) => (
  * @param {ProductInfo[]} props.related
  * @param {Review[]} props.reviews
  */
-const App = ({ info, questions, related, reviews }) => (
-  <div>
-    <Tracker render={Overview} info={info} reviewCount={reviews.length}/>
-    <Tracker render={RelatedItemsAndComparisons} products={related} info={info}/>
-    <Tracker render={QuestionsAndAnswers} questions={questions} product={info.product}/>
-    <Tracker render={RatingsAndReviews} reviews={reviews} metadata={info.metadata}/>
-  </div>
-);
+const App = (props) => {
+  const { info } = props;
+  const productId = info.product.id;
+  const [questions, setQuestions] = React.useState(props.questions);
+  const [related, setRelated] = React.useState(props.related);
+  const [reviews, setReviews] = React.useState(props.reviews);
+
+  if (!import.meta.env.SSR) {
+    React.useEffect(async () => {
+      const questions = await api.getQuestions(productId);
+      questions.sort((x, y) => y.question_helpfulness - x.question_helpfulness);
+      setQuestions(questions);
+    }, []);
+
+    React.useEffect(async () => {
+      const related = await api.getRelated(productId);
+      setRelated(related);
+    }, []);
+
+    React.useEffect(async () => {
+      const reviews = await api.getReviews(productId, 'relevant');
+      setReviews(reviews);
+    }, []);
+  }
+
+  return (
+    <div>
+      <Tracker render={Overview} info={info} reviewCount={reviews.length}/>
+      <Tracker render={RelatedItemsAndComparisons} products={related} info={info}/>
+      <Tracker render={QuestionsAndAnswers} questions={questions} product={info.product}/>
+      <Tracker render={RatingsAndReviews} reviews={reviews} metadata={info.metadata}/>
+    </div>
+  );
+};
 
 export default App;
