@@ -7,6 +7,6 @@ it('hides only when the outside is clicked', () => {
   let x = render(<Modal hide={() => hidden = true}/>);
   fireEvent.click(document.querySelector('.modal'));
   expect(hidden).toBe(false);
-  fireEvent.click(document.querySelector('.modalBack'));
+  fireEvent.click(document.querySelector('.modal-back'));
   expect(hidden).toBe(true);
 });
