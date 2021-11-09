@@ -214,8 +214,13 @@ const getPage = async(endpoint, productId, sort, count, page) => {
  * @param {number=} page - page of results to return (default: 1)
  * @returns {Promise<Review[]}>}
  */
-const getReviews = async (productId, sort, count, page) =>
-  getPage('/reviews', productId, sort, count, page);
+const getReviews = async (productId, sort, count, page) => {
+  const reviews = await getPage('/reviews', productId, sort, count, page);
+  for (const review of reviews) {
+    review.date = new Date(review.date);
+  }
+  return reviews;
+};
 
 /**
  * Retrieves a list of questions for a particular product. This list does not include any reported questions.
@@ -227,8 +232,16 @@ const getReviews = async (productId, sort, count, page) =>
  * @param {number=} page - page of results to return (default: 1)
  * @returns {Promise<Question[]}>}
  */
-const getQuestions = async (productId, count, page) =>
-  getPage('/qa/questions', productId, undefined, count, page);
+const getQuestions = async (productId, count, page) => {
+  const questions = await getPage('/qa/questions', productId, undefined, count, page);
+  for (const question of questions) {
+    question.question_date = new Date(question.question_date);
+    for (const answer of Object.values(question.answers)) {
+      answer.date = new Date(answer.date);
+    }
+  }
+  return questions;
+};
 
 
 /**

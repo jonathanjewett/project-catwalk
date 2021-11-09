@@ -43,9 +43,6 @@ const QuestionModal = ({ hide, product }) => (
         <Form>
           <label htmlFor="body">
             Your Question*
-            {Object.values(errors).length === 0 ? null : (
-              <span>You must enter the following:</span>
-            )}
           </label>
           <Field
             className="interact"

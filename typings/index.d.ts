@@ -33,10 +33,10 @@ interface Style {
 interface Answer {
     id: number,
     body: string,
-    date: string,
+    date: Date,
     answerer_name: string,
     helpfulness: number,
-    photos: {id: number, url: string}[]
+    photos: string[]
 }
 
 // `GET /qa/questions` returns an object whose `.results` property is an array of `Question`s.
@@ -44,7 +44,7 @@ interface Answer {
 interface Question {
     question_id: number,
     question_body: string,
-    question_date: string,
+    question_date: Date,
     asker_name: string,
     question_helpfulness: number,
     reported: boolean,
@@ -61,7 +61,7 @@ interface Review {
     recommend: boolean,
     response: string | null,
     body: string,
-    date: string,
+    date: Date,
     reviewer_name: string,
     helpfulness: number,
     photos: {id: number, url: string}[]

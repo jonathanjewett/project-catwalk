@@ -1,79 +1,55 @@
 import React, {useState, useEffect} from 'react';
 import './ratings-and-reviews.scss';
-import StarRating from '../common/star-rating/index.jsx';
-import ReviewList from './components/ReviewList.jsx';
+import {ListView, StarRating} from '../common';
 import ReviewTile from './components/ReviewTile.jsx';
 import Sort from './components/Sort.jsx';
 import ReviewBreakdown from './components/ReviewBreakdown.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
 
-import {reviews, metadata} from './sampleData.js';
-
-/** @param {Object} reviews */
-const reviewsTotal = (reviews) => {
-  let total = 0;
-  for (let i in reviews) {
-    total += reviews[i];
-  }
-  return total;
-};
-
 /** @param {string} newSortType*/
 
-const sortReviews = (newSortType) => {
+const sortReviews = (newSortType, reviews) => {
   if (newSortType === 'Relevance') {
+    return reviews;
+  }
 
-    return filteredReviews;
-
-  } else if (newSortType === 'Newest') {
-    return filteredReviews.sort(function (review1, review2) {
-      if (review1.date > review2.date) {
-        return -1;
-      } else if (review1.date < review2.date) {
-        return 1;
-      }
+  if (newSortType === 'Newest') {
+    return reviews.slice().sort(function (review1, review2) { // new copy
+      return review2.date - review1.date;
     });
+  }
 
-  } else if (newSortType === 'Most Helpful') {
-    return filteredReviews.sort(function (review1, review2) {
-      if (review1.helpfulness > review2.helpfulness) {
-        return -1;
-      } else if (review1.helpfulness < review2.helpfulness) {
-        return 1;
-      }
+  if (newSortType === 'Most Helpful') {
+    return reviews.slice().sort(function (review1, review2) { // new copy
+      return review2.helpfulness - review1.helpfulness;
     });
   }
 };
 
-let filteredReviews = reviews;
-
-const filterReviews = (starFilters) => {
-  let reviewList = reviews;
-  let filteredList = [];
-  if (!starFilters.length) {
-    filteredReviews = reviews;
-    return;
-  }
-
-  for (let i = 0; i < starFilters.length; i++) {
-    filteredList = filteredList.concat(reviewList.filter(review => review.rating === starFilters[i]));
-  }
-  filteredReviews = filteredList;
+const filterReviews = (starFilters, reviews) => {
+  return starFilters.some(filter => filter) // are we filtering by anything
+    ? reviews.filter(review => starFilters[review.rating]) // filtered
+    : reviews; // no need to filter
 };
 
 const recommendPercentage = (recommended) => {
 
   let total = recommended.true + recommended.false;
 
-  return ((recommended.true / total) * 100).toFixed(0);
+  return 100 * recommended.true / total | 0;
 };
 
 
-const RatingsAndReviews = () => {
+const RatingsAndReviews = ({ reviews, metadata }) => {
 
   let [sortType, setSortType] = useState('Relevance');
 
-  let [starFilters, setStarFilters] = useState([]);
+  // An array of five booleans, one for each star rating,
+  // plus an extra at the start for zero stars.
+  let [starFilters, setStarFilters] = useState(Array(1).concat(Array(5).fill(false)));
+
+  reviews = sortReviews(sortType, reviews);
+  reviews = filterReviews(starFilters, reviews);
 
 
   return (
@@ -85,16 +61,24 @@ const RatingsAndReviews = () => {
           <StarRating rating={metadata.rating}/>
         </div>
         <span className="reviews-recommend">{recommendPercentage(metadata.recommended)}% of reviews recommend this product</span>
-        <ReviewBreakdown breakdown={metadata.ratings} filterReviews={filterReviews} starFilters={starFilters} setStarFilters={setStarFilters}/>
+        <ReviewBreakdown breakdown={metadata.ratings} reviews={reviews} starFilters={starFilters} setStarFilters={setStarFilters}/>
         <ProductBreakdown />
       </div>
       <div className="column-2">
-        <Sort breakdown={metadata.ratings} sortReviews={sortReviews} sortType={sortType} setSortType={setSortType}/>
-        <ReviewList reviews={sortReviews(sortType)} filteredReviews={filterReviews(starFilters)}/>
+        <Sort reviews={reviews} sortType={sortType} setSortType={setSortType}/>
+        <ListView
+          more="More Reviews"
+          add="Add A Review"
+          start={2}
+          placeholder="SEARCH REVIEWS"
+        >
+          {reviews.map(review =>
+            <ReviewTile review={review} key={review.review_id}/>
+          )}
+        </ListView>
       </div>
     </div>
   );
 };
 
-export {reviews, reviewsTotal};
 export default RatingsAndReviews;
