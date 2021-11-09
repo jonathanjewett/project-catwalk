@@ -3,19 +3,16 @@ import CardItem from './CardItem.jsx';
 
 const RelatedItemsList = (props) => {
   const products = props.products;
-  const [currList, setCurrList] = useState(products);
   const [currIndex, setCurrIndex] = useState(0);
 
   // "useEffect is componentDidMount, componentDidUpdate, and componentWillUnmount combined"
 
   const next = () => {
     setCurrIndex(currIndex + 1); // this is changing what currIndex will be the next time the component renders
-    setCurrList(products.slice(currIndex + 1));
   };
 
   const prev = () => {
     setCurrIndex(currIndex - 1);
-    setCurrList(products.slice(currIndex - 1));
   };
 
   const rightButton = currIndex === products.length - 1 ? null :
@@ -33,7 +30,7 @@ const RelatedItemsList = (props) => {
           {leftButton}
         </div>
         <div className="card-list">
-          {currList.map(({ product, metadata, styles }) =>
+          {products.slice(currIndex).map(({ product, metadata, styles }) =>
             <CardItem key={product.id} product={product} rating={metadata.rating} styles={styles} currentProduct={props.currentProduct}/>
           )}
         </div>
