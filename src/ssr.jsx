@@ -1,18 +1,11 @@
 import ReactDOMServer from 'react-dom/server';
+import LRU from 'lru-cache';
 import App from './App';
-import api from './api';
+import apiModule from './api';
 
-const cache = new Map();
+export const api = apiModule;
 
-export const render = async (url, productId = 40344) => {
-  const [info, questions, reviews, related] = await Promise.all([
-    api.getProduct(productId),
-    api.getQuestions(productId, 5),
-    api.getReviews(productId, 'relevant'),
-    api.getRelated(productId, 4),
-  ]);
-  const component = ReactDOMServer.renderToString(
+export const render = ({ info, questions, reviews, related }) =>
+  ReactDOMServer.renderToString(
     <App info={info} related={related} reviews={reviews} questions={questions}/>
   );
-  return { info, questions, reviews, related, component };
-};

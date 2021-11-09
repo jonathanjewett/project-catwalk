@@ -3,24 +3,35 @@ const compression = require('compression');
 const dotenv = require('dotenv');
 const express = require('express');
 const fs = require('fs');
+const LRU = require('lru-cache');
 const path = require('path');
-const { render } = require('./dist/server/ssr.js');
+const { api, render } = require('./dist/server/ssr.js');
 
 dotenv.config();
+
+api.initialize(axios.create({
+  baseURL: process.env.API,
+  headers: {'Authorization': process.env.API_TOKEN}
+}));
 
 let template = fs.readFileSync(
   path.resolve('dist', 'client', 'index.html'),
   'utf-8'
 );
 
+const cache = new LRU({
+  max: Number(process.env.PRODUCT_CACHE_SIZE),
+  maxAge: 1000 * Number(process.env.PRODUCT_CACHE_SECONDS),
+});
+
 const app = express();
 app.use(compression());
 app.use(express.json());
 
-const api = axios.create({
+api.initialize(axios.create({
   baseURL: process.env.API,
-  headers: {'Authorization': process.env.VITE_API_TOKEN}
-});
+  headers: {'Authorization': process.env.API_TOKEN}
+}));
 
 const apiRoutes = {
   post: [
@@ -75,18 +86,33 @@ for (const method in apiRoutes) {
 app.use(express.static(path.resolve('dist', 'client'), { index: false }));
 
 app.use('/:product_id?', async (req, res) => {
-  const url = req.originalUrl;
+  let productId = req.params.product_id;
+  if (productId === undefined) {
+    productId = 40344;
+  }
 
   try {
-    const ssr = await render(url, req.params.product_id);
+    let cached = cache.get(productId);
+    if (cached === undefined) {
+      const [info, questions, reviews, related] = await Promise.all([
+        api.getProduct(productId),
+        api.getQuestions(productId),
+        api.getReviews(productId, 'relevant'),
+        api.getRelated(productId),
+      ]);
+      questions.sort((x, y) => y.question_helpfulness - x.question_helpfulness);
+      cached = { info, questions, reviews, related };
+      cache.set(productId, cached);
+    }
+    const component = await render(cached);
 
     const html = template
-      .replace('<!--ssr-outlet-->', ssr.component)
+      .replace('<!--ssr-outlet-->', component)
       .replace('/*ssr-outlet*/', `
-        const info = ${JSON.stringify(ssr.info)};
-        const questions = ${JSON.stringify(ssr.questions)};
-        const reviews = ${JSON.stringify(ssr.reviews)};
-        const related = ${JSON.stringify(ssr.related)};
+        const info = ${JSON.stringify(cached.info)};
+        const questions = ${JSON.stringify(cached.questions)};
+        const reviews = ${JSON.stringify(cached.reviews)};
+        const related = ${JSON.stringify(cached.related)};
       `);
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
@@ -100,6 +126,6 @@ app.use('/:product_id?', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('listening on http://localhost:3000');
+app.listen(Number(process.env.PORT), () => {
+  console.log(`listening on http://localhost:${process.env.PORT}`);
 });
