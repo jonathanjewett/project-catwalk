@@ -5,6 +5,7 @@ import ReviewTile from './components/ReviewTile.jsx';
 import Sort from './components/Sort.jsx';
 import ReviewBreakdown from './components/ReviewBreakdown.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
+import AddReview from './components/AddReview.jsx';
 
 /** @param {string} newSortType*/
 
@@ -50,6 +51,8 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
 
   reviews = sortReviews(sortType, reviews);
   reviews = filterReviews(starFilters, reviews);
+
+  let [addView, setAddView] = useState(false);
 
 
   return (
