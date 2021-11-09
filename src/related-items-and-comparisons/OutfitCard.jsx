@@ -20,8 +20,8 @@ const OutfitCard = (props) => {
   }
 
   return (
-    <a href={'/' + props.product.id}>
-      <div className="card-item">
+    <div className="card-item">
+      <a href={'/' + props.product.id}>
         <div className="product-image">
           <img className="card-images" src={props.styles[0].photos[0].url} width="250" height="275"></img>
           <div className="card-action-button" onClick={removeFromOutfit}>X</div>
@@ -36,8 +36,8 @@ const OutfitCard = (props) => {
         <div className="star-rating">
           <StarRating rating={props.rating} />
         </div>
-      </div>
-    </a>
+      </a>
+    </div>
   );
 
 };
