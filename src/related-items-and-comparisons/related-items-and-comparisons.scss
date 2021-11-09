@@ -40,6 +40,10 @@
     position: relative;
   }
 
+  .card-images {
+    object-fit: cover;
+  }
+
   .card-action-button {
     cursor: pointer;
     position: absolute;

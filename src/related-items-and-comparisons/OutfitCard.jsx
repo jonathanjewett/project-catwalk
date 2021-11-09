@@ -21,7 +21,7 @@ const OutfitCard = (props) => {
   return (
     <div className="card-item">
       <div className="product-image">
-        <img src={props.styles[0].photos[0].url} width="250" height="250"></img>
+        <img className="card-images" src={props.styles[0].photos[0].url} width="250" height="275"></img>
         <div className="card-action-button" onClick={removeFromOutfit}>X</div>
       </div>
       <div className="category">
@@ -30,7 +30,7 @@ const OutfitCard = (props) => {
       <div className="product-name">
         {props.product.name}
       </div>
-      <Price base={defaultPrice} sale={salePrice}/>
+      <Price base={props.product.default_price} sale={salePrice}/>
       <div className="star-rating">
         <StarRating rating={props.rating} />
       </div>
