@@ -79,7 +79,7 @@ const AddToCart = ({ style }) => {
   }
 
   const addToCart = sizeOptions.length === 0 ? null : (
-    <button type="button" className="interact" onClick={() => {
+    <button type="button" id="add-to-cart" className="interact" onClick={() => {
       if (quantity === 0) {
         // Invalidate and expand the select-a-size menu.
         setExpandSizes(true);
@@ -97,7 +97,7 @@ const AddToCart = ({ style }) => {
   );
 
   return (
-    <div id="add-to-cart">
+    <div className="add-to-cart">
       <div>
         {sizeSelect}
         {quantitySelect}

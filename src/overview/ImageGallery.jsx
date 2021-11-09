@@ -9,7 +9,7 @@ import React from 'react';
 const Thumbnail = ({ src, selected, onClick }) => (
   <img
     src={src}
-    className={selected ? 'selected' : null}
+    className={'thumbnail' + (selected ? ' selected' : '')}
     onClick={onClick}
   />
 );
@@ -36,16 +36,20 @@ const Thumbnails = ({ photos, page, setPage, thumbOffset, setThumbOffset }) => {
       />
     );
 
-  const upButton = thumbOffset === 0
-    ? <div/>
-    : <button onClick={() => setThumbOffset(i => i - 1)}>⮝</button>;
+  const upButton = thumbOffset === 0 ? <div/> :
+    <button id="thumbnails-up" onClick={() => setThumbOffset(i => i - 1)}>
+      ⮝
+    </button>
+  ;
 
-  const downButton = thumbOffset + numThumbnails + 1 > photos.length
-    ? <div/>
-    : <button onClick={() => setThumbOffset(i => i + 1)}>⮟</button>;
+  const downButton = thumbOffset + numThumbnails + 1 > photos.length ? <div/> :
+    <button id="thumbnails-down" onClick={() => setThumbOffset(i => i + 1)}>
+      ⮟
+    </button>
+  ;
 
   return (
-    <div className="thumbnails" onClick={event => event.stopPropagation()}>
+    <div className="thumbnails">
       {upButton}
       {thumbnails}
       {downButton}
@@ -88,7 +92,6 @@ const ImageGallery = ({ zoom, setZoom, style }) => {
 
   // Ensure the selected thumbnail is visible in the thumbnail list
   const scrollPage = (adjustBy) => (event) => {
-    event.stopPropagation();
     const nextPage = page + adjustBy;
     if (nextPage < thumbOffset) {
       setThumbOffset(nextPage);
@@ -99,18 +102,22 @@ const ImageGallery = ({ zoom, setZoom, style }) => {
   };
 
   const leftButton = page === 0 ? null :
-    <button type="button" className="prevStyle" onClick={scrollPage(-1)}>
+    <button type="button" id="prev-style" onClick={scrollPage(-1)}>
       ←
     </button>;
 
   const rightButton = page === style.photos.length - 1 ? null :
-    <button type="button" className="nextStyle" onClick={scrollPage(1)}>
+    <button type="button" id="next-style" onClick={scrollPage(1)}>
       →
     </button>;
 
   return (
     <figure
+      id="gallery"
       onClick={event => setZoom(zoom => {
+        if (event.target.tagName !== 'FIGURE' && event.target.tagName !== 'DIV') {
+          return zoom;
+        }
         if (zoom === 1) {
           scanZoomedImage(event);
         } else {
