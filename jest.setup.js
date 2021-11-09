@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import 'regenerator-runtime';
 import axios from 'axios';
 
 jest.mock('axios', () => ({

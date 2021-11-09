@@ -42,7 +42,6 @@
     "jest-transform-stub": "^2.0.0",
     "jest-transformer-svg": "^1.0.1",
     "msw": "^0.35.0",
-    "regenerator-runtime": "^0.13.9",
     "sass": "^1.43.4",
     "vite": "^2.6.4"
   }
