@@ -8,7 +8,7 @@
     border: 1px solid black;
     margin: 15px;
   }
-  .related-items-list {
+  .card-list {
     display: flex;
     overflow: hidden;
     width: 100%;
@@ -92,6 +92,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     cursor: pointer;
     width: 250px;
     height: 380px;

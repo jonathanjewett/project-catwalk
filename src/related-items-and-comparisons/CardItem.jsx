@@ -16,7 +16,7 @@ const CardItem = (props) => {
   };
 
   const showModal = modal === false ? null :
-    <ComparisonModal close={closeModal} product1={props.product} />; // Need to pass in product2 info as a prop later
+    <ComparisonModal close={closeModal} product1={props.product} product2={props.currentProduct.product}/>; // Need to pass in product2 info as a prop later
 
   for (var i = 0; i < props.styles.length; i++) {
     if (props.styles[i]['default?'] === true) {
