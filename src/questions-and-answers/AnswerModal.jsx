@@ -100,7 +100,12 @@ const AnswerModal = ({ hide, product, question }) => (
               ))}
             </div>
           )}/>
-          <button type="submit" className="interact" disabled={isSubmitting}>
+          <button
+            id="create-answer"
+            type="submit"
+            className="interact"
+            disabled={isSubmitting}
+          >
             Submit
           </button>
         </Form>

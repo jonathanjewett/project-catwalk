@@ -22,7 +22,12 @@ const AnswerTile = ({ answer }) => {
       {answer.photos.length === 0 ? null : (
         <p>
           {answer.photos.map(photo =>
-            <img src={photo} key={photo} onClick={setModal}/>
+            <img
+              className="answer-thumbnail"
+              src={photo}
+              key={photo}
+              onClick={setModal}
+            />
           )}
         </p>
       )}

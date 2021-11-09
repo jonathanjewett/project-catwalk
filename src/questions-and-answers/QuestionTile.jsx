@@ -51,7 +51,9 @@ const QuestionTile = ({ question, product }) => {
           score={question.question_helpfulness}
         />
         <span>
-          <a onClick={() => setShowModal(true)}>Add Answer</a>
+          <a className="add-answer" onClick={() => setShowModal(true)}>
+            Add Answer
+          </a>
         </span>
       </span>
       <h3>{question.question_body}</h3>
