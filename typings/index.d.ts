@@ -36,7 +36,7 @@ interface Answer {
     date: string,
     answerer_name: string,
     helpfulness: number,
-    photos: {id: number, url: string}[]
+    photos: string[]
 }
 
 // `GET /qa/questions` returns an object whose `.results` property is an array of `Question`s.

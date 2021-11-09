@@ -59,6 +59,7 @@ const QuestionTile = ({ question, product }) => {
         {answers.map(([id, answer]) => <AnswerTile key={id} answer={answer}/>)}
         {accordionButton}
       </div>
+      {modal}
     </div>
   );
 };

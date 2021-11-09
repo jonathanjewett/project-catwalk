@@ -11,6 +11,11 @@ const formatName = (name) => name === 'Seller' ? <em>{name}</em> : name;
 const AnswerTile = ({ answer }) => (
   <section>
     <p>{answer.body}</p>
+    {answer.photos.length === 0 ? null : (
+      <p>
+        {answer.photos.map(photo => <img src={photo} key={photo}/>)}
+      </p>
+    )}
     <footer className="details">
       <span>
         by {formatName(answer.answerer_name.trim())},
@@ -20,7 +25,6 @@ const AnswerTile = ({ answer }) => (
       <span>
         <Report type="answer" id={answer.id}/>
       </span>
-
     </footer>
   </section>
 );
