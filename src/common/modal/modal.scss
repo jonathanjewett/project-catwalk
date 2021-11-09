@@ -29,6 +29,15 @@
     font-weight: normal;
   }
 
+  > img:first-child:last-child {
+    min-height: 100%;
+    min-width: 100%;
+  }
+
+  input {
+    width: 100%;
+  }
+
   span {
     float: right;
     text-align: right;
@@ -58,5 +67,15 @@
   textarea, input {
     font-size: 1em;
     font-weight: unset;
+  }
+
+  &.full {
+    padding: 0;
+
+    img {
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: contain;
+    }
   }
 }
