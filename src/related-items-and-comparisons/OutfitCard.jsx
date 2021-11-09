@@ -30,7 +30,7 @@ const OutfitCard = (props) => {
       <div className="product-name">
         {props.product.name}
       </div>
-      <Price base={defaultPrice} sale={salePrice}/>
+      <Price base={props.product.default_price} sale={salePrice}/>
       <div className="star-rating">
         <StarRating rating={props.rating} />
       </div>
