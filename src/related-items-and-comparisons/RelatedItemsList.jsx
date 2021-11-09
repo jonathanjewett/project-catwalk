@@ -32,7 +32,7 @@ const RelatedItemsList = (props) => {
         <div className="scroll-button-container">
           {leftButton}
         </div>
-        <div className="related-items-list">
+        <div className="card-list">
           {currList.map(({ product, metadata, styles }) =>
             <CardItem key={product.id} product={product} rating={metadata.rating} styles={styles} currentProduct={props.currentProduct}/>
           )}

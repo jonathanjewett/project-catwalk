@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import OutfitCard from './OutfitCard.jsx';
 
 const OutfitList = (props) => {
@@ -34,7 +34,7 @@ const OutfitList = (props) => {
       }
     }
     if (index > -1) {
-      updateOutfit(prevState=> outfit.splice(index, 1));
+      updateOutfit(prevState => outfit.splice(index, 1));
     }
   };
 
@@ -52,13 +52,13 @@ const OutfitList = (props) => {
         <div className="scroll-button-container">
           {leftButton}
         </div>
-        <div className="add-card" onClick={addToOutfit}>
-          <div className="add-button">+</div>
-          <div className="add-text">Add to Outfit</div>
-        </div>
-        <div className="outfit-list">
+        <div className="card-list">
+          <div className="add-card" onClick={addToOutfit}>
+            <div className="add-button">+</div>
+            <div className="add-text">Add to Outfit</div>
+          </div>
           {outfit.map(({ product, metadata, styles }) =>
-            <OutfitCard key={product.id} product={product} rating= {metadata.rating} styles={styles}remove={removeFromOutfit}/>
+            <OutfitCard key={product.id} product={product} rating={metadata.rating} styles={styles} remove={removeFromOutfit} />
           )}
         </div>
         {rightButton}
