@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import CardItem from './CardItem.jsx';
 
 const RelatedItemsList = (props) => {
-  const products = props.products;
   const [currIndex, setCurrIndex] = useState(0);
 
   // "useEffect is componentDidMount, componentDidUpdate, and componentWillUnmount combined"
@@ -15,12 +14,11 @@ const RelatedItemsList = (props) => {
     setCurrIndex(currIndex - 1);
   };
 
-  const rightButton = currIndex === products.length - 1 ? null :
+  const rightButton = (currIndex === props.products.length - 1 || props.products.length === 0) ? null :
     <button type="button" className="right-arrow" onClick={next}> &gt; </button>;
 
-  const leftButton = currIndex === 0 ? null :
+  const leftButton = (currIndex === 0 || props.products.length === 0) ? null :
     <button type="button" className="left-arrow" onClick={prev}> &lt; </button>;
-
 
   return (
     <div>
@@ -30,7 +28,7 @@ const RelatedItemsList = (props) => {
           {leftButton}
         </div>
         <div className="card-list">
-          {products.slice(currIndex).map(({ product, metadata, styles }) =>
+          {props.products.slice(currIndex).map(({ product, metadata, styles }) =>
             <CardItem key={product.id} product={product} rating={metadata.rating} styles={styles} currentProduct={props.currentProduct}/>
           )}
         </div>
