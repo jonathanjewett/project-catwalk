@@ -56,6 +56,7 @@ const ComparisonModal = (props) => {
     <div className="comparison-modal">
       <button type="button" onClick={props.close}>X</button>
       <table className="comparison-table">
+        <caption className="table-title">Comparing</caption>
         <thead>
           <tr>
             <th>{props.product1.name}</th>

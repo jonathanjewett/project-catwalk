@@ -1,4 +1,7 @@
 #related-items-and-comparisons {
+  a {
+    text-decoration: none;
+  }
   .card-item {
     display: flex;
     flex-direction: column;
@@ -85,6 +88,11 @@
     top:50%;
     left:50%;
     z-index: 100;
+  }
+
+  .table-title {
+    font-weight: bold;
+    font-size: 20px;
   }
 
   td {
