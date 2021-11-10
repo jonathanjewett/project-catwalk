@@ -92,8 +92,8 @@ app.use('/:product_id?', async (req, res) => {
   }
 
   try {
-    let cached = cache.get(productId);
-    if (cached === undefined) {
+    let html = cache.get(productId);
+    if (html === undefined) {
       const [info, questions, reviews, related] = await Promise.all([
         api.getProduct(productId),
         api.getQuestions(productId),
@@ -101,19 +101,17 @@ app.use('/:product_id?', async (req, res) => {
         api.getRelated(productId),
       ]);
       questions.sort((x, y) => y.question_helpfulness - x.question_helpfulness);
-      cached = { info, questions, reviews, related };
-      cache.set(productId, cached);
+      const component = await render({ info, questions, reviews, related });
+      html = template
+        .replace('<!--ssr-outlet-->', component)
+        .replace('/*ssr-outlet*/', `
+          const info = ${JSON.stringify(info)};
+          const questions = ${JSON.stringify(questions)};
+          const reviews = ${JSON.stringify(reviews)};
+          const related = ${JSON.stringify(related)};
+        `);
+      cache.set(productId, html);
     }
-    const component = await render(cached);
-
-    const html = template
-      .replace('<!--ssr-outlet-->', component)
-      .replace('/*ssr-outlet*/', `
-        const info = ${JSON.stringify(cached.info)};
-        const questions = ${JSON.stringify(cached.questions)};
-        const reviews = ${JSON.stringify(cached.reviews)};
-        const related = ${JSON.stringify(cached.related)};
-      `);
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
   } catch (e) {
