@@ -5,13 +5,11 @@ import ComparisonModal from './ComparisonModal.jsx';
 import OutfitList from './OutfitList.jsx';
 import './related-items-and-comparisons.scss';
 
-import { products } from './sampleData.js';
-
 const RelatedItemsAndComparisons = (props) => (
   <div id="related-items-and-comparisons">
     <div>
-      <RelatedItemsList products={products} currentProduct={props.info}/>
-      <OutfitList products={products} currentProduct={props.info}/>
+      <RelatedItemsList products={props.products} currentProduct={props.info}/>
+      <OutfitList products={props.products} currentProduct={props.info}/>
     </div>
   </div>
 );
