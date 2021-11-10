@@ -11,23 +11,25 @@
     "Anthony Psyk <ajpsyk@gmail.com>"
   ],
   "scripts": {
-    "build": "vite build",
-    "serve": "vite build && nodemon --watch server.js server.js",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --outDir dist/server --ssr src/ssr.jsx",
+    "serve": "node server.js",
     "start": "vite",
     "test": "jest"
   },
   "dependencies": {
+    "@nexapp/vite-plugin-react-svg": "^0.0.1",
     "axios": "^0.24.0",
     "compression": "^1.7.4",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "formik": "^2.2.9",
+    "lru-cache": "^6.0.0",
     "moment": "^2.29.1",
     "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-share": "^4.4.0",
-    "vite-plugin-react-svg": "^0.2.0"
+    "react-share": "^4.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
