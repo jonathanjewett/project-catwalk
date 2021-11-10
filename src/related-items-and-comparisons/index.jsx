@@ -9,7 +9,7 @@ const RelatedItemsAndComparisons = (props) => (
   <div id="related-items-and-comparisons">
     <div>
       <RelatedItemsList products={props.products} currentProduct={props.info}/>
-      <OutfitList products={props.products} currentProduct={props.info}/>
+      <OutfitList currentProduct={props.info}/>
     </div>
   </div>
 );
