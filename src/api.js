@@ -293,7 +293,10 @@ const getProduct = async (productId) => {
  */
 const getRelated = async (productId, count) => {
   const res = await api.get(`/products/${productId}/related`);
-  const productIds = count ? res.data.slice(0, count) : res.data;
+  const productIds = Array.from(new Set(res.data));
+  if (count && productIds.length > count) {
+    productIds.length = count;
+  }
   return Promise.all(productIds.map(getProduct));
 };
 
