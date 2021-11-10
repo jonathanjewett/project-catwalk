@@ -7,12 +7,13 @@ import App from './App';
 import api from './api';
 
 if (import.meta.env.PROD) {
-  if (!import.meta.env.SSR) {
+  if (!import.meta.env.SSR) { // we are in client-side production code
+    // forward all API requests to the hosting server
     api.initialize(axios.create({
       baseURL: `${location.protocol}//${location.hostname}:${location.port}/api/`
     }));
   }
-  ReactDOM.hydrate(
+  ReactDOM.hydrate( // attach event handlers rather than creating from scratch
     <React.StrictMode>
       <App
         info={info}
@@ -23,13 +24,15 @@ if (import.meta.env.PROD) {
     </React.StrictMode>,
     document.getElementById('root')
   );
-} else {
+} else { // we are inclient-side development code
+  // send API requests directly to Atelier API
   api.initialize(axios.create({
     baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/' +
       import.meta.env.VITE_CAMPUS,
     headers: {'Authorization': import.meta.env.VITE_API_TOKEN}
   }));
-  // Get product ID from URL
+
+  // Figure out which product to display by getting a product ID from the URL
   let idString = window.location.pathname;
   if (idString.startsWith('/')) {
     idString = idString.substring(1);
@@ -37,11 +40,10 @@ if (import.meta.env.PROD) {
   let productId;
   // For testing purposes only, default to product #40344
   if (idString === '') {
-    productId = 40344;
+    productId = 40344; // default to product #40344, "Camo Onesie"
   } else {
     productId = Number(idString);
   }
-
 
   Promise.all([
     api.getProduct(productId),

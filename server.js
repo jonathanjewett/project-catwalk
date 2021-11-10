@@ -9,16 +9,21 @@ const { api, render } = require('./dist/server/ssr.js');
 
 dotenv.config();
 
-api.initialize(axios.create({
+// Configuration for requests to the API server
+const client = axios.create({
   baseURL: process.env.API,
   headers: {'Authorization': process.env.API_TOKEN}
-}));
+});
 
+api.initialize(client);
+
+// HTML template into which SSR will be injected
 let template = fs.readFileSync(
   path.resolve('dist', 'client', 'index.html'),
   'utf-8'
 );
 
+// A cache of SSR components rendered to strings, using Product IDs as keys
 const cache = new LRU({
   max: Number(process.env.PRODUCT_CACHE_SIZE),
   maxAge: 1000 * Number(process.env.PRODUCT_CACHE_SECONDS),
@@ -28,11 +33,7 @@ const app = express();
 app.use(compression());
 app.use(express.json());
 
-api.initialize(axios.create({
-  baseURL: process.env.API,
-  headers: {'Authorization': process.env.API_TOKEN}
-}));
-
+// All of these routes will be redirected from the client to the API server
 const apiRoutes = {
   post: [
     'cart',
@@ -64,7 +65,8 @@ for (const method in apiRoutes) {
   for (const route of apiRoutes[method]) {
     passthrough('/api/' + route, async (req, res) => {
       try {
-        const serverResponse = await api({
+        // forward request to API server
+        const serverResponse = await client({
           method,
           url: req.url.slice(4),
           data: req.body
@@ -88,12 +90,12 @@ app.use(express.static(path.resolve('dist', 'client'), { index: false }));
 app.use('/:product_id?', async (req, res) => {
   let productId = req.params.product_id;
   if (productId === undefined) {
-    productId = 40344;
+    productId = 40344; // default to product #40344, "Camo Onesie"
   }
 
   try {
     let html = cache.get(productId);
-    if (html === undefined) {
+    if (html === undefined) { // not in cache, need to generate
       const [info, questions, reviews, related] = await Promise.all([
         api.getProduct(productId),
         api.getQuestions(productId),
@@ -120,7 +122,7 @@ app.use('/:product_id?', async (req, res) => {
       return;
     }
     console.error(e.stack);
-    res.status(500).end(e.message);
+    res.status(500).send(e.message);
   }
 });
 

@@ -1,12 +1,12 @@
 /// <reference path="../typings/index.d.ts"/>
 
-/** An Axios instance that points to the Atelier API. */
+/** An Axios instance that points to the Atelier API. Initially null. */
 /** @type {import('axios').AxiosInstance} */
 let api;
 
 /**
  * Sets up the API's Axios instance.
- * This should be run once at the start of the program.
+ * This should be called once at the start of the program.
  * @param {import('axios').AxiosInstance} instance
  */
 const initialize = (instance) => {
