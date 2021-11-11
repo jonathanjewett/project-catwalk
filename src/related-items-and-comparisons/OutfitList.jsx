@@ -6,29 +6,33 @@ const OutfitList = (props) => {
   // items must be unique, so clicking does nothing if product is already in the list
   // should always have an "add to list" card
   var storedFits = JSON.parse(localStorage.getItem('outfit')) || [];
-  const [outfitIDs, updateOutfitIDs] = useState([]);
+  var storedIDs = JSON.parse(localStorage.getItem('outfitIDs')) || [];
+  const [outfitIDs, updateOutfitIDs] = useState(storedIDs);
   const [outfit, updateOutfit] = useState(storedFits);
-  const [currList, setCurrList] = useState(outfit);
   const [currIndex, setCurrIndex] = useState(0);
+
+  // using this for a homemade forceUpdate
+  const [val, setVal] = useState(0);
 
 
   const next = () => {
     setCurrIndex(currIndex + 1); // this is changing what currIndex will be the next time the component renders
-    setCurrList(outfit.slice(currIndex + 1));
   };
 
   const prev = () => {
     setCurrIndex(currIndex - 1);
-    setCurrList(outfit.slice(currIndex - 1));
   };
 
-  const addToOutfit = () => { // need to replace with outfit from the current page
+  const addToOutfit = () => {
     if (!outfitIDs.includes(props.currentProduct.product.id)) {
-      // updateOutfit([...outfit, props.products[0].product]);
-      updateOutfit([...outfit, props.currentProduct]);
-      updateOutfitIDs([...outfitIDs, props.currentProduct.product.id]);
+      // updateOutfit(prevState => [...outfit, props.currentProduct]);
+      // updateOutfitIDs([...outfitIDs, props.currentProduct.product.id]);
+      outfit.push(props.currentProduct);
+      outfitIDs.push(props.currentProduct.product.id);
+      setVal(val => val + 1);
     }
-    // localStorage.setItem('outfit', JSON.stringify(outfit));
+    localStorage.setItem('outfit', JSON.stringify(outfit));
+    localStorage.setItem('outfitIDs', JSON.stringify(outfitIDs));
   };
 
   const removeFromOutfit = (product) => {
@@ -39,10 +43,14 @@ const OutfitList = (props) => {
       }
     }
     if (index > -1) {
-      updateOutfit(prevState => outfit.splice(index, 1));
-      updateOutfitIDs(prevState => outfitIDs.splice(index, 1));
+      // updateOutfit(prevState => outfit.splice(index, 1));
+      // updateOutfitIDs(prevState => outfitIDs.splice(index, 1));
+      outfit.splice(index, 1)
+      outfitIDs.splice(index, 1);
+      setVal(val => val + 1);
     }
-    // localStorage.setItem('outfit', JSON.stringify(outfit));
+    localStorage.setItem('outfit', JSON.stringify(outfit));
+    localStorage.setItem('outfitIDs', JSON.stringify(outfitIDs));
   };
 
 
@@ -51,10 +59,6 @@ const OutfitList = (props) => {
 
   const leftButton = currIndex === 0 ? null :
     <button type="button" className="left-arrow" onClick={prev}> &lt; </button>;
-
-    useEffect(() => {
-      localStorage.setItem('outfit', JSON.stringify(outfit));
-    })
 
   return (
     <div>
@@ -68,7 +72,7 @@ const OutfitList = (props) => {
             <div className="add-button">+</div>
             <div className="add-text">Add to Outfit</div>
           </div>
-          {outfit.map(({ product, metadata, styles }) =>
+          {outfit.slice(currIndex).map(({ product, metadata, styles }) =>
             <OutfitCard key={product.id} product={product} rating={metadata.rating} styles={styles} remove={removeFromOutfit} />
           )}
         </div>
