@@ -5,10 +5,12 @@
  */
 
 module.exports = {
+  extends: 'eslint:recommended',
   env: {
     es6: true,
     browser: true,
-    mocha: true
+    mocha: true,
+    jest: true
   },
   parserOptions: {
     ecmaVersion: 2020,
@@ -48,6 +50,10 @@ module.exports = {
     'one-var': [1, { 'uninitialized': 'always', 'initialized': 'never' }],
     /* Minuta */
     'comma-style': [2, 'last'],
-    'quotes': [1, 'single']
+    'quotes': [1, 'single'],
+    /* Alter extension */
+    'no-unused-vars': 1,
+    'no-undef': 1,
+    'no-redeclare': 0,
   }
 };
