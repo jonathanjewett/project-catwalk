@@ -10,6 +10,8 @@ const OutfitList = (props) => {
   const [currList, setCurrList] = useState(outfit);
   const [currIndex, setCurrIndex] = useState(0);
 
+
+
   const next = () => {
     setCurrIndex(currIndex + 1); // this is changing what currIndex will be the next time the component renders
     setCurrList(outfit.slice(currIndex + 1));
