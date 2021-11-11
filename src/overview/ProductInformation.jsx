@@ -1,12 +1,4 @@
 import React from 'react';
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  PinterestIcon,
-  PinterestShareButton,
-  TwitterIcon,
-  TwitterShareButton,
-} from 'react-share';
 import { Price, StarRating } from '../common';
 
 /**

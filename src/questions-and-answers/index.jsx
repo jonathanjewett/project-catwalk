@@ -1,6 +1,5 @@
 import React from 'react';
-import api from '../api';
-import { ListView, Modal } from '../common';
+import { ListView } from '../common';
 import QuestionModal from './QuestionModal';
 import QuestionTile from './QuestionTile';
 import './questions-and-answers.scss';

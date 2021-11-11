@@ -24,7 +24,7 @@ const AddToCart = ({ style }) => {
 
   // the value of the select-a-size menu is how many of that size are in stock
   const sizeOptions = Object.entries(style.skus)
-    .filter(([_, sku]) => sku.quantity > 0)
+    .filter(([, sku]) => sku.quantity > 0)
     .map(([id, sku]) =>
       <option key={id} value={id}>{sku.size}</option>
     );

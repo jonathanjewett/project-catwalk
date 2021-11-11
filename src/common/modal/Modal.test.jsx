@@ -4,7 +4,7 @@ import Modal from './';
 
 it('hides only when the outside is clicked', () => {
   let hidden = false;
-  let x = render(<Modal hide={() => hidden = true}/>);
+  render(<Modal hide={() => hidden = true}/>);
   fireEvent.click(document.querySelector('.modal'));
   expect(hidden).toBe(false);
   fireEvent.click(document.querySelector('.modal-back'));

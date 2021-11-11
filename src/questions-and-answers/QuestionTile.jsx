@@ -2,7 +2,6 @@ import React from 'react';
 import AnswerTile from './AnswerTile';
 import AnswerModal from './AnswerModal';
 import { Helpful } from '../common';
-import api from '../api';
 
 /**
  * @param {Object} props
