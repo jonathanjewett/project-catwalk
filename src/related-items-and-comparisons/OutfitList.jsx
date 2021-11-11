@@ -7,7 +7,7 @@ const OutfitList = (props) => {
   // should always have an "add to list" card
   // var storedFits = JSON.parse(localStorage.getItem('outfit')) || [];
   // var storedIDs = JSON.parse(localStorage.getItem('outfitIDs')) || [];
-  const [outfit, updateOutfit] = useState(JSON.parse(localStorage.getItem('outfit')) || []);
+  const [outfit, updateOutfit] = useState(() => JSON.parse(localStorage.getItem('outfit')) || []);
   const [outfitIDs, updateOutfitIDs] = useState(() => JSON.parse(localStorage.getItem('outfitIDs')) || []);
   // const [outfitIDs, updateOutfitIDs] = useState(storedIDs);
   // const [outfit, updateOutfit] = useState(storedFits);
