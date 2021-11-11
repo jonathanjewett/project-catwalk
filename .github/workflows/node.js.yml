@@ -28,5 +28,5 @@ jobs:
         yarn install
         yarn test
         yarn add eslint
-        npx eslint
+        npx eslint . --ext js,jsx --max-warnings=0
         npx vite build
