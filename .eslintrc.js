@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  extends: 'eslint:recommended',
+  extends: 'plugin:react/recommended',
   env: {
     es6: true,
     browser: true,
@@ -55,5 +55,6 @@ module.exports = {
     'no-unused-vars': 1,
     'no-undef': 1,
     'no-redeclare': 0,
+    'react/prop-types': 0
   }
 };
