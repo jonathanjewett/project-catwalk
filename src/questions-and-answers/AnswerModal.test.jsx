@@ -22,9 +22,9 @@ it('sends a message to the server', (done) => {
   };
   const onSubmit = () => {
     try {
-      expect(process.mockRequestLog).toEqual([
-        ['POST', `/qa/questions/${question.question_id}/answers`, expected]
-      ]);
+      expect(process.mockRequestLog).toEqual(
+        [['POST', `/qa/questions/${question.question_id}/answers`, expected]]
+      );
       done();
     } catch (error) {
       done(error);
