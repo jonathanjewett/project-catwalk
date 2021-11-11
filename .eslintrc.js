@@ -5,24 +5,36 @@
  */
 
 module.exports = {
-  extends: 'plugin:react/recommended',
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended'
+  ],
   env: {
     es6: true,
     browser: true,
     mocha: true,
     jest: true
   },
+  globals: {
+    module: 'readonly',
+    process: 'readonly'
+  },
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: {
-      'jsx': true
+      jsx: true
     }
   },
   ignorePatterns: [
     '*.html',
     '*.ts'
   ],
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
   rules: {
     /* Indentation */
     'no-mixed-spaces-and-tabs': 2,
