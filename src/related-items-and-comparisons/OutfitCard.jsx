@@ -2,8 +2,6 @@ import React from 'react';
 import { Price, StarRating } from '../common';
 
 const OutfitCard = (props) => {
-  var image_url = '';
-  var defaultPrice = '??';
   var salePrice = null;
 
   const removeFromOutfit = (e) => {
@@ -13,8 +11,6 @@ const OutfitCard = (props) => {
 
   for (var i = 0; i < props.styles.length; i++) {
     if (props.styles[i]['default?'] === true) {
-      image_url = props.styles[i].photos[0].url; // unused for now, need to clarify what default images should be
-      defaultPrice = props.styles[i].original_price;
       salePrice = props.styles[i].sale_price;
     }
   }

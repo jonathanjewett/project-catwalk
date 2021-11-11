@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import OutfitCard from './OutfitCard.jsx';
 
 const OutfitList = (props) => {
@@ -7,8 +7,10 @@ const OutfitList = (props) => {
   // should always have an "add to list" card
   var storedFits = JSON.parse(localStorage.getItem('outfit')) || [];
   var storedIDs = JSON.parse(localStorage.getItem('outfitIDs')) || [];
-  const [outfitIDs, updateOutfitIDs] = useState(storedIDs);
-  const [outfit, updateOutfit] = useState(storedFits);
+  // const [outfitIDs, updateOutfitIDs] = useState(storedIDs);
+  // const [outfit, updateOutfit] = useState(storedFits);
+  var outfitIDs = storedIDs;
+  var outfit = storedFits;
   const [currIndex, setCurrIndex] = useState(0);
 
   // using this for a homemade forceUpdate
@@ -45,7 +47,7 @@ const OutfitList = (props) => {
     if (index > -1) {
       // updateOutfit(prevState => outfit.splice(index, 1));
       // updateOutfitIDs(prevState => outfitIDs.splice(index, 1));
-      outfit.splice(index, 1)
+      outfit.splice(index, 1);
       outfitIDs.splice(index, 1);
       setVal(val => val + 1);
     }

@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ComparisonModal from './ComparisonModal.jsx';
 import './related-items-and-comparisons.scss';
 import { Price, StarRating } from '../common';
 
 const CardItem = (props) => {
   const [modal, toggleModal] = useState(false);
-  var image_url = '';
-  var defaultPrice = '??';
   var salePrice = null;
 
   const compare = (e) => {
@@ -23,8 +21,6 @@ const CardItem = (props) => {
 
   for (var i = 0; i < props.styles.length; i++) {
     if (props.styles[i]['default?'] === true) {
-      image_url = props.styles[i].photos[0].url; // unused for now, need to clarify what default images should be
-      defaultPrice = props.styles[i].original_price;
       salePrice = props.styles[i].sale_price;
     }
   }
