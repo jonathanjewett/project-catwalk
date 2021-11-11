@@ -71,8 +71,6 @@ const scanZoomedImage = (event) => {
   target.style.backgroundPositionY = `${percentY * 100}%`;
 };
 
-const zoomCursors = ['zoom-in', 'crosshair', 'zoom-out'];
-
 /**
  * @param {Object} props
  * @param {boolean} props.zoom
@@ -91,7 +89,7 @@ const ImageGallery = ({ zoom, setZoom, style }) => {
   }, [style.style_id]);
 
   // Ensure the selected thumbnail is visible in the thumbnail list
-  const scrollPage = (adjustBy) => (event) => {
+  const scrollPage = (adjustBy) => () => {
     const nextPage = page + adjustBy;
     if (nextPage < thumbOffset) {
       setThumbOffset(nextPage);

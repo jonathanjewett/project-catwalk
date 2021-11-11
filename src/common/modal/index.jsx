@@ -8,7 +8,7 @@ import './modal.scss';
  * @param {boolean} full
  */
 const Modal = ({ children, hide, full }) => (
-  <div className="modal-back" onClick={event => {
+  <div role="dialog" className="modal-back" onClick={event => {
     if (event.target.className === 'modal-back') {
       hide(event);
     }
