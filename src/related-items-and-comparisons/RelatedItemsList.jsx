@@ -14,10 +14,10 @@ const RelatedItemsList = (props) => {
     setCurrIndex(currIndex - 1);
   };
 
-  const rightButton = (currIndex === props.products.length - 1 || props.products.length === 0) ? null :
+  const rightButton = currIndex === props.products.length - 1 || props.products.length === 0 ? null :
     <button type="button" className="right-arrow" onClick={next}> &gt; </button>;
 
-  const leftButton = (currIndex === 0 || props.products.length === 0) ? null :
+  const leftButton = currIndex === 0 || props.products.length === 0 ? null :
     <button type="button" className="left-arrow" onClick={prev}> &lt; </button>;
 
   return (
