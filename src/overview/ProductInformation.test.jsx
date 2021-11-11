@@ -16,13 +16,13 @@ const renderComponent = () => render(
 
 it('displays product name and category', () => {
   renderComponent();
-  expect(screen.queryByText(product.name)).not.toBeNull();
-  expect(screen.queryByText(product.category)).not.toBeNull();
+  expect(document.body).toHaveTextContent(product.name);
+  expect(document.body).toHaveTextContent(product.category);
 });
 
 it('displays the number of reviews', () => {
   renderComponent();
-  expect(screen.queryByText('Read all 10 reviews')).not.toBeNull();
+  expect(document.body).toHaveTextContent('Read all 10 reviews');
 });
 
 it('hides the rating section if there are no reviews', () => {
@@ -33,8 +33,8 @@ it('hides the rating section if there are no reviews', () => {
     reviewCount={0}
   />);
   expect(screen.queryByRole('img')).toBeNull();
-  expect(screen.queryByText('Read all 0 reviews')).toBeNull();
-  expect(screen.queryByText('Read all reviews')).toBeNull();
+  expect(document.body).not.toHaveTextContent('Read all 0 reviews');
+  expect(document.body).not.toHaveTextContent('Read all reviews');
 });
 
 it('sends users to the Ratings & Reviews section on click', () => {
