@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import StyleSelector from './StyleSelector';
 import { styles } from './sampleData';
 
@@ -14,8 +14,9 @@ it('renders a checkmark on the appropriate button', () => {
 
 it('renders the name of the current style', () => {
   for (const style of styles) {
-    render(<StyleSelector style={style} styles={styles}/>);
-    expect(screen.queryByText(style.name)).not.toBeNull();
+    const comp = render(<StyleSelector style={style} styles={styles}/>);
+    expect(document.body).toHaveTextContent(style.name);
+    cleanup(comp);
   }
 });
 
@@ -30,7 +31,7 @@ for (let i = 1; i <= 10; i++) {
       stylesMember.style_id = j;
       stylesList.push(stylesMember);
     }
-    render(<StyleSelector style={style} styles={stylesList}/>);
+    const comp = render(<StyleSelector style={style} styles={stylesList}/>);
     const rows = document.querySelectorAll('.styles div');
     for (const [j, row] of rows.entries()) {
       if (j === rows.length - 1) {
@@ -39,5 +40,6 @@ for (let i = 1; i <= 10; i++) {
         expect(row.childElementCount).toBe(4);
       }
     }
+    cleanup(comp);
   });
 }

@@ -8,10 +8,13 @@ it('displays price and sale in the correct format', () => {
   expect(screen.queryByText('$124.01')).not.toBeNull();
 });
 
-it('hides the sale price if there is no sale', () => {
-  const withSale = render(<Price base="123.00" sale="124.01"/>);
-  expect(withSale.container.children[0].childElementCount).toBe(2);
+it('shows the sale price if there is a sale', () => {
+  render(<Price base="123.00" sale="124.01"/>);
+  expect(document.body.children[0].children[0].childElementCount).toBe(2);
+});
 
-  const withoutSale = render(<Price base="123.00"/>);
-  expect(withoutSale.container.children[0].childElementCount).toBeLessThan(2);
+
+it('hides the sale price if there is no sale', () => {
+  render(<Price base="123.00"/>);
+  expect(document.body.children[0].children[0].childElementCount).toBeLessThan(2);
 });

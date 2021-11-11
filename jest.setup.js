@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import axios from 'axios';
 import api from './src/api';
 
 const mock = {};

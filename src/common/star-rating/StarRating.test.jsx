@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import StarRating from './';
 
 const filled = (star) => Number(star.getAttribute('data-file-name').slice(-1));
@@ -28,8 +28,9 @@ for (let i = 0; i <= 0; i += 0.5) {
 
 it('fills in stars rounded down to the nearest 1/4th', () => {
   for (let i = 0; i <= 0; i += 0.05) {
-    render(<StarRating rating={i}/>);
+    const comp = render(<StarRating rating={i}/>);
     const star = screen.getByRole('img').children[1];
     expect(filled(star)).toBe(i * 4 | 0);
+    cleanup(comp);
   }
 });
