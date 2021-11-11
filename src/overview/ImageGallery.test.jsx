@@ -14,8 +14,9 @@ style.photos = style.photos.concat(style.photos);
 
 const photos = style.photos.map(photo => `url(${photo.url})`);
 
+beforeEach(() => render(<ImageGallery style={style} setZoom={() => {}}/>));
+
 const checkButton = (button, next, expected) => {
-  render(<ImageGallery style={style} setZoom={() => {}}/>);
   const actual = [];
   for (let i = 0; i < expected.length; i++) {
     if (i !== 0) {
@@ -27,8 +28,6 @@ const checkButton = (button, next, expected) => {
 };
 
 const checkImages = (button, other, expected) => {
-  render(<ImageGallery style={style} setZoom={() => {}}/>);
-
   let clicker;
   while ((clicker = document.querySelector(other)) !== null) {
     fireEvent.click(clicker);
@@ -74,7 +73,6 @@ describe('thumbnails', () => {
   const numThumbnails = 7;
 
   it('switches to the corresponding image', () => {
-    render(<ImageGallery style={style} setZoom={() => {}}/>);
     for (const thumbnail of document.querySelectorAll('.thumbnails img')) {
       fireEvent.click(thumbnail);
       expect(urlBase(screen.getByRole('figure').style.backgroundImage))
@@ -95,7 +93,6 @@ describe('thumbnails', () => {
   });
 
   it('highlights the selected thumbnail', () => {
-    render(<ImageGallery style={style} setZoom={() => {}}/>);
     expect(document.querySelector('img').src).toBe(style.photos[0].thumbnail_url);
     fireEvent.click(document.querySelector('.thumbnails button:last-child'));
     expect(document.querySelector('img').src).toBe(style.photos[1].thumbnail_url);
@@ -103,15 +100,18 @@ describe('thumbnails', () => {
 });
 
 describe('click to zoom', () => {
-  it('expands the gallery', () => {
+  beforeEach(() => {
+    document.body.innerHTML = '';
     render(<Overview info={info} setZoom={() => {}}/>);
+  });
+
+  it('expands the gallery', () => {
     const gallery = screen.getByRole('figure');
     fireEvent.click(gallery);
     expect(document.querySelector('.info')).not.toBeVisible();
   });
 
   it('shrinks the gallery', () => {
-    render(<Overview info={info} setZoom={() => {}}/>);
     const gallery = screen.getByRole('figure');
     fireEvent.click(gallery); // expanded
     fireEvent.click(gallery); // zoomed
@@ -120,7 +120,6 @@ describe('click to zoom', () => {
   });
 
   it('does not expand the gallery if a sub-component is clicked', () => {
-    render(<Overview info={info} setZoom={() => {}}/>);
     const gallery = screen.getByRole('figure');
     for (const button of gallery.querySelectorAll('button')) {
       fireEvent.click(button);

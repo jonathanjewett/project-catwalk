@@ -19,11 +19,11 @@ const QuestionTile = ({ question, product }) => {
     />
   ) : null;
   const answers = Object.entries(question.answers);
-  answers.sort((x, y) => {
-    const seller1 = x[1].answerer_name === 'Seller';
-    const seller2 = y[1].answerer_name === 'Seller';
+  answers.sort(([, x], [, y]) => {
+    const seller1 = x.answerer_name === 'Seller';
+    const seller2 = y.answerer_name === 'Seller';
     return seller1 === seller2
-      ? y[1].helpfulness - x[1].helpfulness
+      ? y.helpfulness - x.helpfulness
       : seller2 - seller1;
   });
   let accordionButton = null;
