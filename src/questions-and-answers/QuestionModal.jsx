@@ -39,7 +39,7 @@ const QuestionModal = ({ hide, product }) => (
           .catch(console.error)
       }
     >
-      {({ isSubmitting, isValidating, errors }) => (
+      {({ isSubmitting }) => (
         <Form>
           <label htmlFor="body">
             Your Question*

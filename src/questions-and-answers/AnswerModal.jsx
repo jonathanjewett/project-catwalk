@@ -40,7 +40,7 @@ const AnswerModal = ({ hide, product, question }) => (
           .catch(console.error)
       }
     >
-      {({ isSubmitting, isValidating, errors, values }) => (
+      {({ isSubmitting, values }) => (
         <Form>
           <label htmlFor="body">
             Your Answer*
@@ -95,9 +95,7 @@ const AnswerModal = ({ hide, product, question }) => (
                   onChange={event => arrayHelpers.push(URL.createObjectURL(event.currentTarget.files[0]))}
                 />
               ) : null}
-              {values.photos.map(photo => (
-                <img src={photo}/>
-              ))}
+              {values.photos.map(photo => (<img key={photo} src={photo}/>))}
             </div>
           )}/>
           <button

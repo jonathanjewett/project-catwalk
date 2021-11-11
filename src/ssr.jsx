@@ -1,5 +1,5 @@
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import LRU from 'lru-cache';
 import App from './App';
 import apiModule from './api';
 

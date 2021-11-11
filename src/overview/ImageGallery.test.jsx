@@ -122,9 +122,8 @@ describe('click to zoom', () => {
   it('does not expand the gallery if a sub-component is clicked', () => {
     render(<Overview info={info} setZoom={() => {}}/>);
     const gallery = screen.getByRole('figure');
-    const subComponents = [];
     for (const button of gallery.querySelectorAll('button')) {
-      fireEvent.click(screen.getByRole('figure').querySelector('button'));
+      fireEvent.click(button);
       expect(document.querySelector('.info')).toBeVisible();
     }
   });

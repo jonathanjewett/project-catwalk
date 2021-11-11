@@ -6,6 +6,7 @@ import './common/details/details.scss';
 import App from './App';
 import api from './api';
 
+/* global info:writable, related:writable, reviews:writable, questions:writable */
 if (import.meta.env.PROD) {
   if (!import.meta.env.SSR) { // we are in client-side production code
     // forward all API requests to the hosting server

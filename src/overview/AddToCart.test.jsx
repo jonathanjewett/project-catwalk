@@ -52,7 +52,6 @@ it('updates the quantity with available stock when a size is chosen', () => {
     skus.push(sku);
   });
   render(<AddToCart style={style}/>);
-  const selects = [...screen.getAllByRole('combobox')];
   const [sizeMenu, quantityMenu] = getSizeAndQuantity();
   expect(quantityMenu).toBeDisabled();
   for (let i = 1; i < sizeMenu.options.length; i++) {
