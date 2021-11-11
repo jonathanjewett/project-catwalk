@@ -5,11 +5,11 @@ const OutfitList = (props) => {
   // hook for array of outfits, starts with nothing by default
   // items must be unique, so clicking does nothing if product is already in the list
   // should always have an "add to list" card
+  var storedFits = JSON.parse(localStorage.getItem('outfit')) || [];
   const [outfitIDs, updateOutfitIDs] = useState([]);
-  const [outfit, updateOutfit] = useState([]);
+  const [outfit, updateOutfit] = useState(storedFits);
   const [currList, setCurrList] = useState(outfit);
   const [currIndex, setCurrIndex] = useState(0);
-
 
 
   const next = () => {
@@ -28,6 +28,7 @@ const OutfitList = (props) => {
       updateOutfit([...outfit, props.currentProduct]);
       updateOutfitIDs([...outfitIDs, props.currentProduct.product.id]);
     }
+    // localStorage.setItem('outfit', JSON.stringify(outfit));
   };
 
   const removeFromOutfit = (product) => {
@@ -41,6 +42,7 @@ const OutfitList = (props) => {
       updateOutfit(prevState => outfit.splice(index, 1));
       updateOutfitIDs(prevState => outfitIDs.splice(index, 1));
     }
+    // localStorage.setItem('outfit', JSON.stringify(outfit));
   };
 
 
@@ -49,6 +51,10 @@ const OutfitList = (props) => {
 
   const leftButton = currIndex === 0 ? null :
     <button type="button" className="left-arrow" onClick={prev}> &lt; </button>;
+
+    useEffect(() => {
+      localStorage.setItem('outfit', JSON.stringify(outfit));
+    })
 
   return (
     <div>
