@@ -7,8 +7,12 @@ const OutfitList = (props) => {
   // should always have an "add to list" card
   // var storedFits = JSON.parse(localStorage.getItem('outfit')) || [];
   // var storedIDs = JSON.parse(localStorage.getItem('outfitIDs')) || [];
-  const [outfit, updateOutfit] = useState(() => JSON.parse(localStorage.getItem('outfit')) || []);
-  const [outfitIDs, updateOutfitIDs] = useState(() => JSON.parse(localStorage.getItem('outfitIDs')) || []);
+  const [outfit, updateOutfit] = useState(() =>
+    !import.meta.env.SSR && JSON.parse(localStorage.getItem('outfit')) || []
+  );
+  const [outfitIDs, updateOutfitIDs] = useState(() =>
+    !import.meta.env.SSR && JSON.parse(localStorage.getItem('outfitIDs')) || []
+  );
   // const [outfitIDs, updateOutfitIDs] = useState(storedIDs);
   // const [outfit, updateOutfit] = useState(storedFits);
   // var outfitIDs = storedIDs;
@@ -35,10 +39,12 @@ const OutfitList = (props) => {
       // outfitIDs.push(props.currentProduct.product.id);
       // setVal(val => val + 1);
       const newOutfit = [...outfit, props.currentProduct];
-      localStorage.setItem('outfit', JSON.stringify(newOutfit));
-      updateOutfit(newOutfit);
       const newOutfitIDs = [...outfitIDs, props.currentProduct.product.id];
-      localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDs));
+      if (!import.meta.env.SSR) {
+        localStorage.setItem('outfit', JSON.stringify(newOutfit));
+        localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDs));
+      }
+      updateOutfit(newOutfit);
       updateOutfitIDs(newOutfitIDs);
     }
     // localStorage.setItem('outfit', JSON.stringify(outfit));
@@ -55,9 +61,11 @@ const OutfitList = (props) => {
         newOutfitIDsRemoved.push(outfit[i].product.id);
       }
     }
-    localStorage.setItem('outfit', JSON.stringify(newOutfitRemoved));
+    if (!import.meta.env.SSR) {
+      localStorage.setItem('outfit', JSON.stringify(newOutfitRemoved));
+      localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDsRemoved));
+    }
     updateOutfit(newOutfitRemoved);
-    localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDsRemoved));
     updateOutfitIDs(newOutfitIDsRemoved);
 
     /*
