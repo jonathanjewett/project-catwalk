@@ -40,7 +40,9 @@ const RelatedItemsList = (props) => {
   }, []);
 
   React.useEffect(() => {
-    toggleButtons(setHideLeft, setHideRight, listRef.current, 0);
+    const list = listRef.current;
+    setCardWidth(calculateCardWidth(list));
+    toggleButtons(setHideLeft, setHideRight, list, 0);
   }, [props.products.length]);
 
   const moveList = (direction) => {
