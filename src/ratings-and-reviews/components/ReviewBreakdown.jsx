@@ -30,7 +30,7 @@ const ReviewBreakdown = ({breakdown, starFilters, setStarFilters}) => (
         <progress
           id={`progress-${numStars}-star`}
           max={reviewsTotal(breakdown)}
-          value={breakdown[numStars]}
+          value={breakdown[numStars] || 0}
         />
       </div>
     )).reverse()}
