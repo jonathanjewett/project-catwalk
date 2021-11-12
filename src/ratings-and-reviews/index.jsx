@@ -80,7 +80,7 @@ const RatingsAndReviews = ({ product, reviews, metadata }) => {
             <ReviewTile review={review} key={review.review_id}/>
           )}
         </ListView>
-        {addView && <AddReview hide={() => setAddView(addView = false)} product={product}/>}
+        {addView && <AddReview hide={() => { setAddView(addView = false); }} product={product} characteristics={metadata.characteristics}/>}
       </div>
     </div>
   );

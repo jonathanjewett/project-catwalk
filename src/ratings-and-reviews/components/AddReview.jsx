@@ -1,16 +1,48 @@
 import React from 'react';
 import { Modal, validateEmail} from '../../common';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import '../ratings-and-reviews.scss';
 import api from '../../api';
 
-const AddReview = ({hide, /*product*/}) => {
+const ratingConverter = (rating) => {
+  if (rating === 'Great') {
+    return 5;
+  }
+  if (rating === 'Good') {
+    return 4;
+  }
+  if (rating === 'Average') {
+    return 3;
+  }
+  if (rating === 'Fair') {
+    return 2;
+  }
+  if (rating === 'Poor') {
+    return 1;
+  }
+  if (rating === 'Yes') {
+    return true;
+  }
+  if (rating === 'No') {
+    return false;
+  }
+};
+
+const AddReview = ({hide, product, characteristics}) => {
+
+  let [textCount, setTextCount] = React.useState(0);
+
+  const characteristicNames = Object.keys(characteristics);
+  const initialValues = {rating: '', recommend: '', summary: '', body: '', nickname: '', photos: [], email: ''};
+  for (const characteristic of characteristicNames) {
+    initialValues[characteristic] = '';
+  }
   return (
     <Modal hide={hide}>
       <h1>Write Your Review</h1>
-      <h2>About the Product</h2>
+      <h2>About the {product.name}</h2>
       <Formik
-        initialValues={{rating: '', recommend: '', size: '', width: '', comfort: '', quality: '', length: '', fit: '', summary: '', body: '', nickname: '', email: ''}}
+        initialValues={initialValues}
         validate={values => {
           const errors = {};
           if (!values.rating) {
@@ -19,38 +51,51 @@ const AddReview = ({hide, /*product*/}) => {
           if (!values.recommend) {
             errors.recommend = 'Required';
           }
-          if (!values.characteristics) {
-            errors.characteristics = 'Required';
-          }
           if (!values.body) {
             errors.body = 'Required';
           }
           if (!values.nickname) {
             errors.body = 'Required';
-          } else if (!validateEmail(values.email)) {
-            errors.email = 'Invalid email address';
           }
           if (!values.email) {
             errors.email = 'Required';
+          } else if (!validateEmail(values.email)) {
+            errors.email = 'Invalid email address';
           }
           return errors;
         }}
         onSubmit={(values, {resetForm, setSubmitting}) => {
-          api.createReview(values)
+          const postConstructor = {
+            rating: ratingConverter(values.rating),
+            summary: values.summary || '',
+            body: values.body,
+            recommend: ratingConverter(values.recommend),
+            photos: values.photos,
+            name: values.nickname,
+            email: values.email,
+            characteristics: {}
+          };
+
+          for (const characteristic of characteristicNames) {
+            postConstructor.characteristics[characteristics[characteristic].id] = Number.parseInt(values[characteristic]);
+          }
+          console.log(postConstructor);
+          api.createReview(product.id, postConstructor)
             .then(() => {
               setSubmitting(false);
               resetForm();
               hide();
             })
             .catch(console.error);
-        }}
+        }
+        }
       >
-        {({values, isSubmitting}) => (
+        {({values, isSubmitting, isValidating, handleChange, errors}) => (
           <Form>
             <label>Your Rating:</label>
             <div className="star-rating-buttons">
               <div className="rating-indicator"> {values.rating}</div>
-              <Field type="radio" name="rating" id="star-5"value="Great" />
+              <Field type="radio" name="rating" id="star-5"value="Great"/>
               <label htmlFor="star-5"></label>
               <Field type="radio" name="rating" id="star-4" value="Good" />
               <label htmlFor="star-4"></label>
@@ -71,84 +116,96 @@ const AddReview = ({hide, /*product*/}) => {
               <Field type="radio" name="recommend" id="recommend-no" value="No"/>
             </div>
             <label>Tell us more about this product</label>
-            <div className="characterisitcs-buttons">
+            {characteristics.Size &&
+            <div>
               <label>Size: </label>
-              <Field type="radio" name="size" value="A size too small"/>
+              <Field type="radio" name="Size" value="1"/>
               <label>A size too small</label>
-              <Field type="radio" name="size" value="1/2 a size too small"/>
+              <Field type="radio" name="Size" value="2"/>
               <label>1/2 a size too small</label>
-              <Field type="radio" name="size" value="Perfect"/>
+              <Field type="radio" name="Size" value="3"/>
               <label>Perfect</label>
-              <Field type="radio" name="size" value="1/2 a size too big"/>
+              <Field type="radio" name="Size" value="4"/>
               <label>1/2 a size too big</label>
-              <Field type="radio" name="size" value="A size too big"/>
+              <Field type="radio" name="Size" value="5"/>
               <label>A size too big</label>
             </div>
+            }
+            {characteristics.Width &&
             <div>
               <label>Width: </label>
-              <Field type="radio" name="width" value="Too Narrow"/>
+              <Field type="radio" name="Width" value="1"/>
               <label>Too narrow</label>
-              <Field type="radio" name="width" value="Slighty narrow"/>
+              <Field type="radio" name="Width" value="2"/>
               <label>Slightly narrow</label>
-              <Field type="radio" name="width" value="Perfect"/>
+              <Field type="radio" name="Width" value="3"/>
               <label>Perfect</label>
-              <Field type="radio" name="width" value="Slightly wide"/>
+              <Field type="radio" name="Width" value="4"/>
               <label>Slightly wide</label>
-              <Field type="radio" name="width" value="A size too big"/>
+              <Field type="radio" name="Width" value="5"/>
               <label>Too wide</label>
             </div>
+            }
+            {characteristics.Comfort &&
             <div>
               <label>Comfort: </label>
-              <Field type="radio" name="comfort" value="Uncomfortable"/>
+              <Field type="radio" name="Comfort" value="1"/>
               <label>Uncomfortable</label>
-              <Field type="radio" name="comfort" value="Slighty uncomfortable"/>
+              <Field type="radio" name="Comfort" value="2"/>
               <label>Slightly uncomfortable</label>
-              <Field type="radio" name="comfort" value="Ok"/>
+              <Field type="radio" name="Comfort" value="3"/>
               <label>Ok</label>
-              <Field type="radio" name="comfort" value="Comfortable"/>
+              <Field type="radio" name="Comfort" value="4"/>
               <label>Comfortable</label>
-              <Field type="radio" name="comfort" value="Perfect"/>
+              <Field type="radio" name="Comfort" value="5"/>
               <label>Perfect</label>
             </div>
+            }
+            {characteristics.Quality &&
             <div>
               <label>Quality: </label>
-              <Field type="radio" name="quality" value="Poor"/>
+              <Field type="radio" name="Quality" value="1"/>
               <label>Poor</label>
-              <Field type="radio" name="quality" value="Below average"/>
+              <Field type="radio" name="Quality" value="2"/>
               <label>Below average</label>
-              <Field type="radio" name="quality" value="What I expected"/>
+              <Field type="radio" name="Quality" value="3"/>
               <label>What I expected</label>
-              <Field type="radio" name="quality" value="Pretty great"/>
+              <Field type="radio" name="Quality" value="4"/>
               <label>Pretty great</label>
-              <Field type="radio" name="quality" value="Perfect"/>
+              <Field type="radio" name="Quality" value="5"/>
               <label>Perfect</label>
             </div>
+            }
+            {characteristics.Length &&
             <div>
               <label>Length: </label>
-              <Field type="radio" name="length" value="Runs Short"/>
+              <Field type="radio" name="Length" value="1"/>
               <label>Runs Short</label>
-              <Field type="radio" name="length" value="Runs slightly short"/>
+              <Field type="radio" name="Length" value="2"/>
               <label>Runs slightly short</label>
-              <Field type="radio" name="length" value="Perfect"/>
+              <Field type="radio" name="Length" value="3"/>
               <label>Perfect</label>
-              <Field type="radio" name="length" value="Runs slightly long"/>
+              <Field type="radio" name="Length" value="4"/>
               <label>Runs slightly long</label>
-              <Field type="radio" name="length" value="Runs long"/>
+              <Field type="radio" name="Length" value="5"/>
               <label>Runs long</label>
             </div>
+            }
+            {characteristics.Fit &&
             <div>
               <label>Fit: </label>
-              <Field type="radio" name="fit" value="Runs tight"/>
+              <Field type="radio" name="Fit" value="1"/>
               <label>Runs tight</label>
-              <Field type="radio" name="fit" value="Runs slightly tight"/>
+              <Field type="radio" name="Fit" value="2"/>
               <label>Runs slightly tight</label>
-              <Field type="radio" name="fit" value="Perfect"/>
+              <Field type="radio" name="Fit" value="3"/>
               <label>Perfect</label>
-              <Field type="radio" name="fit" value="Runs slightly long"/>
+              <Field type="radio" name="Fit" value="4"/>
               <label>Runs slightly long</label>
-              <Field type="radio" name="fit" value="Runs long"/>
+              <Field type="radio" name="Fit" value="5"/>
               <label>Runs long</label>
             </div>
+            }
             <div>
               <label>Review Summary: </label>
               <Field
@@ -161,17 +218,39 @@ const AddReview = ({hide, /*product*/}) => {
             </div>
             <div>
               <label>Review Body: </label>
-              <Field
+              <input
+                onChange={event => {
+                  setTextCount(event.target.value.length);
+                  handleChange(event);
+                }}
                 className="interact"
                 type="text"
                 as="textarea"
                 name="body"
                 id="body"
                 placeholder="Why did you like the product or not?"
-                minLength="50"
+                minLength= "50"
                 maxLength="1000"
                 required
               />
+              {textCount < 50 ? <div>Minimum required characters left: {50 - textCount}</div> : <div>Minimum Reached</div>}
+            </div>
+            <div>
+              <label>Upload your photos: </label>
+              <FieldArray name="photos" render={arrayHelpers => (
+                <div>
+                  {values.photos.length < 5 ? (
+                    <input
+                      type="file"
+                      name="photo"
+                      id="photo"
+                      accept="image/*"
+                      onChange={event => arrayHelpers.push(URL.createObjectURL(event.currentTarget.files[0]))}
+                    />
+                  ) : null}
+                  {values.photos.map(photo => (<img key={photo} src={photo} height="100" width="100"/>))}
+                </div>
+              )}/>
             </div>
             <div>
               <label>Nickname: </label>
