@@ -39,6 +39,10 @@ const RelatedItemsList = (props) => {
     return () => window.removeEventListener('resize', resizeListener);
   }, []);
 
+  React.useEffect(() => {
+    toggleButtons(setHideLeft, setHideRight, listRef.current, 0);
+  }, [props.products.length]);
+
   const moveList = (direction) => {
     const list = listRef.current;
     const scrollBy = direction === 'right' ? cardWidth : -cardWidth;
