@@ -1,0 +1,50 @@
+header {
+  text-align: center;
+}
+
+.branding {
+  background-color: var(--foreground);
+  color: #66cccc;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px 15px 10px 15px;
+  display: flex;
+  align-items: center;
+
+  h1 {
+    margin: auto 0 auto 0.5em;
+  }
+
+  svg {
+    width: 75px;
+    height: 75px;
+    margin: auto 0;
+  }
+}
+
+.highlights {
+  margin-top: 90px;
+  padding: 0.5em 0;
+  display: inline-flex;
+  margin-left: auto;
+  color: #bbb;
+
+  a {
+    text-decoration-color: #bbb;
+  }
+
+  em, > a, > span {
+    margin: 0 1em;
+    color: var(--foreground);
+  }
+
+  p {
+    display: inline;
+
+    &::before {
+      content: " ";
+    }
+  }
+}

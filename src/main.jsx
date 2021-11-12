@@ -5,7 +5,17 @@ import './index.scss';
 import './common/details/details.scss';
 import App from './App';
 import api from './api';
-
+import { product, metadata, styles } from './overview/sampleData';
+ReactDOM.render(
+  <React.StrictMode>
+    <App
+      info={{ product, metadata, styles }}
+      related={[]}
+      reviews={[]}
+      questions={[]}
+    />
+  </React.StrictMode>,
+  document.getElementById('root'));
 /* global info:writable, related:writable, reviews:writable, questions:writable */
 if (import.meta.env.PROD) {
   if (!import.meta.env.SSR) { // we are in client-side production code
