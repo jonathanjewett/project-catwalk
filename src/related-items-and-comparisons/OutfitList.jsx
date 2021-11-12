@@ -28,8 +28,8 @@ const calculateCardWidth = (list) => {
 };
 
 const OutfitList = (props) => {
-  const [outfit, updateOutfit] = useState(() => JSON.parse(localStorage.getItem('outfit')) || []);
-  const [outfitIDs, updateOutfitIDs] = useState(() => JSON.parse(localStorage.getItem('outfitIDs')) || []);
+  const [outfit, updateOutfit] = useState(() => !import.meta.env.SSR && JSON.parse(localStorage.getItem('outfit')) || []);
+  const [outfitIDs, updateOutfitIDs] = useState(() => !import.meta.env.SSR && JSON.parse(localStorage.getItem('outfitIDs')) || []);
 
   const [hideLeft, setHideLeft] = useState(true);
   const [hideRight, setHideRight] = useState(true);
