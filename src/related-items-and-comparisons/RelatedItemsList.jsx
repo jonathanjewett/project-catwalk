@@ -1,23 +1,61 @@
 import React, { useState } from 'react';
 import CardItem from './CardItem.jsx';
 
+const toggleButtons = (setHideLeft, setHideRight, list, offset) => {
+  if (list.children[0]) {
+    const children = list.children;
+    const listRect = list.getBoundingClientRect();
+    // console.log(listRect.right);
+    const cardRect = children[children.length - 1].getBoundingClientRect();
+    setHideLeft(list.scrollLeft + offset <= 0);
+    setHideRight(listRect.right + offset >= cardRect.right);
+    // console.log(list.scrollLeft + offset);
+  }
+};
+
+/** @param {HTMLElement} list */
+const calculateCardWidth = (list) => {
+  if (list.children[0]) {
+    const firstCard = list.children[0];
+    const border = firstCard.offsetLeft - list.offsetLeft;
+    return firstCard.offsetWidth + border * 2;
+  }
+};
+
 const RelatedItemsList = (props) => {
-  const [currIndex, setCurrIndex] = useState(0);
+  const [hideLeft, setHideLeft] = useState(true);
+  const [hideRight, setHideRight] = useState(true);
+  const [cardWidth, setCardWidth] = useState(0);
+  const listRef = React.createRef();
 
-  // "useEffect is componentDidMount, componentDidUpdate, and componentWillUnmount combined"
+  React.useEffect(() => {
+    const list = listRef.current;
+    const resizeListener = () => {
+      setCardWidth(calculateCardWidth(list));
+      toggleButtons(setHideLeft, setHideRight, list, 0);
+    };
+    resizeListener();
+    window.addEventListener('resize', resizeListener);
+    return () => window.removeEventListener('resize', resizeListener);
+  }, []);
 
-  const next = () => {
-    setCurrIndex(currIndex + 1); // this is changing what currIndex will be the next time the component renders
+  const moveList = (direction) => {
+    const list = listRef.current;
+    const scrollBy = direction === 'right' ? cardWidth : -cardWidth;
+    list.scrollTo({
+      top: 0,
+      left: list.scrollLeft + scrollBy,
+      behavior: 'smooth'
+    });
+    toggleButtons(setHideLeft, setHideRight, list, scrollBy);
   };
+  const prev = () => moveList('left');
+  const next = () => moveList('right');
 
-  const prev = () => {
-    setCurrIndex(currIndex - 1);
-  };
-
-  const rightButton = currIndex === props.products.length - 1 || props.products.length === 0 ? null :
+  const rightButton = hideRight ? null :
     <button type="button" className="right-arrow" onClick={next}> &gt; </button>;
 
-  const leftButton = currIndex === 0 || props.products.length === 0 ? null :
+  const leftButton = hideLeft ? null :
     <button type="button" className="left-arrow" onClick={prev}> &lt; </button>;
 
   return (
@@ -27,9 +65,9 @@ const RelatedItemsList = (props) => {
         <div className="scroll-button-container">
           {leftButton}
         </div>
-        <div className="card-list">
-          {props.products.slice(currIndex).map(({ product, metadata, styles }) =>
-            <CardItem key={product.id} product={product} rating={metadata.rating} styles={styles} currentProduct={props.currentProduct}/>
+        <div className="card-list" ref={listRef}>
+          {props.products.map(({ product, metadata, styles }, i) =>
+            <CardItem key={i} product={product} rating={metadata.rating} styles={styles} currentProduct={props.currentProduct} />
           )}
         </div>
         {rightButton}
