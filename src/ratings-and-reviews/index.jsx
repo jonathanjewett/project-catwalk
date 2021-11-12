@@ -5,6 +5,7 @@ import ReviewTile from './components/ReviewTile.jsx';
 import Sort from './components/Sort.jsx';
 import ReviewBreakdown from './components/ReviewBreakdown.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
+import AddReview from './components/AddReview.jsx';
 
 /** @param {string} newSortType*/
 
@@ -40,7 +41,7 @@ const recommendPercentage = (recommended) => {
 };
 
 
-const RatingsAndReviews = ({ reviews, metadata }) => {
+const RatingsAndReviews = ({ product, reviews, metadata }) => {
 
   let [sortType, setSortType] = useState('Relevance');
 
@@ -50,6 +51,8 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
 
   reviews = sortReviews(sortType, reviews);
   reviews = filterReviews(starFilters, reviews);
+
+  let [addView, setAddView] = useState(false);
 
 
   return (
@@ -69,6 +72,7 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
         <ListView
           more="More Reviews"
           add="Add A Review"
+          onAdd={() => setAddView(addView = true)}
           start={2}
           placeholder="SEARCH REVIEWS"
         >
@@ -76,6 +80,7 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
             <ReviewTile review={review} key={review.review_id}/>
           )}
         </ListView>
+        {addView && <AddReview hide={() => { setAddView(addView = false); }} product={product} characteristics={metadata.characteristics}/>}
       </div>
     </div>
   );

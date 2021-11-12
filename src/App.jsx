@@ -31,7 +31,8 @@ const App = ({ info, questions, related, reviews }) => (
     <Tracker render={Overview} info={info} reviewCount={reviews.length}/>
     <Tracker render={RelatedItemsAndComparisons} products={related} info={info}/>
     <Tracker render={QuestionsAndAnswers} questions={questions} product={info.product}/>
-    <Tracker render={RatingsAndReviews} reviews={reviews} metadata={info.metadata}/>
+    <Tracker render={RatingsAndReviews} product={info.product} reviews={reviews} metadata={info.metadata}/>
+
   </div>
 );
 

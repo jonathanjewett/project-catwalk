@@ -76,4 +76,46 @@
   .star-breakdown:hover {
     text-decoration: underline;
   }
+
+  .star-rating-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  .star-rating-buttons input{
+    display: none;
+  }
+  .star-rating-buttons label {
+    width: 20px;
+    height: 20px;
+    font-family: Verdana;
+    font-size: 20px;
+    color: black;
+    transition: 0.2s ease;
+  }
+  .star-rating-buttons label::before {
+    content: '\2606';
+  }
+  .star-rating-buttons input:checked ~ label:before {
+    content: '\2605';
+  }
+  .star-rating-buttons label:hover {
+    color: black;
+    transition: 0.2s ease;
+  }
+  .rating-indicator {
+    color: black;
+    margin-top: 16px;
+    margin-left: 5px;
+  }
+
+  .recommend-buttons {
+    margin-top: 10px;
+  }
+  .characteristics-buttons {
+    margin-top: 10px;
+  }
+
+
+
 }
