@@ -39,13 +39,10 @@ const QuestionModal = ({ hide, product }) => (
           .catch(console.error)
       }
     >
-      {({ isSubmitting, isValidating, errors }) => (
+      {({ isSubmitting }) => (
         <Form>
           <label htmlFor="body">
             Your Question*
-            {Object.values(errors).length === 0 ? null : (
-              <span>You must enter the following:</span>
-            )}
           </label>
           <Field
             className="interact"
@@ -85,7 +82,12 @@ const QuestionModal = ({ hide, product }) => (
             <ErrorMessage name="email" component="span"/>
             For authentication reasons, you will not be emailed
           </div>
-          <button type="submit" className="interact" disabled={isSubmitting}>
+          <button
+            id="create-question"
+            type="submit"
+            className="interact"
+            disabled={isSubmitting}
+          >
             Submit
           </button>
         </Form>

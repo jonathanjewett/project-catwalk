@@ -5,11 +5,17 @@
         "!**/vendor/**"
     ],
     "coverageDirectory": "./coverage/",
+    "reporters": ["jest-progress-bar-reporter"],
     "setupFilesAfterEnv": ["./jest.setup.js"],
     "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": [
+        "/dist/",
+        "/node_modules/"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest",
       ".+\\.svg$": "jest-transformer-svg",
       ".+\\.(scss|png|jpg|gif)$": "jest-transform-stub"
-    }
+    },
+    "verbose": true
 }

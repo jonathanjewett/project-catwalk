@@ -1,17 +1,13 @@
 import React from 'react';
-import CardItem from './CardItem.jsx';
 import RelatedItemsList from './RelatedItemsList.jsx';
-import ComparisonModal from './ComparisonModal.jsx';
 import OutfitList from './OutfitList.jsx';
 import './related-items-and-comparisons.scss';
 
-import { products } from './sampleData.js';
-
-const RelatedItemsAndComparisons = (/* { products } */) => (
+const RelatedItemsAndComparisons = (props) => (
   <div id="related-items-and-comparisons">
     <div>
-      <RelatedItemsList products={products}/>
-      <OutfitList products={products}/>
+      <RelatedItemsList products={props.products} currentProduct={props.info}/>
+      <OutfitList currentProduct={props.info}/>
     </div>
   </div>
 );

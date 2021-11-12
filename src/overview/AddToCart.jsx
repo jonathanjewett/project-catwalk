@@ -24,7 +24,7 @@ const AddToCart = ({ style }) => {
 
   // the value of the select-a-size menu is how many of that size are in stock
   const sizeOptions = Object.entries(style.skus)
-    .filter(([_, sku]) => sku.quantity > 0)
+    .filter(([, sku]) => sku.quantity > 0)
     .map(([id, sku]) =>
       <option key={id} value={id}>{sku.size}</option>
     );
@@ -79,7 +79,7 @@ const AddToCart = ({ style }) => {
   }
 
   const addToCart = sizeOptions.length === 0 ? null : (
-    <button type="button" className="interact" onClick={() => {
+    <button type="button" id="add-to-cart" className="interact" onClick={() => {
       if (quantity === 0) {
         // Invalidate and expand the select-a-size menu.
         setExpandSizes(true);
@@ -97,7 +97,7 @@ const AddToCart = ({ style }) => {
   );
 
   return (
-    <div id="add-to-cart">
+    <div className="add-to-cart">
       <div>
         {sizeSelect}
         {quantitySelect}

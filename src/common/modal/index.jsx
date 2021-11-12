@@ -5,10 +5,15 @@ import './modal.scss';
  * @param {Object} props
  * @param {React.ReactChildren} props.children
  * @param {React.MouseEventHandler} props.hide
+ * @param {boolean} full
  */
-const Modal = ({ children, hide }) => (
-  <div className="modalBack" onClick={hide}>
-    <div className="modal" onClick={event => event.stopPropagation()}>
+const Modal = ({ children, hide, full }) => (
+  <div role="dialog" className="modal-back" onClick={event => {
+    if (event.target.className === 'modal-back') {
+      hide(event);
+    }
+  }}>
+    <div className={'modal' + (full ? ' full' : '') }>
       {children}
     </div>
   </div>

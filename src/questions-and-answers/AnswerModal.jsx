@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import { Modal, validateEmail } from '../common';
 import api from '../api';
 
@@ -14,7 +14,7 @@ const AnswerModal = ({ hide, product, question }) => (
     <h1>Submit your Answer</h1>
     <h2>{product.name}: {question.question_body}</h2>
     <Formik
-      initialValues={{body: '', name: '', email: ''}}
+      initialValues={{body: '', name: '', email: '', photos: []}}
       validate={values => {
         const errors = {};
         if (!values.body) {
@@ -40,13 +40,10 @@ const AnswerModal = ({ hide, product, question }) => (
           .catch(console.error)
       }
     >
-      {({ isSubmitting, isValidating, errors }) => (
+      {({ isSubmitting, values }) => (
         <Form>
           <label htmlFor="body">
             Your Answer*
-            {Object.values(errors).length === 0 ? null : (
-              <span>You must enter the following:</span>
-            )}
           </label>
           <Field
             className="interact"
@@ -86,7 +83,27 @@ const AnswerModal = ({ hide, product, question }) => (
             <ErrorMessage name="email" component="span"/>
             For authentication reasons, you will not be emailed
           </div>
-          <button type="submit" className="interact" disabled={isSubmitting}>
+          <label htmlFor="photo">Attach Photos</label>
+          <FieldArray name="photos" render={arrayHelpers => (
+            <div>
+              {values.photos.length < 5 ? (
+                <input
+                  type="file"
+                  name="photo"
+                  id="photo"
+                  accept="image/*"
+                  onChange={event => arrayHelpers.push(URL.createObjectURL(event.currentTarget.files[0]))}
+                />
+              ) : null}
+              {values.photos.map(photo => (<img key={photo} src={photo}/>))}
+            </div>
+          )}/>
+          <button
+            id="create-answer"
+            type="submit"
+            className="interact"
+            disabled={isSubmitting}
+          >
             Submit
           </button>
         </Form>

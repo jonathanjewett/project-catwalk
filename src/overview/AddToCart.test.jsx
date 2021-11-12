@@ -18,12 +18,12 @@ const getSizeAndQuantity = () => Array.prototype.sort
 it('displays "Out of Stock" if out of stock', () => {
   const style = makeStyle(sku => sku.quantity = 0);
   render(<AddToCart style={style}/>);
-  expect(screen.queryByText('Out of Stock')).not.toBeNull();
+  expect(document.body).toHaveTextContent('Out of Stock');
 });
 
 it('does not display "Out of Stock" if not out of stock', () => {
   render(<AddToCart style={styles[0]}/>);
-  expect(screen.queryByText('Out of Stock')).toBeNull();
+  expect(document.body).not.toHaveTextContent('Out of Stock');
 });
 
 it('does not display sizes that are out of stock', () => {
@@ -52,7 +52,6 @@ it('updates the quantity with available stock when a size is chosen', () => {
     skus.push(sku);
   });
   render(<AddToCart style={style}/>);
-  const selects = [...screen.getAllByRole('combobox')];
   const [sizeMenu, quantityMenu] = getSizeAndQuantity();
   expect(quantityMenu).toBeDisabled();
   for (let i = 1; i < sizeMenu.options.length; i++) {

@@ -18,7 +18,7 @@ const Helpful = ({ score, type, id }) => {
     api.markHelpful(type, id).catch(console.error);
   };
 
-  return <span>Helpful? <a onClick={onClick}>Yes</a> ({score})</span>;
+  return <span>Helpful? <a className="helpful" onClick={onClick}>Yes</a> ({score})</span>;
 };
 
 export default Helpful;

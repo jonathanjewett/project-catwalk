@@ -5,22 +5,36 @@
  */
 
 module.exports = {
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended'
+  ],
   env: {
     es6: true,
     browser: true,
-    mocha: true
+    mocha: true,
+    jest: true
+  },
+  globals: {
+    module: 'readonly',
+    process: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: {
-      'jsx': true
+      jsx: true
     }
   },
   ignorePatterns: [
     '*.html',
     '*.ts'
   ],
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
   rules: {
     /* Indentation */
     'no-mixed-spaces-and-tabs': 2,
@@ -48,6 +62,11 @@ module.exports = {
     'one-var': [1, { 'uninitialized': 'always', 'initialized': 'never' }],
     /* Minuta */
     'comma-style': [2, 'last'],
-    'quotes': [1, 'single']
+    'quotes': [1, 'single'],
+    /* Alter extension */
+    'no-unused-vars': 1,
+    'no-undef': 1,
+    'no-redeclare': 0,
+    'react/prop-types': 0
   }
 };

@@ -8,6 +8,7 @@ import React from 'react';
  */
 const StyleButton = ({ style, selected, onClick }) => (
   <button
+    className="style"
     type="button"
     style={{backgroundImage: `url(${style.photos[0].thumbnail_url})`}}
     onClick={onClick}
