@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './ratings-and-reviews.scss';
 import {ListView, StarRating} from '../common';
 import ReviewTile from './components/ReviewTile.jsx';
 import Sort from './components/Sort.jsx';
 import ReviewBreakdown from './components/ReviewBreakdown.jsx';
 import ProductBreakdown from './components/ProductBreakdown.jsx';
+import AddReview from './components/AddReview.jsx';
 
 /** @param {string} newSortType*/
 
@@ -40,7 +41,7 @@ const recommendPercentage = (recommended) => {
 };
 
 
-const RatingsAndReviews = ({ reviews, metadata }) => {
+const RatingsAndReviews = ({ product, reviews, metadata }) => {
 
   let [sortType, setSortType] = useState('Relevance');
 
@@ -50,6 +51,8 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
 
   reviews = sortReviews(sortType, reviews);
   reviews = filterReviews(starFilters, reviews);
+
+  let [addView, setAddView] = useState(false);
 
 
   return (
@@ -62,13 +65,14 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
         </div>
         <span className="reviews-recommend">{recommendPercentage(metadata.recommended)}% of reviews recommend this product</span>
         <ReviewBreakdown breakdown={metadata.ratings} reviews={reviews} starFilters={starFilters} setStarFilters={setStarFilters}/>
-        <ProductBreakdown />
+        <ProductBreakdown characteristics={metadata.characteristics}/>
       </div>
       <div className="column-2">
         <Sort reviews={reviews} sortType={sortType} setSortType={setSortType}/>
         <ListView
           more="More Reviews"
           add="Add A Review"
+          onAdd={() => setAddView(addView = true)}
           start={2}
           placeholder="SEARCH REVIEWS"
         >
@@ -76,6 +80,7 @@ const RatingsAndReviews = ({ reviews, metadata }) => {
             <ReviewTile review={review} key={review.review_id}/>
           )}
         </ListView>
+        {addView && <AddReview hide={() => { setAddView(addView = false); }} product={product} characteristics={metadata.characteristics}/>}
       </div>
     </div>
   );

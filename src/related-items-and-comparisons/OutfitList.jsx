@@ -63,10 +63,12 @@ const OutfitList = (props) => {
   const addToOutfit = () => {
     if (!outfitIDs.includes(props.currentProduct.product.id)) {
       const newOutfit = [...outfit, props.currentProduct];
-      localStorage.setItem('outfit', JSON.stringify(newOutfit));
-      updateOutfit(newOutfit);
       const newOutfitIDs = [...outfitIDs, props.currentProduct.product.id];
-      localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDs));
+      if (!import.meta.env.SSR) {
+        localStorage.setItem('outfit', JSON.stringify(newOutfit));
+        localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDs));
+      }
+      updateOutfit(newOutfit);
       updateOutfitIDs(newOutfitIDs);
     }
     // added to try and toggle buttons correctly when adding item
@@ -85,9 +87,11 @@ const OutfitList = (props) => {
         toggleButtons(setHideLeft, setHideRight, listRef.current, cardWidth);
       }
     }
-    localStorage.setItem('outfit', JSON.stringify(newOutfitRemoved));
+    if (!import.meta.env.SSR) {
+      localStorage.setItem('outfit', JSON.stringify(newOutfitRemoved));
+      localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDsRemoved));
+    }
     updateOutfit(newOutfitRemoved);
-    localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDsRemoved));
     updateOutfitIDs(newOutfitIDsRemoved);
 
   };
