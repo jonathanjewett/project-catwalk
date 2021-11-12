@@ -26,7 +26,7 @@ const addToCart = async (skuId) => {
  * Routes used:
  * - [`POST /reviews`](https://learn-2.galvanize.com/cohorts/2967/blocks/94/content_files/Front%20End%20Capstone/project-atelier-catwalk/reviews.md#add-a-review)
  * @param {Object} review - review to post
- * @param {number} review.product_id - ID of the product to post the review for
+ * @param {number} productId - ID of the product to post the review for
  * @param {number} review.rating - integer (1-5) indicating the review rating
  * @param {string} review.summary - summary text of the review
  * @param {string} review.body - continued or full text of the review
@@ -36,7 +36,8 @@ const addToCart = async (skuId) => {
  * @param {string[]} review.photos - array of text urls that link to images to be shown
  * @param {{[characteristic_id: string]: number}} review.characteristics - object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
  */
-const createReview = async (review) => {
+const createReview = async (productId, review) => {
+  review.product_id = productId;
   await api.post('/reviews', review);
 };
 
