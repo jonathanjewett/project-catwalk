@@ -12,15 +12,13 @@ import RelatedItemsAndComparisons from './related-items-and-comparisons';
  * @param {ProductInfo[]} props.related
  * @param {Review[]} props.reviews
  */
-const App = ({ info, questions, related, reviews }) => {
-  return (
-    <div>
-      <Tracker render={Overview} info={info} reviewCount={reviews.length}/>
-      <Tracker render={RelatedItemsAndComparisons} products={related} info={info}/>
-      <Tracker render={QuestionsAndAnswers} questions={questions} product={info.product}/>
-      <Tracker render={RatingsAndReviews} product={info.product} reviews={reviews} metadata={info.metadata}/>
-    </div>
-  );
-};
+const App = ({ info, questions, related, reviews }) => (
+  <div>
+    <Tracker render={Overview} info={info} reviewCount={reviews.length}/>
+    <Tracker render={RelatedItemsAndComparisons} products={related} info={info}/>
+    <Tracker render={QuestionsAndAnswers} questions={questions} product={info.product}/>
+    <Tracker render={RatingsAndReviews} product={info.product} reviews={reviews} metadata={info.metadata}/>
+  </div>
+);
 
 export default App;
