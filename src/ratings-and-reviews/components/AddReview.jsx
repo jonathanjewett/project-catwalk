@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, validateEmail} from '../../common';
-import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
+import { Formik, Form, Field, FieldArray} from 'formik';
 import '../ratings-and-reviews.scss';
 import api from '../../api';
 
@@ -90,7 +90,7 @@ const AddReview = ({hide, product, characteristics}) => {
         }
         }
       >
-        {({values, isSubmitting, isValidating, handleChange, errors}) => (
+        {({values, isSubmitting, handleChange}) => (
           <Form>
             <label>Your Rating:</label>
             <div className="star-rating-buttons">
@@ -115,95 +115,95 @@ const AddReview = ({hide, product, characteristics}) => {
               <label htmlFor="recommend-no">No:</label>
               <Field type="radio" name="recommend" id="recommend-no" value="No"/>
             </div>
-            <label>Tell us more about this product</label>
+            <label>Tell us more about this product:</label>
             {characteristics.Size &&
-            <div>
+            <div className="add-characteristics">
               <label>Size: </label>
               <Field type="radio" name="Size" value="1"/>
-              <label>A size too small</label>
+              <label className="add-characteristics-label">A size too small</label>
               <Field type="radio" name="Size" value="2"/>
-              <label>1/2 a size too small</label>
+              <label className="add-characteristics-label">1/2 a size too small</label>
               <Field type="radio" name="Size" value="3"/>
-              <label>Perfect</label>
+              <label className="add-characteristics-label">Perfect</label>
               <Field type="radio" name="Size" value="4"/>
-              <label>1/2 a size too big</label>
+              <label className="add-characteristics-label">1/2 a size too big</label>
               <Field type="radio" name="Size" value="5"/>
-              <label>A size too big</label>
+              <label className="add-characteristics-label">A size too big</label>
             </div>
             }
             {characteristics.Width &&
-            <div>
-              <label>Width: </label>
+            <div className="add-characteristics">
+              <label className="add-characteristics-label">Width: </label>
               <Field type="radio" name="Width" value="1"/>
-              <label>Too narrow</label>
+              <label className="add-characteristics-label">Too narrow</label>
               <Field type="radio" name="Width" value="2"/>
-              <label>Slightly narrow</label>
+              <label className="add-characteristics-label">Slightly narrow</label>
               <Field type="radio" name="Width" value="3"/>
-              <label>Perfect</label>
+              <label className="add-characteristics-label">Perfect</label>
               <Field type="radio" name="Width" value="4"/>
-              <label>Slightly wide</label>
+              <label className="add-characteristics-label">Slightly wide</label>
               <Field type="radio" name="Width" value="5"/>
-              <label>Too wide</label>
+              <label className="add-characteristics-label">Too wide</label>
             </div>
             }
             {characteristics.Comfort &&
-            <div>
-              <label>Comfort: </label>
+            <div className="add-characteristics">
+              <label className="add-characteristics-label">Comfort: </label>
               <Field type="radio" name="Comfort" value="1"/>
-              <label>Uncomfortable</label>
+              <label className="add-characteristics-label">Uncomfortable</label>
               <Field type="radio" name="Comfort" value="2"/>
-              <label>Slightly uncomfortable</label>
+              <label className="add-characteristics-label">Slightly uncomfortable</label>
               <Field type="radio" name="Comfort" value="3"/>
-              <label>Ok</label>
+              <label className="add-characteristics-label">Ok</label>
               <Field type="radio" name="Comfort" value="4"/>
-              <label>Comfortable</label>
+              <label className="add-characteristics-label">Comfortable</label>
               <Field type="radio" name="Comfort" value="5"/>
-              <label>Perfect</label>
+              <label className="add-characteristics-label">Perfect</label>
             </div>
             }
             {characteristics.Quality &&
-            <div>
+            <div className="add-characteristics">
               <label>Quality: </label>
               <Field type="radio" name="Quality" value="1"/>
-              <label>Poor</label>
+              <label className="add-characteristics-label">Poor</label>
               <Field type="radio" name="Quality" value="2"/>
-              <label>Below average</label>
+              <label className="add-characteristics-label">Below average</label>
               <Field type="radio" name="Quality" value="3"/>
-              <label>What I expected</label>
+              <label className="add-characteristics-label">What I expected</label>
               <Field type="radio" name="Quality" value="4"/>
-              <label>Pretty great</label>
+              <label className="add-characteristics-label">Pretty great</label>
               <Field type="radio" name="Quality" value="5"/>
-              <label>Perfect</label>
+              <label className="add-characteristics-label">Perfect</label>
             </div>
             }
             {characteristics.Length &&
-            <div>
+            <div className="add-characteristics">
               <label>Length: </label>
               <Field type="radio" name="Length" value="1"/>
-              <label>Runs Short</label>
+              <label className="add-characteristics-label">Runs Short</label>
               <Field type="radio" name="Length" value="2"/>
-              <label>Runs slightly short</label>
+              <label className="add-characteristics-label">Runs slightly short</label>
               <Field type="radio" name="Length" value="3"/>
-              <label>Perfect</label>
+              <label className="add-characteristics-label">Perfect</label>
               <Field type="radio" name="Length" value="4"/>
-              <label>Runs slightly long</label>
+              <label className="add-characteristics-label">Runs slightly long</label>
               <Field type="radio" name="Length" value="5"/>
-              <label>Runs long</label>
+              <label className="add-characteristics-label">Runs long</label>
             </div>
             }
             {characteristics.Fit &&
-            <div>
+            <div className="add-characteristics">
               <label>Fit: </label>
               <Field type="radio" name="Fit" value="1"/>
-              <label>Runs tight</label>
+              <label className="add-characteristics-label">Runs tight</label>
               <Field type="radio" name="Fit" value="2"/>
-              <label>Runs slightly tight</label>
+              <label className="add-characteristics-label">Runs slightly tight</label>
               <Field type="radio" name="Fit" value="3"/>
-              <label>Perfect</label>
+              <label className="add-characteristics-label">Perfect</label>
               <Field type="radio" name="Fit" value="4"/>
-              <label>Runs slightly long</label>
+              <label className="add-characteristics-label">Runs slightly long</label>
               <Field type="radio" name="Fit" value="5"/>
-              <label>Runs long</label>
+              <label className="add-characteristics-label">Runs long</label>
             </div>
             }
             <div>
