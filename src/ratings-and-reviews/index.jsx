@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './ratings-and-reviews.scss';
 import {ListView, StarRating} from '../common';
 import ReviewTile from './components/ReviewTile.jsx';
@@ -65,7 +65,7 @@ const RatingsAndReviews = ({ product, reviews, metadata }) => {
         </div>
         <span className="reviews-recommend">{recommendPercentage(metadata.recommended)}% of reviews recommend this product</span>
         <ReviewBreakdown breakdown={metadata.ratings} reviews={reviews} starFilters={starFilters} setStarFilters={setStarFilters}/>
-        <ProductBreakdown />
+        <ProductBreakdown characteristics={metadata.characteristics}/>
       </div>
       <div className="column-2">
         <Sort reviews={reviews} sortType={sortType} setSortType={setSortType}/>

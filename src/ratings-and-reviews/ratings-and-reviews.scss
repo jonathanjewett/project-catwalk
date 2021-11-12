@@ -57,10 +57,29 @@
     background-color: rgb(207, 207, 207);
   }
 
-  .review-breakdown-label {
+  .review-breakdown-label, .characteristic-breakdown {
     font-size: 12px;
     text-decoration: none;
   }
+
+  .characteristic-low {
+    text-align: left;
+    margin-right: 150px;
+  }
+
+  .product-breakdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 40px;
+  }
+
+  .characteristic-breakdown, .characteristic-mid {
+    text-align: center;
+  }
+
+
 
   .filtered {
     font-weight: bold;
