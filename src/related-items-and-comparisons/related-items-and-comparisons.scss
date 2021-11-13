@@ -1,4 +1,8 @@
 #related-items-and-comparisons {
+  h3 {
+    text-transform: uppercase;
+  }
+
   a {
     text-decoration: none;
   }
@@ -50,35 +54,16 @@
   .card-action-button {
     cursor: pointer;
     position: absolute;
-    color: white;
-    text-shadow: 0 0 5px black, 0 0 5px black;
     top: 4px;
     right: 8px;
     font-size: 25px;
     font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px black, 0 0 5px black;
   }
-
-  .list-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .scroll-button-container {
-    height: 50px;
-    width: 25px;
-  }
-  .left-arrow {
-    position: relative;
-    height: 50px;
-    left: 0px;
-    z-index: 99;
-  }
-
-  .right-arrow {
-    position: relative;
-    height: 50px;
-    right: 0px;
-    z-index: 99;
+  .card-action-button:hover {
+    color: black;
+    text-shadow: 0 0 2px white;
   }
 
   .comparison-modal {

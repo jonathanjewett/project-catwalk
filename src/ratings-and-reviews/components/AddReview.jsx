@@ -79,7 +79,6 @@ const AddReview = ({hide, product, characteristics}) => {
           for (const characteristic of characteristicNames) {
             postConstructor.characteristics[characteristics[characteristic].id] = Number.parseInt(values[characteristic]);
           }
-          console.log(postConstructor);
           api.createReview(product.id, postConstructor)
             .then(() => {
               setSubmitting(false);

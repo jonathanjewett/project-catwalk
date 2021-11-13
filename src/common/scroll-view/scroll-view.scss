@@ -1,0 +1,32 @@
+.scrollview-items {
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
+}
+.scrollview {
+  position: relative;
+
+  > button {
+    cursor: pointer;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border: none;
+    background: none;
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 5px black, 0 0 5px black;
+
+    &:hover {
+      color: black;
+      text-shadow: 0 0 2px white;
+    }
+  }
+  .left-arrow {
+    left: 0;
+  }
+  .right-arrow {
+    right: 0;
+  }
+}

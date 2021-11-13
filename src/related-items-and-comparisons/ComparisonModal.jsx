@@ -19,7 +19,6 @@ const ComparisonModal = (props) => {
       var valueAdded = false;
       for (var j = 0; j < props.product1.features.length; j++) {
         if (props.product1.features[j].feature === features[i]) {
-          //console.log(props.product1.features[j].feature);
           featuresAndValues.push({feature: features[i], value1: props.product1.features[j].value, value2: null});
           valueAdded = true;
         }
