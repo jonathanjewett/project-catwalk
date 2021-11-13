@@ -105,6 +105,7 @@ app.use('/:product_id?', async (req, res) => {
       questions.sort((x, y) => y.question_helpfulness - x.question_helpfulness);
       const component = await render({ info, questions, reviews, related });
       html = template
+        .replace('<title>Project Catwalk</title>', `<title>Project Catwalk - ${info.product.name}</title>`)
         .replace('<!--ssr-outlet-->', component)
         .replace('/*ssr-outlet*/', `
           const info = ${JSON.stringify(info)};
