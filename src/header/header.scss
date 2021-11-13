@@ -10,11 +10,20 @@ header {
   left: 0;
   right: 0;
   padding: 5px 15px 10px 15px;
-  display: flex;
   align-items: center;
+  display: flex;
+
+  div {
+    width: 100%;
+    max-width: 1380px;
+    display: flex;
+    margin: auto;
+  }
 
   h1 {
     margin: auto 0 auto 0.5em;
+    flex-grow: 1;
+    text-align: left;
   }
 
   svg {
@@ -25,10 +34,9 @@ header {
 }
 
 .highlights {
-  margin-top: 90px;
+  margin: 90px -50px auto -50px;
   padding: 0.5em 0;
   display: inline-flex;
-  margin-left: auto;
   color: #bbb;
 
   a {
@@ -36,7 +44,7 @@ header {
   }
 
   em, > a, > span {
-    margin: 0 1em;
+    margin: 0 0.5em;
     color: var(--foreground);
   }
 

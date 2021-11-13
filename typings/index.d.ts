@@ -33,7 +33,7 @@ interface Style {
 interface Answer {
     id: number,
     body: string,
-    date: Date,
+    date: string,
     answerer_name: string,
     helpfulness: number,
     photos: string[]
@@ -44,7 +44,7 @@ interface Answer {
 interface Question {
     question_id: number,
     question_body: string,
-    question_date: Date,
+    question_date: string,
     asker_name: string,
     question_helpfulness: number,
     reported: boolean,
@@ -61,7 +61,7 @@ interface Review {
     recommend: boolean,
     response: string | null,
     body: string,
-    date: Date,
+    date: string,
     reviewer_name: string,
     helpfulness: number,
     photos: {id: number, url: string}[]

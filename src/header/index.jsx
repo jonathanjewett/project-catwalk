@@ -1,6 +1,6 @@
 import React from 'react';
 import Favicon from '../favicon.svg';
-import './Header.scss';
+import './header.scss';
 import { Price } from '../common';
 
 /**
@@ -18,7 +18,7 @@ const Header = ({ announcement, discount, newProduct }) => {
   if (discount) {
     elements.push(
       <span key="discount">
-        <a href={`/${discount}`}>{discount.name}</a>:
+        <a href={`/${discount.id}`}>{discount.name}</a>:
         <Price base={discount.base} sale={discount.sale}/>
       </span>
     );
@@ -36,8 +36,10 @@ const Header = ({ announcement, discount, newProduct }) => {
   return (
     <header>
       <div className="branding">
-        <Favicon/>
-        <h1>Project Catwalk</h1>
+        <div>
+          <Favicon/>
+          <h1>Project Catwalk</h1>
+        </div>
       </div>
       <div className="highlights">
         {elements}

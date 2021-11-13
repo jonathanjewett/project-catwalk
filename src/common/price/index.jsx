@@ -11,7 +11,7 @@ const price = (priceString) => {
   if (priceString.endsWith('.00')) {
     priceString = priceString.slice(0, -3);
   }
-  return `$${priceString}`;
+  return `$${priceString.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
 };
 
 /**
