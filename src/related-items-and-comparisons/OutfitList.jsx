@@ -3,38 +3,26 @@ import OutfitCard from './OutfitCard.jsx';
 import { ScrollView } from '../common';
 
 const OutfitList = (props) => {
-  const [outfit, updateOutfit] = useState(() => !import.meta.env.SSR && JSON.parse(localStorage.getItem('outfit')) || []);
-  const [outfitIDs, updateOutfitIDs] = useState(() => !import.meta.env.SSR && JSON.parse(localStorage.getItem('outfitIDs')) || []);
+  const [outfit, updateOutfit] = useState(() =>
+    !import.meta.env.SSR && JSON.parse(localStorage.getItem('outfit')) || []
+  );
   const addToOutfit = () => {
-    if (outfitIDs.includes(props.currentProduct.product.id)) {
+    if (outfit.some(item => item.product.id === props.currentProduct.product.id)) {
       return;
     }
     const newOutfit = [...outfit, props.currentProduct];
-    const newOutfitIDs = [...outfitIDs, props.currentProduct.product.id];
     if (!import.meta.env.SSR) {
       localStorage.setItem('outfit', JSON.stringify(newOutfit));
-      localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDs));
     }
     updateOutfit(newOutfit);
-    updateOutfitIDs(newOutfitIDs);
   };
 
   const removeFromOutfit = (product) => {
-    // Could have sliced first, then spliced new array
-    var newOutfitRemoved = [];
-    var newOutfitIDsRemoved = [];
-    for (var i = 0; i < outfit.length; i++) {
-      if (outfit[i].product.id !== product.id) {
-        newOutfitRemoved.push(outfit[i]);
-        newOutfitIDsRemoved.push(outfit[i].product.id);
-      }
-    }
+    const newOutfit = outfit.filter(item => item.product.id !== product.id);
     if (!import.meta.env.SSR) {
-      localStorage.setItem('outfit', JSON.stringify(newOutfitRemoved));
-      localStorage.setItem('outfitIDs', JSON.stringify(newOutfitIDsRemoved));
+      localStorage.setItem('outfit', JSON.stringify(newOutfit));
     }
-    updateOutfit(newOutfitRemoved);
-    updateOutfitIDs(newOutfitIDsRemoved);
+    updateOutfit(newOutfit);
   };
 
   return (
