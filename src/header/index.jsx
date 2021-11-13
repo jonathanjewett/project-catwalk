@@ -1,6 +1,6 @@
 import React from 'react';
 import Favicon from '../favicon.svg';
-import './Header.scss';
+import './header.scss';
 import { Price } from '../common';
 
 /**
