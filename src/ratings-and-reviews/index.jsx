@@ -16,7 +16,7 @@ const sortReviews = (newSortType, reviews) => {
 
   if (newSortType === 'Newest') {
     return reviews.slice().sort(function (review1, review2) { // new copy
-      return review2.date - review1.date;
+      return new Date(review2.date) - new Date(review1.date);
     });
   }
 
@@ -49,8 +49,8 @@ const RatingsAndReviews = ({ product, reviews, metadata }) => {
   // plus an extra at the start for zero stars.
   let [starFilters, setStarFilters] = useState(Array(1).concat(Array(5).fill(false)));
 
-  reviews = sortReviews(sortType, reviews);
   reviews = filterReviews(starFilters, reviews);
+  reviews = sortReviews(sortType, reviews);
 
   let [addView, setAddView] = useState(false);
 
