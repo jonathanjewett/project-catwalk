@@ -1,4 +1,6 @@
 .price {
+  white-space: nowrap;
+
   span:first-child {
     text-decoration: line-through;
   }
