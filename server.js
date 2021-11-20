@@ -11,8 +11,8 @@ dotenv.config();
 
 // Configuration for requests to the API server
 const client = axios.create({
-  baseURL: process.env.API,
-  headers: {'Authorization': process.env.API_TOKEN}
+  baseURL: process.env.VITE_API,
+  headers: {'Authorization': process.env.VITE_API_TOKEN}
 });
 
 api.initialize(client);

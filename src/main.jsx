@@ -5,23 +5,15 @@ import './index.scss';
 import './common/details/details.scss';
 import App from './App';
 import api from './api';
-import { product, metadata, styles } from './overview/sampleData';
-ReactDOM.render(
-  <React.StrictMode>
-    <App
-      info={{ product, metadata, styles }}
-      related={[]}
-      reviews={[]}
-      questions={[]}
-    />
-  </React.StrictMode>,
-  document.getElementById('root'));
+import sampleInfo from './overview/sampleData';
+
 /* global info:writable, related:writable, reviews:writable, questions:writable */
 if (import.meta.env.PROD) {
   if (!import.meta.env.SSR) { // we are in client-side production code
     // forward all API requests to the hosting server
+    const { protocol, hostname, port } = window.location;
     api.initialize(axios.create({
-      baseURL: `${location.protocol}//${location.hostname}:${location.port}/api/`
+      baseURL: `${protocol}//${hostname}:${port}/api/`
     }));
   }
   ReactDOM.hydrate( // attach event handlers rather than creating from scratch
@@ -38,9 +30,8 @@ if (import.meta.env.PROD) {
 } else { // we are inclient-side development code
   // send API requests directly to Atelier API
   api.initialize(axios.create({
-    baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/' +
-      import.meta.env.VITE_CAMPUS,
-    headers: {'Authorization': import.meta.env.VITE_API_TOKEN}
+    baseURL: import.meta.env.VITE_API,
+    headers: { 'Authorization': import.meta.env.VITE_API_TOKEN }
   }));
 
   // Figure out which product to display by getting a product ID from the URL
@@ -56,13 +47,15 @@ if (import.meta.env.PROD) {
     productId = Number(idString);
   }
 
-  Promise.all([
+  Promise.allSettled([
     api.getProduct(productId),
     api.getQuestions(productId),
     api.getRelated(productId),
     api.getReviews(productId, 'relevant'),
-  ]).then(([info, questions, related, reviews]) => {
-    questions.sort((x, y) => y.question_helpfulness - x.question_helpfulness);
+  ]).then(resultsOrErrors => {
+    const [info, questions, related, reviews] = resultsOrErrors.map((res, i) =>
+      res.value || (i === 0 ? sampleInfo : [])
+    );
     ReactDOM.render(
       <React.StrictMode>
         <App

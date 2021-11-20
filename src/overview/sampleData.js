@@ -1,4 +1,4 @@
-export const {product, metadata, styles} = {
+const sampleData = {
   'product': {
     'id': 40344,
     'campus': 'hr-rfp',
@@ -410,3 +410,6 @@ export const {product, metadata, styles} = {
     }
   ]
 };
+
+export default sampleData;
+export const { product, metadata, styles } = sampleData;
