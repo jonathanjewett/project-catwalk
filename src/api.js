@@ -195,7 +195,7 @@ const getProductDetail = async (productId) => {
 const getPage = async(endpoint, productId, sort, count, page) => {
   const params = new URLSearchParams({
     product_id: productId,
-    count: count || Number.MAX_SAFE_INTEGER
+    count: count || 2147483647
   });
   if (sort !== undefined) {
     params.append('sort', sort);

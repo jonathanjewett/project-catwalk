@@ -34,7 +34,7 @@ const CardItem = (props) => {
       {showModal}
       <a href={'/' + props.product.id}>
         <div className="product-image">
-          <img className="card-images" src={props.styles[0].photos[0].url} width="250" height="275"></img>
+          <img className="card-images" src={props.styles[0] && props.styles[0].photos[0] && props.styles[0].photos[0].url} width="250" height="275"></img>
           <div className="card-action-button" onClick={compare}>☆</div>
         </div>
         <div className="category">
